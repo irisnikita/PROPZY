@@ -24,13 +24,13 @@
             background-image: url('../public/images/home/home-02.png');
             width: 100%;
             background-position: top;
-            background-size: cover;
+            background-size: 100% auto;
+            background-repeat: no-repeat;
             min-height: 20rem;
         }
 
         .logo__banner {
-            background-image: url(../public/images/home/home-05.png);
-            min-height: 147px ;
+            background-image: url('../public/images/home/home-05.png');
         }
     }
 
