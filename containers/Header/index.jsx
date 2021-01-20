@@ -2,20 +2,22 @@ import React from 'react';
 const Header = () => {
     return (
         <header>
-            <div class="container bg-blue-100 text-white flex item-center justify-between mx-auto px-4 ">
-            <img src="https://i.ibb.co/sHZz13b/logo.png" class='inline max-w-xs max-h-xs' ></img>
-
-                <ul class='list-reset flex space-x-5'>
-                    <li> <a href="#"> TRANG CHỦ </a> </li>
-                    <li> <a href="#">GIỚI THIỆU </a></li>
-                    <li><a href="#">THỂ LỆ </a></li>
-                    <li><a href="#">LIÊN HỆ </a> </li> 
-                    <li><a href="#">XEM QUÀ  </a> </li>
-                </ul>
-
+            <div class="fixed f-Sans-pro w-screen bg-blue-100 text-white">
+                <div className='static mx-auto w-10/12 flex justify-between'>
+                    <div className='w-max bg-white px-2 pt-2 pb-1 rounded-b-xl' >
+                        <img src="/svg/logo.svg" alt="" />
+                    </div>
+                    <ul className='font-semibold list-reset items-center flex space-x-10'>
+                        <li> <a href="#"> TRANG CHỦ </a> </li>
+                        <li> <a href="#">GIỚI THIỆU </a></li>
+                        <li><a href="#">THỂ LỆ </a></li>
+                        <li><a href="#">LIÊN HỆ </a> </li>
+                        <li><a href="#">XEM QUÀ  </a> </li>
+                    </ul>
+                </div>
             </div>
         </header>
-        
+
     );
 };
 
