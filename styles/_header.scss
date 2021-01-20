@@ -1,0 +1,8 @@
+.menu-header__list {
+    a {
+        transition: all 200ms;
+        &:hover {
+            color: #F17423;
+        }
+    }
+}

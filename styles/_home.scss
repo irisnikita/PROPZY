@@ -6,4 +6,38 @@
 
 .home-page__wrap {
     background-color: $color-blue;
+    min-height: 100vh;
+
+    .home-page__main {
+        padding-top: 90px;
+
+
+        .main-content--1 {
+            background-image: url('../public/svg/home-01.svg');
+            width: 100%;
+            min-height: 554px;
+        }
+      
+        .main-content--2 {
+            position: relative;
+            z-index: 20;
+            background-image: url('../public/images/home/home-02.png');
+            width: 100%;
+            background-position: top;
+            background-size: cover;
+            min-height: 20rem;
+        }
+
+        .logo__banner {
+            background-image: url(../public/images/home/home-05.png);
+            min-height: 147px ;
+        }
+    }
+
+    // React-slick
+    .slick-dots {
+        li {
+
+        }
+    }
 }

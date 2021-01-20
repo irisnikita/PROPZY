@@ -1,11 +1,36 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
 @import 'variables';
 @import 'home';
+@import 'header';
 
 html, body {
   font-family: 'Source Sans Pro';
+}
+
+// Margin
+// Position
+.pl-8-rem {left: 8rem;}
+.pb-7-rem {bottom: 7rem;}
+
+.slick-list, .slick-track { touch-action:pan-y; }
+
+.btn-orange {
+    border-radius: 10px;
+    min-height: 57px;
+    font-weight: 700;
+    min-width: 200px;
+    width: max-content;
+    display: flex;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    background-color: #F17423;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+}
+
+.hight-light {
+    font-weight: bold;
+    color: $color-orange;
 }
 
   @font-face {
@@ -1531,11 +1556,11 @@ html, body {
     opacity: 100;
   }
   
-.slider-item1 {
-  background-image: url(../public/svg/materials_CC-14.svg);
-  height: 100%;
-  width: 100%;
-}
+// .slider-item1 {
+//   background-image: url(../public/svg/materials_CC-14.svg);
+//   height: 100%;
+//   width: 100%;
+// }
 
 .slider-item2 {
   background-image: url(../public/svg/materials_CC-15.svg);
