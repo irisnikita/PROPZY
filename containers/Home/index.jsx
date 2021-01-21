@@ -91,12 +91,39 @@ const HomeContainer = () => {
                             </motion.div>
                         </div>
                     </div>
+
+                    {/* component tham gia chương trình */}
+
                     <div className='flex mt-10 justify-center items-center'>
                         <img src="/svg/banner-title/banner-title-2.svg" alt="" />
                     </div>
-                 
 
 
+                    <div className='flex w-10/12 mx-auto flex-row space-x-24 px-16 py-8'>
+                        <img class='w-2/12 ' src="/svg/join-step-1.svg" alt="" />
+                        <p className='text-white text-6xl mt-24'> > </p>
+                        <img class='w-2/12 ' src="/svg/join-step-2.svg" alt="" />
+                        <p className='text-white text-6xl mt-24'> > </p>
+                        <img class='w-2/12 ' src="/svg/join-step-3.svg" alt="" />
+
+                    </div>
+
+                    <div className='flex mt-4 justify-center items-center'>
+                        <div className="btn-orange w-2/12">HÁI LÌ XÌ NGAY</div>
+                    </div>
+
+                    
+
+                    <div className='flex mt-10 justify-center items-center'>
+                        <img src="/svg/logo-banner-tittle.svg" alt="" />
+                        <p className='text-3xl font-semibold mb-5 text-white absolute '>THỂ LỆ CHƯƠNG TRÌNH</p>
+                    </div>
+
+
+
+
+
+                    {/* Component Đối tác                              */}
                     <div className='flex mt-10 justify-center items-center'>
                         <img src="/svg/logo-banner-tittle.svg" alt="" />
                         <p className='text-3xl font-semibold mb-5 text-white absolute '>ĐỐI TÁC CỦA PROPZY</p>
@@ -120,7 +147,7 @@ const HomeContainer = () => {
                         </div>
                     </div>
 
-
+                    {/* Component giới thiệu */}
                     <div className='flex mt-10 justify-center items-center'>
                         <img src="/svg/logo-banner-tittle.svg" alt="" />
                         <p className='text-3xl font-semibold mb-5 text-white absolute '>GIỚI THIỆU PROPZYCARE</p>
@@ -150,18 +177,16 @@ const HomeContainer = () => {
                                             <input type="text" className='px-4 bg-transparent py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-white' placeholder="Họ và tên" />
 
                                             <input type="number" className='px-4 bg-transparent py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-white' placeholder="Số điện thoại" />
-                                            
+
                                             <input type="email" className='px-4 bg-transparent py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-white' placeholder="Email" />
 
                                             <select name='price' className='px-4 bg-transparent py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-white' >
-                                                <option  className='text-white bg-transparent' value="" > Giá muốn thuê </option>
+                                                <option className='text-white bg-transparent' value="" > Giá muốn thuê </option>
                                                 <option className='text-black bg-transparent' value='dưới 1 tỷ '> Dưới 1 tỷ  </option>
                                                 <option className='text-black bg-transparent' value='dưới 2 tỷ '> 1 -3 tỷ  </option>
                                                 <option className='text-black bg-transparent' value='dưới 3 tỷ '> trên 3 tỷ </option>
 
-                                            </select> 
-                                            
-
+                                            </select>
 
                                         </div>
 
@@ -171,14 +196,14 @@ const HomeContainer = () => {
                                 </div>
 
                             </div>
-
                         </div>
-
                     </div>
+
+
 
                 </motion.section>
             </section>
-            <Footer/>
+            <Footer />
         </div>
     );
 };
