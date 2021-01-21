@@ -12,7 +12,25 @@ html, body {
 .pl-8-rem {left: 8rem;}
 .pb-7-rem {bottom: 7rem;}
 
+.padding-bottom-0 {padding-bottom: 0px !important;}
+
 .slick-list, .slick-track { touch-action:pan-y; }
+
+//collapse__list
+.collapse__list {
+  li {
+    &::before {
+      content: "";
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #fff;
+      margin-right: 5px;
+      display: inline-block;
+    }
+  }
+}
+
 
 .btn-orange {
     border-radius: 10px;

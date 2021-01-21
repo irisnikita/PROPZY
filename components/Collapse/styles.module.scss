@@ -1,0 +1,53 @@
+// Variables
+$color-blue: #155AA9;
+$color-orange: #F17423;
+$color-yellow: #FDCC0B;
+
+.wrap-collapse {
+    font-family: 'Source Sans Pro';
+    font-size: 20px;
+    position: relative;
+    
+    &::before {
+        content: '';
+        display: block;
+        position: absolute;
+        height: 100%;
+        left: 22px;
+        border-left: 1px dashed #fff;
+    }
+    .label__number {
+        border-radius: 50%;
+        font-size: 36px;
+        line-height: 46px;
+        text-align: center;
+        background-color: $color-orange;
+        color: #fff;
+        z-index: 2;
+        width: 46px;
+        height: 46px;
+    }
+
+   
+
+    .pane__title {
+        cursor: pointer;
+        color: $color-orange;
+        font-size: 25px;
+        font-weight: 600;
+    }
+
+    .pane__content {
+        color: #fff;
+        max-height: 0px;
+        transition: all 300ms;
+        transition-timing-function: ease-in-out;
+        overflow: hidden;
+
+        &.pane_content--open {
+            max-height: 500px;
+        }
+    }
+
+
+}

@@ -14,12 +14,13 @@ import Footer from 'containers/Footer'
 
 // Components
 import ImageSlider from 'components/ImageSlider';
+import Collapse from 'components/Collapse';
 
 const HomeContainer = () => {
     // Framer motion
     const { scrollYProgress } = useViewportScroll();
     const yViewScroll = useTransform(scrollYProgress, [0, 0.5, 1], [0, -200, -250]);
-    const yLuckyMoney1 = useTransform(scrollYProgress, [0, 0.5, 1], [-600, 0, 0]);
+    const yLuckyMoney1 = useTransform(scrollYProgress, [0, 0.5, 1], [-300, 0, 0]);
     const yLuckyMoney2 = useTransform(scrollYProgress, [0, 1], [500, -200]);
 
     return (
@@ -77,15 +78,15 @@ const HomeContainer = () => {
                     </div>
                     <div className="flex justify-center">
                         <div className="flex space-x-5 items-center w-10/12 pt-5">
-                            <motion.div style={{ y: yLuckyMoney1 }} className='relative flex items-center justify-center flex-col'>
+                            <motion.div className='relative flex items-center justify-center flex-col'>
                                 <img src="/images/home/phong-bi-1.png" alt="" />
                                 <div className="btn-blue relative bottom-20">XEM QUÀ</div>
                             </motion.div>
-                            <motion.div style={{ y: yLuckyMoney2 }} className='relative flex items-center justify-center flex-col'>
+                            <motion.div className='relative flex items-center justify-center flex-col'>
                                 <img src="/images/home/phong-bi-2.png" alt="" />
                                 <div className="btn-blue relative bottom-20">XEM QUÀ</div>
                             </motion.div>
-                            <motion.div style={{ y: yLuckyMoney1 }} className='relative flex items-center justify-center flex-col'>
+                            <motion.div className='relative flex items-center justify-center flex-col'>
                                 <img src="/images/home/phong-bi-3.png" alt="" />
                                 <div className="btn-blue relative bottom-20">XEM QUÀ</div>
                             </motion.div>
@@ -93,26 +94,24 @@ const HomeContainer = () => {
                     </div>
 
                     {/* component tham gia chương trình */}
-
                     <div className='flex mt-10 justify-center items-center'>
                         <img src="/svg/banner-title/banner-title-2.svg" alt="" />
                     </div>
 
 
-                    <div className='flex w-10/12 mx-auto flex-row space-x-24 px-16 py-8'>
-                        <img class='w-2/12 ' src="/svg/join-step-1.svg" alt="" />
-                        <p className='text-white text-6xl mt-24'> > </p>
-                        <img class='w-2/12 ' src="/svg/join-step-2.svg" alt="" />
-                        <p className='text-white text-6xl mt-24'> > </p>
-                        <img class='w-2/12 ' src="/svg/join-step-3.svg" alt="" />
-
+                    <div className="flex justify-center">
+                        <div className='flex justify-center w-10/12 space-x-24 py-8'>
+                            <img class='w-2/12 ' src="/svg/join-step-1.svg" alt="" />
+                            <p className='text-white text-6xl mt-24'> &gt; </p>
+                            <img class='w-2/12 ' src="/svg/join-step-2.svg" alt="" />
+                            <p className='text-white text-6xl mt-24'> &gt; </p>
+                            <img class='w-2/12 ' src="/svg/join-step-3.svg" alt="" />
+                        </div>
                     </div>
 
                     <div className='flex mt-4 justify-center items-center'>
                         <div className="btn-orange w-2/12">HÁI LÌ XÌ NGAY</div>
                     </div>
-
-                    
 
                     <div className='flex mt-10 justify-center items-center'>
                         <img src="/svg/logo-banner-tittle.svg" alt="" />
@@ -120,8 +119,10 @@ const HomeContainer = () => {
                     </div>
 
 
-
-
+                    {/* component collapse */}
+                    <div className="w-8/12 mx-auto" >
+                        <Collapse />
+                    </div>
 
                     {/* Component Đối tác                              */}
                     <div className='flex mt-10 justify-center items-center'>
@@ -129,7 +130,7 @@ const HomeContainer = () => {
                         <p className='text-3xl font-semibold mb-5 text-white absolute '>ĐỐI TÁC CỦA PROPZY</p>
                     </div>
 
-                    <div class="container w-10/12  mx-auto flex flex-row space-x-8 ">
+                    <div class="container w-10/12  mx-auto flex flex-row space-x-8 justify-center ">
                         <div className='w-2/12 overflow-hidden rounded-lg shadow-lg  '>
                             <img src="/svg/logo-partner-1.svg" alt="" />
                         </div>
@@ -198,9 +199,6 @@ const HomeContainer = () => {
                             </div>
                         </div>
                     </div>
-
-
-
                 </motion.section>
             </section>
             <Footer />
