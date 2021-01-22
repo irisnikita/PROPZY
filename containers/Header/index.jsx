@@ -23,7 +23,7 @@ const Header = () => {
 
     return (
         <header>
-            <div class="fixed z-40 f-Sans-pro w-screen text-white">
+            <div className="fixed z-40 f-Sans-pro w-screen text-white">
                 <div className={`default__header ${isChangeHeader ? 'header--orange' : ''} static mx-auto w-10/12 flex justify-between`}>
                     <div className='w-max bg-white px-2 pt-2 pb-1 rounded-b-xl' >
                         <img src="/svg/logo.svg" alt="" />

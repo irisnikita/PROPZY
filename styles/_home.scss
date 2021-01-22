@@ -21,7 +21,7 @@
         .main-content--2 {
             position: relative;
             z-index: 20;
-            background-image: url('../public/images/home/home-02.png');
+            background-image: url('../public/images/home/home-06.png');
             width: 100%;
             background-position: top;
             background-size: 100% auto;
@@ -36,6 +36,13 @@
 
     // React-slick
     .slick-dots {
+
+        .slick__dot {
+            background-color: $color-orange;
+        }
+        .slick-active {
+            .slick__dot {background-color: #fff;}
+        }
         li {
 
         }

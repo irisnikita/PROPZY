@@ -31,7 +31,7 @@ html, body {
   }
 }
 
-
+// Button
 .btn-orange {
     border-radius: 10px;
     min-height: 57px;
@@ -64,6 +64,24 @@ html, body {
     &:hover {
       transform: scale(1.1);
     }
+}
+
+// Input
+.default__input {
+  outline: none;
+  padding: 10px 20px;
+  border-radius: 10px;
+  min-height: 75px;
+  background: transparent;
+  border: 2px solid #FFFFFF;
+  box-sizing: border-box;
+  color: #fff;
+
+  &::placeholder {
+    font-style: italic;
+    color: #fff;
+    font-weight: 400;
+  }
 }
 
 .hight-light {

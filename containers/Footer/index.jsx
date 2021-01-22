@@ -1,15 +1,15 @@
 import React from 'react'
 
-const Footer = () =>{
+const Footer = () => {
     return (
-       <footer className='footer-container'>
-           <div class='flex f-Sans-pro text-white text-xl w-10/12 w-screen px-32 pt-56 space-x-28 '>
-               
+        <footer className='footer-container'>
+            <div className='flex f-Sans-pro text-white text-xl w-10/12 w-screen px-32 pt-56 space-x-28 '>
+
                 <div className='relative w-3/12'>
-                    <img src="/svg/logo-white-footer.svg" alt="" />      
-                    <p> Tầng 4, Tòa Nhà Flemington, Số 182, Lê Đại Hành, P.15, Q.11, TP.HCM</p> 
+                    <img src="/svg/logo-white-footer.svg" alt="" />
+                    <p> Tầng 4, Tòa Nhà Flemington, Số 182, Lê Đại Hành, P.15, Q.11, TP.HCM</p>
                     <div className='py-1'> </div>
-                    <p> Email: vietnam@propzy.com</p> 
+                    <p> Email: vietnam@propzy.com</p>
                     <div className='py-1'> </div>
                     <p>Hãy gọi cho chúng tôi để được tư vấn 24/7</p>
                     <img src="/svg/hotline.svg" alt="" />
@@ -39,10 +39,10 @@ const Footer = () =>{
                     <li><a> Bán nhà</a></li>
                     <li><a> Thuê nhà</a></li>
                     <li><a> Cộng đồng môi giới Propzy </a></li>
-                    
+
                 </ul>
-           </div>
-       </footer>
+            </div>
+        </footer>
     );
 };
 export default Footer;
