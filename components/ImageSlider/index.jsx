@@ -40,7 +40,11 @@ const ImageSlider = () => {
                         <img width={310} src='/images/slider/slider-2-left.png' alt="" />
                         <img className='md:w-10/12 absolute left-40 top-5' src='/images/slider/slider-2-right.png' alt="" />
                     </div>
-                    <div className="btn-orange absolute pb-7-rem px-20 right-40">HÁI LÌ XÌ NGAY</div>
+                    <div
+                        className="btn-orange absolute pb-7-rem px-20 right-40 animate__animated animate__slow animate__infinite animate__swing"
+                    >
+                        HÁI LÌ XÌ NGAY
+                    </div>
                 </div>
             </Slider>
         </div>

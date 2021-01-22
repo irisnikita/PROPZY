@@ -84,6 +84,13 @@ html, body {
   }
 }
 
+// Animation
+/* The rotate left to right */
+@keyframes rotate-left-right {
+  from {transform: rotate(-45deg);}
+  to {transform: rotate(45deg);}
+}
+
 .hight-light {
     font-weight: bold;
     color: $color-orange;

@@ -12,10 +12,11 @@ import Footer from 'containers/Footer'
 // Components
 import ImageSlider from 'components/ImageSlider';
 import Collapse from 'components/Collapse';
+import ApricotBlossom from 'components/ApricotBlossom';
 
 const HomeContainer = () => {
     return (
-        <div className='home-page__wrap'>
+        <div className='home-page__wrap overflow-x-hidden'>
             <Header />
             <section className='home-page__main'>
                 <section className='main-content--1 md:py-5'>
@@ -28,21 +29,19 @@ const HomeContainer = () => {
                             <img
                                 src="/images/home/home-03.png" className='w-full' alt="" />
                             <div className='pt-10 text-white' data-aos="fade-right">
-                                Nhà thật sự có Tết khi nơi đó có tình thân sum vầy. Nhà to cũng được, nhà nhỏ cũng được, miễn có nhau là được,
+                                Nhà thật sự có Tết khi nơi đó có tình thân sum vầy. Nhà to cũng được, nhà nhỏ cũng được, miễn có nhau là được, &nbsp;
                                 <span className="hight-light">
                                     vì CÓ NHÀ LÀ CÓ TẾT.
                                 </span>
                                 <p className='py-2'></p>
-                                Tham gia ngay
-                                <span className='hight-light'>HÁI LÌ XÌ - KHAI XUÂN ĐÓN LỘC</span>
-                                cho cả năm may mắn cùng những cơ hội ‘rinh’ nhiều phần quà hấp dẫn và giá trị lên đến
+                                Tham gia ngay &nbsp;
+                                <span className='hight-light'>HÁI LÌ XÌ - KHAI XUÂN ĐÓN LỘC</span> &nbsp;
+                                cho cả năm may mắn cùng những cơ hội ‘rinh’ nhiều phần quà hấp dẫn và giá trị lên đến &nbsp;
                                 <span className='hight-light'>1 tỷ đồng.</span>
                             </div>
                         </div>
                         <div className='w-8/12 relative'>
-                            <img
-
-                                src="/images/home/home-04.png" className='w-full' alt="" />
+                            <ApricotBlossom />
                             <div className='text-yellow-300 italic font-bold absolute right-10'>“Nhấp vào bao lì xì để nhận quà”</div>
                         </div>
 
