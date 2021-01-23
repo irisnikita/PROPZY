@@ -7,6 +7,12 @@ import classnames from 'classnames';
 // Styles
 import styles from 'components/LuckyMoney/styles.module.scss';
 
+const prizes = [
+    { key: 'vn-moving', name: 'VN Moving', area: 'HCM (City Wide)', detail: 'Giảm 500K cho khách đặt chuyển nhà', voucher: 500000, quantity: 99999, image: '/svg/lucky-money/voucher-500k.svg' },
+    { key: 'home-az', name: 'HomeAZ', area: 'HCM (City Wide)', detail: 'Giảm 600K cho khách đặt mua nệm trên app HomeAZ', voucher: 600000, quantity: 99999, image: '/svg/lucky-money/coupon-600k.svg' },
+    { key: 'godee', name: 'Godee', area: 'HCM (City Wide)', detail: 'Tặng 25 chuyến xe miễn phí (30k/ chuyến) cho khách hàng', voucher: 750000, quantity: 99999, image: '/svg/lucky-money/godee.svg' },
+]
+
 const Unregistered = (props) => {
     // Props
     const { onClose } = props;
@@ -15,6 +21,17 @@ const Unregistered = (props) => {
     const [isOpenRegister, setOpenRegister] = useState(false);
     const [isRegisterSuccess, setRegisterSuccess] = useState(false);
     const [isRegisterRent, setRegisterRent] = useState(false);
+    const [prizeSelected, setPrizeSelected] = useState({});
+
+    useEffect(() => {
+        randomPrize()
+    }, [])
+
+    const randomPrize = () => {
+        const random = Math.floor(Math.random() * prizes.length);
+
+        setPrizeSelected(prizes[random])
+    }
 
     // Function
     const onClickRegisterUser = () => {
@@ -30,7 +47,7 @@ const Unregistered = (props) => {
             {!isRegisterSuccess ? (
                 <>
                     <div className="relative">
-                        <img className={styles['img-lucky-money']} src={'/svg/lucky-money/voucher-500k.svg'} alt="" />
+                        <img className={styles['img-lucky-money']} src={prizeSelected.image} alt="" />
                         <div className="flex justify-center absolute bottom-5 w-full">
                             <div className="btn-orange" onClick={() => { setOpenRegister(true) }}>
                                 ĐĂNG KÝ ĐỂ NHẬN QUÀ

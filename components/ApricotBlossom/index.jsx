@@ -63,7 +63,6 @@ const ApricotBlossom = () => {
     }
 
     const onCloseLuckyMoneyModal = () => {
-        console.log('djio')
         setIdLuckyMoneySelected(null)
     }
 
@@ -84,7 +83,7 @@ const ApricotBlossom = () => {
                     {luckyMoneys.length ? luckyMoneys.map((luckyMoney, index) => {
                         return (
                             <div
-                                onClick={() => onClickLuckyMoney(index)}
+                                onClick={() => onClickLuckyMoney(luckyMoney.x + index)}
                                 key={luckyMoney.x + index}
                                 className={classnames(
                                     styles['lucky-money__item'],
@@ -105,7 +104,6 @@ const ApricotBlossom = () => {
                     style={{ visibility: 'hidden' }}
                     src="/images/home/apricot-blossom.png" alt=""
                 />
-
             </div>
             <img width={'80%'} className='absolute z-10 bottom-0 left-0' src="/images/home/buffalo.png" alt="" />
             <AnimatePresence>

@@ -6,9 +6,14 @@ import classnames from 'classnames';
 
 // Styles
 import styles from 'components/LuckyMoney/styles.module.scss';
+import { type } from 'os';
 
 // Constant
 
+/**
+ * @description Đây là danh sách các phần quà để hiển thị khi người dùng mở lì xí có 4 loại đó là voucher: 10% fail: 
+ * @description 70% Giải 2 triệu: 1% và combo quà: 8% 
+ */
 const categories = [
 	{
 		key: 'voucher', rate: 10, prizeList: [
@@ -59,23 +64,12 @@ const Unregistered = (props) => {
 	const { onClose } = props;
 
 	// State 
-	const [isOpenRegister, setOpenRegister] = useState(false);
-	const [isRegisterSuccess, setRegisterSuccess] = useState(false);
-	const [isRegisterRent, setRegisterRent] = useState(false);
+	const [prizeSelected, setPrizeSelected] = useState({});
+	const [countOpen, setCountOpen] = useState(2);
 
 	// Use effect
 	useEffect(() => {
-
-		const array = []
-		for (let i = 0; i < 100; i++) {
-			array.push(randomPrize())
-		}
-
-		console.log(array)
-		console.log('voucher', array.filter(item => item.key === 'voucher').length)
-		console.log('voucher', array.filter(item => item.key === 'propzy-care').length)
-		console.log('voucher', array.filter(item => item.key === 'fail').length)
-
+		randomPrize()
 	}, [])
 
 	// Function to random prize with rate
@@ -89,16 +83,23 @@ const Unregistered = (props) => {
 		let empty = 0;
 		let random = Math.floor(Math.random() * (totalProb + 1))
 
-		let item = {};
+		let prize = null;
 
 		for (let i = 0; i < categories.length; i++) {
 			if (random <= categories[i].rate + empty) {
-				item = categories[i];
+				if (categories[i].prizeList.length) {
+					let random = Math.floor(Math.random() * categories[i].prizeList.length)
+
+					prize = categories[i].prizeList[random];
+				} else {
+					prize = categories[i].prizeList[0];
+				}
+
 				break;
 			}
 		}
 
-		return item;
+		prize === null ? setPrizeSelected(categories[3].prizeList[0]) : setPrizeSelected(prize)
 	}
 
 	// Function
@@ -106,19 +107,23 @@ const Unregistered = (props) => {
 		setRegisterSuccess(true)
 	}
 
-	const onClickAdvisory = () => {
-		typeof onClose == 'function' && onClose();
+	const onClickOpenPrize = () => {
+		typeof props.onClose === 'function' && props.onClose()
 	}
 
 	return (
-		<div className='animate__animated animate__fadeIn relative flex items-center'>
-			<img className={styles['img-lucky-money']} src={'/svg/lucky-money/un-register.svg'} alt="" />
-			<div className="flex justify-center absolute bottom-5 w-full">
-				<div className="btn-orange">
-					XEM QUÀ
+		<>
+			<div className='animate__animated animate__fadeIn relative flex flex-row justify-center items-center'>
+				<img className={styles['img-lucky-money']} src={prizeSelected.image} alt="" />
+				<div className="flex justify-center absolute bottom-5 w-full">
+					<div className="btn-orange" onClick={onClickOpenPrize}>
+						XEM QUÀ
                 </div>
+				</div>
+				<div className="text-xs absolute -bottom-6 text-white">{`Bạn còn ${countOpen} lượt chơi`}</div>
 			</div>
-		</div>
+
+		</>
 	);
 };
 

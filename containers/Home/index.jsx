@@ -1,5 +1,5 @@
 // Libraries
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import {
     motion,
@@ -13,8 +13,13 @@ import Footer from 'containers/Footer'
 import ImageSlider from 'components/ImageSlider';
 import Collapse from 'components/Collapse';
 import ApricotBlossom from 'components/ApricotBlossom';
+import FlipLuckyMoney from 'components/LuckyMoney/components/FlipLuckyMoney';
+import LuckyMoney from 'components/LuckyMoney';
 
 const HomeContainer = () => {
+    // State
+    const [isOpenLuckyMoney, setOpenLuckyMoney] = useState(false);
+
     return (
         <div className='home-page__wrap overflow-x-hidden'>
             <Header />
@@ -51,24 +56,9 @@ const HomeContainer = () => {
                     </div>
                     <div className="flex justify-center">
                         <div className="flex space-x-5 items-center w-10/12 pt-5">
-                            <motion.div className='relative flex items-center justify-center flex-col'>
-                                <img src="/images/home/phong-bi-1.png" alt="" />
-                                <div className="absolute flex justify-center bottom-10">
-                                    <div className="btn-blue">XEM QUÀ</div>
-                                </div>
-                            </motion.div>
-                            <motion.div className='relative flex items-center justify-center flex-col'>
-                                <img src="/images/home/phong-bi-2.png" alt="" />
-                                <div className="absolute flex justify-center bottom-10">
-                                    <div className="btn-blue">XEM QUÀ</div>
-                                </div>
-                            </motion.div>
-                            <motion.div className='relative flex items-center justify-center flex-col'>
-                                <img src="/images/home/phong-bi-3.png" alt="" />
-                                <div className="absolute flex justify-center bottom-10">
-                                    <div className="btn-blue">XEM QUÀ</div>
-                                </div>
-                            </motion.div>
+                            <FlipLuckyMoney frontImage={'/images/home/phong-bi-1.png'} backImage={'/images/home/phong-bi-1-back.png'} />
+                            <FlipLuckyMoney frontImage={'/images/home/phong-bi-2.png'} backImage={'/images/home/phong-bi-2-back.png'} />
+                            <FlipLuckyMoney frontImage={'/images/home/phong-bi-3.png'} backImage={'/images/home/phong-bi-3-back.png'} />
                         </div>
                     </div>
 
@@ -89,7 +79,7 @@ const HomeContainer = () => {
                     </div>
 
                     <div className='flex mt-4 justify-center items-center'>
-                        <div className="btn-orange w-2/12">HÁI LÌ XÌ NGAY</div>
+                        <div onClick={() => setOpenLuckyMoney(true)} className="btn-orange w-2/12">HÁI LÌ XÌ NGAY</div>
                     </div>
 
                     <div className='flex mt-10 justify-center items-center'>
@@ -177,6 +167,7 @@ const HomeContainer = () => {
                 </section>
             </section>
             <Footer />
+            <LuckyMoney isOpen={isOpenLuckyMoney} onClose={() => setOpenLuckyMoney(false)} id='home-page' />
         </div>
     );
 };

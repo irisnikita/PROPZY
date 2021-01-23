@@ -4,12 +4,15 @@ import PropTypes from 'prop-types';
 import Slider from 'react-slick';
 import { motion } from 'framer-motion';
 
+// Components
+import LuckyMoney from 'components/LuckyMoney'
+
 const ImageSlider = () => {
     // State 
     const [listImages] = useState([
         { key: '1', path: '/svg/image-slider-1.svg' },
-
     ])
+    const [isOpenLuckyMoney, setOpenLuckyMoney] = useState(false);
 
     // Setting slider
     const settingsSlider = {
@@ -37,16 +40,18 @@ const ImageSlider = () => {
                 </div>
                 <div className='relative outline-none'>
                     <div className='relative flex'>
-                        <img width={310} src='/images/slider/slider-2-left.png' alt="" />
-                        <img className='md:w-10/12 absolute left-40 top-5' src='/images/slider/slider-2-right.png' alt="" />
+                        <img width={310} src='/images/Slider/slider-2-left.png' alt="" />
+                        <img className='md:w-10/12 absolute left-60 top-7' src='/images/Slider/slider-2-right.png' alt="" />
                     </div>
                     <div
+                        onClick={() => setOpenLuckyMoney(true)}
                         className="btn-orange absolute pb-7-rem px-20 right-40 animate__animated animate__slow animate__infinite animate__swing"
                     >
                         HÁI LÌ XÌ NGAY
                     </div>
                 </div>
             </Slider>
+            <LuckyMoney isOpen={isOpenLuckyMoney} onClose={() => setOpenLuckyMoney(false)} id='image-slider' />
         </div>
     );
 };
