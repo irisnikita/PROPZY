@@ -1,6 +1,9 @@
 .modal-wrapper {
     position: fixed;
     z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     top: 0;
     left: 0;
     background-color: rgba(0, 0, 0, 0.5);
@@ -8,6 +11,25 @@
     height: 100%;
 
     .img-lucky-money {
-        max-width: 450px;
+        max-width: 400px;
+    }
+
+    .message--success {
+      width: 450px;
+    }
+
+    .box__register {
+        height: 450px;
+        width: 566px;
+        max-width: 0px;
+        transition: all 1s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    
+        &.box--open {
+            max-width: 1000px;
+            opacity: 1;
+        }
     }
 }

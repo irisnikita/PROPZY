@@ -68,7 +68,7 @@ const ApricotBlossom = () => {
     }
 
     return (
-        <AnimateSharedLayout>
+        <AnimateSharedLayout type='crossfade'>
             <div
                 className={classnames('relative animate__animated animate__slow', {
                     'animate__wobble': isAnimationTree,
@@ -99,7 +99,7 @@ const ApricotBlossom = () => {
                 }) : null}
             </div>
             <AnimatePresence>
-                <LuckyMoney isOpen={isOpenLuckyMoneyModal} onClose={() => setOpenLuckyMoneyModal(false)} id={idLuckyMoneySelected} />
+                <LuckyMoney isOpen={isOpenLuckyMoneyModal} onClose={() => { setOpenLuckyMoneyModal(false) }} id={idLuckyMoneySelected} />
             </AnimatePresence>
         </AnimateSharedLayout>
     );

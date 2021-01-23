@@ -53,15 +53,21 @@ const HomeContainer = () => {
                         <div className="flex space-x-5 items-center w-10/12 pt-5">
                             <motion.div className='relative flex items-center justify-center flex-col'>
                                 <img src="/images/home/phong-bi-1.png" alt="" />
-                                <div className="btn-blue relative bottom-20">XEM QUÀ</div>
+                                <div className="absolute flex justify-center bottom-10">
+                                    <div className="btn-blue">XEM QUÀ</div>
+                                </div>
                             </motion.div>
                             <motion.div className='relative flex items-center justify-center flex-col'>
                                 <img src="/images/home/phong-bi-2.png" alt="" />
-                                <div className="btn-blue relative bottom-20">XEM QUÀ</div>
+                                <div className="absolute flex justify-center bottom-10">
+                                    <div className="btn-blue">XEM QUÀ</div>
+                                </div>
                             </motion.div>
                             <motion.div className='relative flex items-center justify-center flex-col'>
                                 <img src="/images/home/phong-bi-3.png" alt="" />
-                                <div className="btn-blue relative bottom-20">XEM QUÀ</div>
+                                <div className="absolute flex justify-center bottom-10">
+                                    <div className="btn-blue">XEM QUÀ</div>
+                                </div>
                             </motion.div>
                         </div>
                     </div>
