@@ -33,7 +33,7 @@ const Header = () => {
                         <li> <a href="#">GIỚI THIỆU </a></li>
                         <li><a href="#">THỂ LỆ </a></li>
                         <li><a href="#">LIÊN HỆ </a> </li>
-                        <li><a href="#">XEM QUÀ  </a> </li>
+                        <li><a href="/user">XEM QUÀ  </a> </li>
                     </ul>
                 </div>
             </div>
