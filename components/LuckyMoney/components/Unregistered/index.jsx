@@ -30,7 +30,7 @@ const Unregistered = (props) => {
             {!isRegisterSuccess ? (
                 <>
                     <div className="relative">
-                        <img className={styles['img-lucky-money']} src={'/svg/lucky-money/un-register.svg'} alt="" />
+                        <img className={styles['img-lucky-money']} src={'/svg/lucky-money/voucher-500k.svg'} alt="" />
                         <div className="flex justify-center absolute bottom-5 w-full">
                             <div className="btn-orange" onClick={() => { setOpenRegister(true) }}>
                                 ĐĂNG KÝ ĐỂ NHẬN QUÀ

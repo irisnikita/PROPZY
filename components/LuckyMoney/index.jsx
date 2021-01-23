@@ -10,6 +10,7 @@ import styles from './styles.module.scss';
 
 // Components
 import Unregistered from './components/Unregistered';
+import Registered from './components/Registered';
 
 // Constant
 const steps = [
@@ -35,8 +36,9 @@ const LuckyMoney = (props) => {
     // State
     const [currentStep, setCurrentStep] = useState(steps[0]);
     const [isStepOpen, setStepOpen] = useState(false);
-    const [isRegister, setRegister] = useState(false);
+    const [isRegister, setRegister] = useState(true);
 
+    // Life cycle
     useEffect(() => {
         if (isOpen) {
             document.querySelector('body').style.overflow = 'hidden';
@@ -84,7 +86,7 @@ const LuckyMoney = (props) => {
 
     const showRenderStepOpen = () => {
         return isRegister ? (
-            <div>sd</div>
+            <Registered onClose={onCloseModal} />
         ) : (
                 <Unregistered onClose={onCloseModal} />
             )

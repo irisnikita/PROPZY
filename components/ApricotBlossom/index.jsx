@@ -70,34 +70,44 @@ const ApricotBlossom = () => {
     return (
         <AnimateSharedLayout type='crossfade'>
             <div
-                className={classnames('relative animate__animated animate__slow', {
-                    'animate__wobble': isAnimationTree,
+                className={classnames('relative animate__animated animate__fast', {
+                    'animate__shakeY': isAnimationTree,
                 })}
             >
+                <div className={classnames(
+                    '"absolute top-0 left-0 w-full h-full"',
+                    // {
+                    //     'animate__wobble': isAnimationTree
+                    // }
+                )}>
+                    <img width={'80%'} className={styles['tree__image']} src="/images/home/cay-mai.png" alt="" />
+                    {luckyMoneys.length ? luckyMoneys.map((luckyMoney, index) => {
+                        return (
+                            <div
+                                onClick={() => onClickLuckyMoney(index)}
+                                key={luckyMoney.x + index}
+                                className={classnames(
+                                    styles['lucky-money__item'],
+                                    'absolute z-20',
+                                    'animate__swing animate__animated animate__infinite animate__slow',
+                                )}
+                                style={{
+                                    top: luckyMoney.y,
+                                    left: luckyMoney.x
+                                }}
+                            >
+                                <img style={{ width: luckyMoney.width ? luckyMoney.width : 18 }} className={classnames(styles['lucky-money__img'], 'transform', luckyMoney.rotate)} src="/images/home/lucky-money.png" alt="" />
+                            </div>
+                        )
+                    }) : null}
+                </div>
                 <img
-
+                    style={{ visibility: 'hidden' }}
                     src="/images/home/apricot-blossom.png" alt=""
                 />
-                {luckyMoneys.length ? luckyMoneys.map((luckyMoney, index) => {
-                    return (
-                        <div
-                            onClick={() => onClickLuckyMoney(index)}
-                            key={luckyMoney.x + index}
-                            className={classnames(
-                                styles['lucky-money__item'],
-                                'absolute',
-                                'animate__swing animate__animated animate__infinite animate__slow',
-                            )}
-                            style={{
-                                top: luckyMoney.y,
-                                left: luckyMoney.x
-                            }}
-                        >
-                            <img style={{ width: luckyMoney.width ? luckyMoney.width : 18 }} className={classnames(styles['lucky-money__img'], 'transform', luckyMoney.rotate)} src="/images/home/lucky-money.png" alt="" />
-                        </div>
-                    )
-                }) : null}
+
             </div>
+            <img width={'80%'} className='absolute z-10 bottom-0 left-0' src="/images/home/buffalo.png" alt="" />
             <AnimatePresence>
                 <LuckyMoney isOpen={isOpenLuckyMoneyModal} onClose={() => { setOpenLuckyMoneyModal(false) }} id={idLuckyMoneySelected} />
             </AnimatePresence>
