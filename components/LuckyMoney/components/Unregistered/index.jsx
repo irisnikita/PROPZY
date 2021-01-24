@@ -7,6 +7,7 @@ import axios from 'axios'
 import { isEmpty } from 'lodash'
 import { useSelector, useDispatch } from 'react-redux'
 
+
 // Redux toolkit
 import { selectUser, getUser } from 'store/user/userSlice'
 
@@ -15,14 +16,16 @@ import { appConfig } from 'constant'
 
 // Services
 import * as userServices from 'services/user'
+import * as prizeServices from 'services/prize'
+
 
 // Styles
 import styles from 'components/LuckyMoney/styles.module.scss';
 
 const prizes = [
-    { key: 'vn-moving', name: 'VN Moving', area: 'HCM (City Wide)', detail: 'Giảm 500K cho khách đặt chuyển nhà', voucher: 500000, quantity: 99999, image: '/svg/lucky-money/voucher-500k.svg' },
-    { key: 'home-az', name: 'HomeAZ', area: 'HCM (City Wide)', detail: 'Giảm 600K cho khách đặt mua nệm trên app HomeAZ', voucher: 600000, quantity: 99999, image: '/svg/lucky-money/coupon-600k.svg' },
-    { key: 'godee', name: 'Godee', area: 'HCM (City Wide)', detail: 'Tặng 25 chuyến xe miễn phí (30k/ chuyến) cho khách hàng', voucher: 750000, quantity: 99999, image: '/svg/lucky-money/godee.svg' },
+    { key: 'VN_Moving', name: 'VN Moving', area: 'HCM (City Wide)', detail: 'Giảm 500K cho khách đặt chuyển nhà', voucher: 500000, quantity: 99999, image: '/svg/lucky-money/voucher-500k.svg' },
+    { key: 'HomeAZ', name: 'HomeAZ', area: 'HCM (City Wide)', detail: 'Giảm 600K cho khách đặt mua nệm trên app HomeAZ', voucher: 600000, quantity: 99999, image: '/svg/lucky-money/coupon-600k.svg' },
+    { key: 'Godee', name: 'Godee', area: 'HCM (City Wide)', detail: 'Tặng 25 chuyến xe miễn phí (30k/ chuyến) cho khách hàng', voucher: 750000, quantity: 99999, image: '/svg/lucky-money/godee.svg' },
 ]
 
 const Unregistered = (props) => {
@@ -42,11 +45,20 @@ const Unregistered = (props) => {
         phone: '',
         price: ''
     })
+    const [listPrize, setListPrize] = useState([]);
 
     useEffect(() => {
         randomPrize()
+        getListPrizes()
     }, [])
 
+    const getListPrizes = async () => {
+        const listPrizes = await prizeServices.getListCoupon();
+
+        if (listPrizes && listPrizes.data) {
+            setListPrize(listPrizes.data)
+        }
+    }
 
 
     const randomPrize = () => {
@@ -60,13 +72,25 @@ const Unregistered = (props) => {
         localStorage.setItem('user-email', user.email);
     }
 
+    const sendMail = async () => {
+        const draftPrize = listPrize.find(prize => prize.category === prizeSelected.key);
+
+        const sendMail = await userServices.sendMail({
+            email: form.email,
+            name: draftPrize.name
+        })
+        if (sendMail) {
+            console.log('fine')
+        }
+    }
+
     // Function
     const onClickRegisterUser = async () => {
-        const user = await userServices.create({ ...form });
-
+        // const user = await userServices.create({ ...form });
+        sendMail()
         if (user && user.data) {
-            saveUser(user.data)
-            setRegisterSuccess(true)
+            // saveUser(user.data)
+            // setRegisterSuccess(true)
         }
     }
 
@@ -97,7 +121,14 @@ const Unregistered = (props) => {
                     <div className="relative">
                         <img className={styles['img-lucky-money']} src={prizeSelected.image} alt="" />
                         <div className="flex justify-center absolute bottom-5 w-full">
-                            <div className="btn-orange" onClick={() => setOpenRegister(true)}>
+                            <div className={classnames(
+                                "btn-orange",
+                                {
+                                    'hidden': isOpenRegister
+                                }
+                            )}
+                                onClick={() => setOpenRegister(true)}
+                            >
                                 ĐĂNG KÝ ĐỂ NHẬN QUÀ
                     </div>
                         </div>
