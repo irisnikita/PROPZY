@@ -36,7 +36,7 @@ const LuckyMoney = (props) => {
     // State
     const [currentStep, setCurrentStep] = useState(steps[0]);
     const [isStepOpen, setStepOpen] = useState(false);
-    const [isRegister, setRegister] = useState(true);
+    const [isRegister, setRegister] = useState(false);
 
     // Life cycle
     useEffect(() => {

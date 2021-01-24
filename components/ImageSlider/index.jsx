@@ -32,20 +32,20 @@ const ImageSlider = () => {
     };
 
     return (
-        <div className='w-8/12 mx-auto'>
+        <div className='w-full md:w-8/12 mx-auto'>
             <Slider {...settingsSlider}>
-                <div className='relative outline-none'>
+                <div className='relative outline-none slider-wrap__item'>
                     <img className='w-full' src="/svg/image-slider-1.svg" alt="" />
-                    <div className="btn-orange absolute bottom-0 pl-8-rem">PROPZY CARE</div>
+                    <div className="btn-orange mt-5 md:mt-0 relative mx-auto md:absolute md:bottom-0 pl-8-rem">PROPZY CARE</div>
                 </div>
                 <div className='relative outline-none'>
-                    <div className='relative flex'>
-                        <img width={310} src='/images/Slider/slider-2-left.png' alt="" />
-                        <img className='md:w-10/12 absolute left-60 top-7' src='/images/Slider/slider-2-right.png' alt="" />
+                    <div className='relative flex flex-wrap flex-col-reverse items-center md:flex-row'>
+                        <img className={'md:w-96 w-2/3'} src='/images/Slider/slider-2-left.png' alt="" />
+                        <img className='w-full md:w-10/12 md:absolute relative -left-7 md:left-60 md:top-7' src='/images/Slider/slider-2-right.png' alt="" />
                     </div>
                     <div
                         onClick={() => setOpenLuckyMoney(true)}
-                        className="btn-orange absolute pb-7-rem px-20 right-40 animate__animated animate__slow animate__infinite animate__swing"
+                        className="btn-orange mb-10 md:mb-0  relative mx-auto mt-5 md:mt-0 md:absolute pb-7-rem md:px-20 md:right-40 animate__animated animate__slow animate__infinite animate__swing"
                     >
                         HÁI LÌ XÌ NGAY
                     </div>

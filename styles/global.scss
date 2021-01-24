@@ -145,6 +145,17 @@ html, body {
     color: $color-orange;
 }
 
+  @media(max-width: 768px) {
+    .pl-8-rem {left: 0 !important;}
+    .pb-7-rem {bottom: 0 !important;}
+    .btn-blue {
+      min-height: 40px !important;
+      font-weight: 700 !important;
+      min-width: 120px !important;
+      width: max-content !important;
+    }
+  }
+
   @font-face {
     font-family: 'icon-out';
     src:  url('../public/fonts/icon-out.eot?pyms8g');

@@ -8,3 +8,9 @@
     left: 160px;
     z-index: 1;
 } 
+
+@media(max-width: 640px) {
+    .tree__image {
+        left: 60px !important;
+    }
+}

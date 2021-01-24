@@ -18,3 +18,12 @@
         }
     }
 }
+
+// Responsive
+@media (max-width: 640px) {
+    .default__header {
+        &.header--orange {
+            background-color: transparent !important;
+        }
+    }
+}

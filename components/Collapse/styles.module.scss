@@ -17,10 +17,12 @@ $color-yellow: #FDCC0B;
         border-left: 1px dashed #fff;
     }
     .label__number {
+        cursor: pointer;
         border-radius: 50%;
         font-size: 36px;
-        line-height: 46px;
-        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         background-color: $color-orange;
         color: #fff;
         z-index: 2;
@@ -48,6 +50,28 @@ $color-yellow: #FDCC0B;
             max-height: 500px;
         }
     }
-
-
 }
+
+// Responsive
+@media (max-width: 640px) {
+    .wrap-collapse {
+        font-size: 16px !important;
+
+         
+        &::before {
+            left: 18px !important;
+        }
+
+        .label__number {
+            width: 36px !important;
+            height: 36px !important;
+            font-size: 25px !important;
+        }
+    
+
+        .pane__title {
+            font-size: 18px !important;
+        }
+    }
+}
+

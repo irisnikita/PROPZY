@@ -4,6 +4,15 @@
 } 
 .footer-container {
     background-image: url('../public/svg/materials_CC-11.svg');
+    background-position: center;
+    background-size: cover;
     width: 100%;
     min-height: 554px;  
+}
+
+// Responsive
+@media (max-width: 640px) {
+    .footer-container {
+        padding-top: 180px !important;
+    }
 }

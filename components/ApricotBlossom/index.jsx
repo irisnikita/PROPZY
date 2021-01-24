@@ -74,10 +74,8 @@ const ApricotBlossom = () => {
                 })}
             >
                 <div className={classnames(
-                    '"absolute top-0 left-0 w-full h-full"',
-                    // {
-                    //     'animate__wobble': isAnimationTree
-                    // }
+                    'absolute top-0 left-0 w-full h-full',
+
                 )}>
                     <img width={'80%'} className={styles['tree__image']} src="/images/home/cay-mai.png" alt="" />
                     {luckyMoneys.length ? luckyMoneys.map((luckyMoney, index) => {

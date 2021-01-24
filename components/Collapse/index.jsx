@@ -85,8 +85,8 @@ const index = () => {
                 let isOpenContent = isOpen === index;
 
                 return (
-                    <div key={panel + index} className={`flex space-x-10 pb-5 ${index === panels.length - 1 ? 'padding-bottom-0' : ''}`}>
-                        <div className={`${styles['label__number']} w-4/12`}>{index + 1}</div>
+                    <div key={panel + index} className={`flex space-x-5 md:space-x-10 pb-5 ${index === panels.length - 1 ? 'padding-bottom-0' : ''}`}>
+                        <div onClick={() => onClickPaneTitle(index)} className={`${styles['label__number']} w-4/12`}>{index + 1}</div>
                         <div className='space-y-2 w-10/12'>
                             <div className={styles['pane__title']} onClick={() => onClickPaneTitle(index)}>{panel.title}</div>
                             <div

@@ -14,6 +14,9 @@
 
         .main-content--1 {
             background-image: url('../public/svg/home-01.svg');
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
             width: 100%;
             min-height: 554px;
         }
@@ -34,6 +37,7 @@
         }
     }
 
+    
     // React-slick
     .slick-dots {
 
@@ -46,5 +50,21 @@
         li {
 
         }
+    }
+}
+
+// Responsive
+@media (max-width: 640px) {
+    .slider-wrap__item {
+        width: 100vw !important;
+    }
+    .home-page__main {
+        padding-top: 60px !important;
+    }
+    .main-content--1 {
+        min-height: 680px !important;
+    }
+    .flip-lucky-money {
+        width: 300px !important;
     }
 }

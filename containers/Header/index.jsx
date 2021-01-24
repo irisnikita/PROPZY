@@ -24,11 +24,11 @@ const Header = () => {
     return (
         <header className='relative'>
             <div className="fixed z-40 f-Sans-pro w-full text-white">
-                <div className={`default__header ${isChangeHeader ? 'header--orange' : ''} static mx-auto w-10/12 flex justify-between`}>
-                    <div className='w-max bg-white px-2 pt-2 pb-1 rounded-b-xl' >
-                        <img src="/svg/logo.svg" alt="" />
+                <div className={`default__header ${isChangeHeader ? 'header--orange' : ''} static mx-auto w-10/12 flex justify-center md:justify-between`}>
+                    <div className='md:w-max w-6/12 bg-white px-2 pt-2 pb-1 rounded-b-xl' >
+                        <img className='md:w-full mx-auto w-8/12' src="/svg/logo.svg" alt="" />
                     </div>
-                    <ul className='menu-header__list font-semibold list-reset items-center flex space-x-10 pr-5'>
+                    <ul className='menu-header__list hidden md:flex font-semibold list-reset items-center space-x-10 pr-5'>
                         <li> <a href="#"> TRANG CHỦ </a> </li>
                         <li> <a href="#">GIỚI THIỆU </a></li>
                         <li><a href="#">THỂ LỆ </a></li>
