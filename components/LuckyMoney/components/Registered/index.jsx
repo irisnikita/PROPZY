@@ -3,10 +3,14 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { motion } from 'framer-motion'
 import classnames from 'classnames';
+import { connect } from 'react-redux';
 
 // Styles
 import styles from 'components/LuckyMoney/styles.module.scss';
 import { type } from 'os';
+
+// Services 
+import * as userServices from 'services/user'
 
 // Constant
 
@@ -61,7 +65,7 @@ const categories = [
 
 const Unregistered = (props) => {
 	// Props
-	const { onClose } = props;
+	const { onClose, user } = props;
 
 	// State 
 	const [prizeSelected, setPrizeSelected] = useState({});
@@ -71,6 +75,19 @@ const Unregistered = (props) => {
 	useEffect(() => {
 		randomPrize()
 	}, [])
+
+	useEffect(() => {
+		if (user) {
+			updateTurnUser();
+		}
+	}, [user])
+
+	const updateTurnUser = async () => {
+		const updateTurn = await userServices.update({
+			id: user.email,
+			turn: user.turn
+		});
+	}
 
 	// Function to random prize with rate
 	const randomPrize = () => {
@@ -120,7 +137,7 @@ const Unregistered = (props) => {
 						XEM QUÀ
                 </div>
 				</div>
-				<div className="text-xs absolute -bottom-6 text-white">{`Bạn còn ${countOpen} lượt chơi`}</div>
+				<div className="text-xs absolute -bottom-6 text-white">{`Bạn còn ${user.turn || 2} lượt chơi`}</div>
 			</div>
 
 		</>
@@ -134,4 +151,10 @@ Unregistered.defaultProps = {
 	onClose: () => { }
 };
 
-export default Unregistered;
+const mapStateToProps = (state) => {
+	return {
+		user: state.userSlice.user
+	}
+}
+
+export default connect(mapStateToProps)(Unregistered);

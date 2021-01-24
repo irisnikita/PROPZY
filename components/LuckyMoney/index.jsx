@@ -4,6 +4,9 @@ import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import { motion } from 'framer-motion';
+import { isEmpty } from 'lodash'
+import { connect } from 'react-redux'
+
 
 // Styles
 import styles from './styles.module.scss';
@@ -11,6 +14,10 @@ import styles from './styles.module.scss';
 // Components
 import Unregistered from './components/Unregistered';
 import Registered from './components/Registered';
+import OutOfLuckyMoney from './components/OutOfLuckyMoney';
+
+// Services
+import * as userServices from 'services/user'
 
 // Constant
 const steps = [
@@ -37,6 +44,12 @@ const LuckyMoney = (props) => {
     const [currentStep, setCurrentStep] = useState(steps[0]);
     const [isStepOpen, setStepOpen] = useState(false);
     const [isRegister, setRegister] = useState(false);
+
+    useEffect(() => {
+        if (!isEmpty(props.user)) {
+            setRegister(true)
+        }
+    }, [props.user])
 
     // Life cycle
     useEffect(() => {
@@ -85,7 +98,9 @@ const LuckyMoney = (props) => {
     }
 
     const showRenderStepOpen = () => {
-        return isRegister ? (
+
+
+        return +props.user.turn <= 0 ? <OutOfLuckyMoney /> : isRegister ? (
             <Registered onClose={onCloseModal} />
         ) : (
                 <Unregistered onClose={onCloseModal} />
@@ -125,4 +140,10 @@ LuckyMoney.defaultProps = {
     isOpen: false,
 }
 
-export default LuckyMoney;
+const mapStateToProps = (state) => {
+    return {
+        user: state.userSlice.user
+    }
+}
+
+export default connect(mapStateToProps)(LuckyMoney);

@@ -4,9 +4,18 @@ import PropTypes from 'prop-types';
 import { motion } from 'framer-motion'
 import classnames from 'classnames';
 import axios from 'axios'
+import { isEmpty } from 'lodash'
+import { useSelector, useDispatch } from 'react-redux'
 
-// appconfig
+// Redux toolkit
+import { selectUser, getUser } from 'store/user/userSlice'
+
+// App config
 import { appConfig } from 'constant'
+
+// Services
+import * as userServices from 'services/user'
+
 // Styles
 import styles from 'components/LuckyMoney/styles.module.scss';
 
@@ -19,12 +28,14 @@ const prizes = [
 const Unregistered = (props) => {
     // Props
     const { onClose } = props;
+    const dispatch = useDispatch();
 
     // State 
     const [isOpenRegister, setOpenRegister] = useState(false);
     const [isRegisterSuccess, setRegisterSuccess] = useState(false);
     const [isRegisterRent, setRegisterRent] = useState(false);
     const [prizeSelected, setPrizeSelected] = useState({});
+    const [user, setUser] = useState({});
     const [form, setForm] = useState({
         email: '',
         name: '',
@@ -36,32 +47,36 @@ const Unregistered = (props) => {
         randomPrize()
     }, [])
 
+
+
     const randomPrize = () => {
         const random = Math.floor(Math.random() * prizes.length);
 
         setPrizeSelected(prizes[random])
     }
 
-    // Function
-    const onClickRegisterUser = async () => {
-        // const user = await axios({
-        //     method: 'POST',
-        //     url: appConfig.API + '/users/register',
-        //     date: { ...form }
-        // })
-
-        // if (user) {
-        //     console.log("onClickRegister -> user", user)
-        //     setRegisterSuccess(true)
-        // }
-
-        axios.post("http://localhost:5000/api/users/register", { ...form }).then(() => setRegisterSuccess(true));
+    // Set Local Storage
+    const saveUser = (user) => {
+        localStorage.setItem('user-email', user.email);
     }
 
-    const onClickAdvisory = () => {
-        typeof onClose == 'function' && onClose();
+    // Function
+    const onClickRegisterUser = async () => {
+        const user = await userServices.create({ ...form });
 
-        axios.post("http://localhost:5000/api/orders", { ...form }).then(() => { typeof onClose == 'function' && onClose(); });
+        if (user && user.data) {
+            saveUser(user.data)
+            setRegisterSuccess(true)
+        }
+    }
+
+    const onClickAdvisory = async () => {
+        typeof onClose == 'function' && onClose();
+        const order = await userServices.createOrders({ ...form });
+
+        if (order) {
+            typeof onClose == 'function' && onClose();
+        }
     }
 
     const onChangeForm = (value, type) => {

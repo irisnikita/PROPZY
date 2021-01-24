@@ -3,8 +3,18 @@ import React, { useEffect, useState } from 'react';
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import classnames from 'classnames'
+import { isEmpty } from 'lodash'
+import { connect } from 'react-redux'
 
-const Header = () => {
+// Redux toolkit
+import { getUser } from 'store/user/userSlice';
+
+// Services 
+import * as userServices from 'services/user'
+
+import { appConfig } from 'constant'
+
+const Header = (props) => {
     // State
     const [isChangeHeader, setChangeHeader] = useState(false);
     const [menuItemSelected, setMenuItemSelected] = useState({})
@@ -21,6 +31,9 @@ const Header = () => {
     useEffect(() => {
         window.addEventListener('scroll', onScroll)
 
+        // // Get data user
+        getDataUser();
+
         return () => {
             window.removeEventListener('scroll', onScroll)
         }
@@ -31,6 +44,18 @@ const Header = () => {
 
         draftMenuItem && setMenuItemSelected(draftMenuItem)
     }, [router])
+
+    const getDataUser = async () => {
+        if (localStorage.getItem(appConfig.LOCAL_EMAIL)) {
+            const user = await userServices.get({
+                id: localStorage.getItem(appConfig.LOCAL_EMAIL)
+            })
+
+            if (!isEmpty(user)) {
+                props.getUser({ ...user.data })
+            }
+        }
+    }
 
     const onScroll = (e) => {
         if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
@@ -80,8 +105,13 @@ const Header = () => {
                 </div>
             </div>
         </header>
-
     );
 };
 
-export default Header;
+const mapStateToProps = (state) => ({
+    user: state.userSlice.user
+})
+
+const mapDispatchToProps = { getUser }
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);
