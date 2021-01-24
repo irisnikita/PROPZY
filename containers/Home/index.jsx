@@ -80,7 +80,7 @@ const HomeContainer = () => {
                         <div onClick={() => setOpenLuckyMoney(true)} className="btn-orange w-2/12">HÁI LÌ XÌ NGAY</div>
                     </div>
 
-                    <div className='flex mt-10 justify-center items-center'>
+                    <div id={'rule-event'} className='flex mt-10 justify-center items-center'>
                         <img src="/svg/logo-banner-tittle.svg" alt="" />
                         <p className='md:text-3xl font-semibold mb-5 text-white absolute '>THỂ LỆ CHƯƠNG TRÌNH</p>
                     </div>
@@ -116,7 +116,7 @@ const HomeContainer = () => {
                     </div>
 
                     {/* Component giới thiệu */}
-                    <div className='flex mt-10 justify-center items-center'>
+                    <div id={'propzycare-introduce'} className='flex mt-10 justify-center items-center'>
                         <img src="/svg/logo-banner-tittle.svg" alt="" />
                         <p className='md:text-3xl font-semibold mb-5 text-white absolute '>GIỚI THIỆU PROPZYCARE</p>
                     </div>

@@ -14,14 +14,14 @@ const User = () => {
 
     useEffect(() => {
         if (name) {
-          console.log('abc');
+            console.log('abc');
         }
-        
-      }, []);
+
+    }, []);
     const submitHandler = (e) => {
         Axios.post("http://localhost:5000/api/users/register", { name, email, phone });
         console.log('send data');
-      }
+    }
 
     return (
         <div>
@@ -37,7 +37,7 @@ const User = () => {
                 <>
                     <div
                         className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none"
-                       // onClick={() => setShowModal(false) }
+                    // onClick={() => setShowModal(false) }
                     >
                         <div className="relative w-auto my-6 mx-auto max-w-2xl">
                             {/*content*/}
@@ -63,12 +63,12 @@ const User = () => {
 
                                         <input type="email" className='modal__input w-full' name='phone' id='phone' placeholder="Email" onChange={(e) => setEmail(e.target.value)} />
 
-                                       
+
                                     </div>
                                 </div>
                                 {/*footer*/}
                                 <div className="flex items-center justify-end p-6  rounded-b">
-                                    
+
                                     <button
                                         className="bg-yellow-500 text-white active:bg-yellow-800 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1"
                                         type="button"
