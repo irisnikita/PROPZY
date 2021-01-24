@@ -14,7 +14,7 @@ export const translations = {
 }
 
 export const appConfig = {
-    API: 'http://165.227.83.101:5000/api',
+    API: 'https://vmotel.me/api',
     // API: 'http://localhost:5000/api',
     LOCAL_EMAIL: 'user-email'
 } 
