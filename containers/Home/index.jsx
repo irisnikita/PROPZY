@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import {
     motion,
 } from 'framer-motion';
+import axios from 'axios'
 
 // Containers
 import Header from 'containers/Header';
@@ -19,6 +20,25 @@ import LuckyMoney from 'components/LuckyMoney';
 const HomeContainer = () => {
     // State
     const [isOpenLuckyMoney, setOpenLuckyMoney] = useState(false);
+    const [formContact, setFormContact] = useState({});
+
+    const onClickAdvisory = () => {
+        typeof onClose == 'function' && onClose();
+
+        axios.post("http://localhost:5000/api/orders", { ...formContact })
+    }
+
+    const onChangeForm = (value, type) => {
+        let draftForm = {}
+
+        draftForm = {
+            ...formContact,
+            [type]: value
+        }
+
+        setFormContact(draftForm)
+    }
+
 
     return (
         <div className='home-page__wrap overflow-x-hidden'>
@@ -142,20 +162,20 @@ const HomeContainer = () => {
                                             </div>
                                         </div>
                                         <div className='py-7 space-y-3'>
-                                            <input type="text" className='default__input w-full' placeholder="Họ và tên" />
+                                            <input onChange={(e) => onChangeForm(e.target.value, 'name')} type="text" className='default__input w-full' placeholder="Họ và tên" />
 
-                                            <input type="number" className='default__input w-full' placeholder="Số điện thoại" />
+                                            <input onChange={(e) => onChangeForm(e.target.value, 'phone')} type="number" className='default__input w-full' placeholder="Số điện thoại" />
 
-                                            <input type="email" className='default__input w-full' placeholder="Email" />
+                                            <input onChange={(e) => onChangeForm(e.target.value, 'email')} type="email" className='default__input w-full' placeholder="Email" />
 
-                                            <select name='price' className='default__input w-full' >
-                                                <option className='text-white bg-transparent' value="" > Giá muốn thuê </option>
+                                            <select onChange={(e) => { onChangeForm(e.target.value, 'price') }} name='price' className='default__input w-full' >
+                                                <option className='text-white bg-transparent' value="0" > Giá muốn thuê </option>
                                                 <option className='text-black bg-transparent' value='dưới 1 tỷ '> Dưới 1 tỷ  </option>
                                                 <option className='text-black bg-transparent' value='dưới 2 tỷ '> 1 -3 tỷ  </option>
                                                 <option className='text-black bg-transparent' value='dưới 3 tỷ '> trên 3 tỷ </option>
 
                                             </select>
-                                            <div className="btn-orange place-self-center mt-5 mx-auto w-2/5">TƯ VẤN NGAY</div>
+                                            <div onClick={onClickAdvisory} className="btn-orange place-self-center mt-5 mx-auto w-2/5">TƯ VẤN NGAY</div>
                                         </div>
                                     </div>
                                 </div>

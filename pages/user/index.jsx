@@ -14,13 +14,11 @@ const User = () => {
 
     useEffect(() => {
         if (name) {
-            console.log('abc');
         }
 
     }, []);
     const submitHandler = (e) => {
         Axios.post("http://localhost:5000/api/users/register", { name, email, phone });
-        console.log('send data');
     }
 
     return (

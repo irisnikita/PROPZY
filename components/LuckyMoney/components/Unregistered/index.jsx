@@ -3,7 +3,10 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { motion } from 'framer-motion'
 import classnames from 'classnames';
+import axios from 'axios'
 
+// appconfig
+import { appConfig } from 'constant'
 // Styles
 import styles from 'components/LuckyMoney/styles.module.scss';
 
@@ -22,6 +25,12 @@ const Unregistered = (props) => {
     const [isRegisterSuccess, setRegisterSuccess] = useState(false);
     const [isRegisterRent, setRegisterRent] = useState(false);
     const [prizeSelected, setPrizeSelected] = useState({});
+    const [form, setForm] = useState({
+        email: '',
+        name: '',
+        phone: '',
+        price: ''
+    })
 
     useEffect(() => {
         randomPrize()
@@ -34,12 +43,36 @@ const Unregistered = (props) => {
     }
 
     // Function
-    const onClickRegisterUser = () => {
-        setRegisterSuccess(true)
+    const onClickRegisterUser = async () => {
+        // const user = await axios({
+        //     method: 'POST',
+        //     url: appConfig.API + '/users/register',
+        //     date: { ...form }
+        // })
+
+        // if (user) {
+        //     console.log("onClickRegister -> user", user)
+        //     setRegisterSuccess(true)
+        // }
+
+        axios.post("http://localhost:5000/api/users/register", { ...form }).then(() => setRegisterSuccess(true));
     }
 
     const onClickAdvisory = () => {
         typeof onClose == 'function' && onClose();
+
+        axios.post("http://localhost:5000/api/orders", { ...form }).then(() => { typeof onClose == 'function' && onClose(); });
+    }
+
+    const onChangeForm = (value, type) => {
+        let draftForm = {}
+
+        draftForm = {
+            ...form,
+            [type]: value
+        }
+
+        setForm(draftForm)
     }
 
     return (
@@ -49,7 +82,7 @@ const Unregistered = (props) => {
                     <div className="relative">
                         <img className={styles['img-lucky-money']} src={prizeSelected.image} alt="" />
                         <div className="flex justify-center absolute bottom-5 w-full">
-                            <div className="btn-orange" onClick={() => { setOpenRegister(true) }}>
+                            <div className="btn-orange" onClick={() => setOpenRegister(true)}>
                                 ĐĂNG KÝ ĐỂ NHẬN QUÀ
                     </div>
                         </div>
@@ -71,9 +104,9 @@ const Unregistered = (props) => {
                                 ĐĂNG KÝ
                     </div>
                             <div className="space-y-3 mt-3">
-                                <input type="text" className={classnames('second__input', 'w-full')} placeholder='Họ và tên' />
-                                <input type="text" className={classnames('second__input', 'w-full')} placeholder='Email' />
-                                <input type="text" className={classnames('second__input', 'w-full')} placeholder='Số điện thoại' />
+                                <input type="text" onChange={(e) => onChangeForm(e.target.value, 'name')} className={classnames('second__input', 'w-full')} placeholder='Họ và tên' />
+                                <input type="text" onChange={(e) => onChangeForm(e.target.value, 'email')} className={classnames('second__input', 'w-full')} placeholder='Email' />
+                                <input type="text" onChange={(e) => onChangeForm(e.target.value, 'phone')} className={classnames('second__input', 'w-full')} placeholder='Số điện thoại' />
                                 <div className="flex justify-end w-full">
                                     <div
                                         className="btn-orange min-h-0 py-4 min-w-0 px-10 rounded-md"
@@ -101,10 +134,10 @@ const Unregistered = (props) => {
                                         Hơn 100.000 bất động sản tại Propzy sẵn sàng giao dịch!
                                 </p>
                                     <div className="space-y-3">
-                                        <input type="text" className={classnames('second__input', 'w-full')} placeholder='Họ và tên' />
-                                        <input type="email" className={classnames('second__input', 'w-full')} placeholder='Email' />
-                                        <input type='' className={classnames('second__input', 'w-full')} placeholder='Số điện thoại' />
-                                        <input type="number" className={classnames('second__input', 'w-full')} placeholder='Giá muốn thuê'></input>
+                                        <input type="text" value={form['name']} onChange={(e) => onChangeForm(e.target.value, 'name')} className={classnames('second__input', 'w-full')} placeholder='Họ và tên' />
+                                        <input type="email" value={form['email']} onChange={(e) => onChangeForm(e.target.value, 'email')} className={classnames('second__input', 'w-full')} placeholder='Email' />
+                                        <input type='number' value={form['phone']} onChange={(e) => onChangeForm(e.target.value, 'phone')} className={classnames('second__input', 'w-full')} placeholder='Số điện thoại' />
+                                        <input type="text" value={form['price']} onChange={(e) => onChangeForm(e.target.value, 'price')} className={classnames('second__input', 'w-full')} placeholder='Giá muốn thuê'></input>
                                     </div>
                                     <div className="flex justify-between py-7 items-center">
                                         <span className='cursor-pointer text__color--orange'>Hái lì xì tiếp</span>

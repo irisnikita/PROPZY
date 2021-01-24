@@ -12,3 +12,7 @@ export const translations = {
         contact: 'Contact'
     }
 }
+
+export const appConfig = {
+    API: 'http://localhost:5000/api'
+} 
