@@ -4,13 +4,13 @@ import PropTypes from 'prop-types';
 import { motion } from 'framer-motion'
 import classnames from 'classnames';
 import { connect } from 'react-redux';
-
+import { isEmpty } from 'lodash'
 // Styles
 import styles from 'components/LuckyMoney/styles.module.scss';
 
 // Services 
 import * as userServices from 'services/user'
-
+import * as prizeServices from 'services/prize'
 // Constant
 
 /**
@@ -20,42 +20,42 @@ import * as userServices from 'services/user'
 const categories = [
 	{
 		key: 'voucher', rate: 10, prizeList: [
-			{ key: 'vn-moving', name: 'VN Moving', area: 'HCM (City Wide)', detail: 'Giảm 500K cho khách đặt chuyển nhà', voucher: 500000, quantity: 99999, image: '/svg/lucky-money/voucher-500k.svg' },
-			{ key: 'home-az', name: 'HomeAZ', area: 'HCM (City Wide)', detail: 'Giảm 600K cho khách đặt mua nệm trên app HomeAZ', voucher: 600000, quantity: 99999, image: '/svg/lucky-money/coupon-600k.svg' },
-			{ key: 'godee', name: 'Godee', area: 'HCM (City Wide)', detail: 'Tặng 25 chuyến xe miễn phí (30k/ chuyến) cho khách hàng', voucher: 750000, quantity: 99999, image: '/svg/lucky-money/godee.svg' },
-			{ key: 'lalamove', name: 'Lalamove', area: 'HCM (City Wide)', detail: 'Giảm 75K cho khách đặt chuyển nhà', voucher: 75000, quantity: 300, image: '/svg/lucky-money/75k-lalamove.svg' },
-			{ key: 'jupviec', name: 'JupViec.vn', area: 'HCM (City Wide)', detail: 'Giảm 75K cho khách đặt chuyển nhà', voucher: 75000, quantity: 700, image: '/svg/lucky-money/75k-giup-viec.svg' },
+			{ key: 'VN_Moving', category: 'voucher', name: 'VN Moving', area: 'HCM (City Wide)', detail: 'Giảm 500K cho khách đặt chuyển nhà', voucher: 500000, quantity: 99999, image: '/svg/lucky-money/voucher-500k.svg' },
+			{ key: 'HomeAZ', category: 'voucher', name: 'HomeAZ', area: 'HCM (City Wide)', detail: 'Giảm 600K cho khách đặt mua nệm trên app HomeAZ', voucher: 600000, quantity: 99999, image: '/svg/lucky-money/coupon-600k.svg' },
+			{ key: 'GoDee', category: 'voucher', name: 'Godee', area: 'HCM (City Wide)', detail: 'Tặng 25 chuyến xe miễn phí (30k/ chuyến) cho khách hàng', voucher: 750000, quantity: 99999, image: '/svg/lucky-money/godee.svg' },
+			// { key: 'lalamove', name: 'Lalamove', area: 'HCM (City Wide)', detail: 'Giảm 75K cho khách đặt chuyển nhà', voucher: 75000, quantity: 300, image: '/svg/lucky-money/75k-lalamove.svg' },
+			{ key: 'Jupviec', category: 'voucher', name: 'JupViec.vn', area: 'HCM (City Wide)', detail: 'Giảm 75K cho khách đặt chuyển nhà', voucher: 75000, quantity: 700, image: '/svg/lucky-money/75k-giup-viec.svg' },
 		],
 	},
 	{
 		key: 'propzy-care', rate: 1, prizeList: [
-			{ key: 'propzy-care', name: 'Propzy Care', area: 'HCM (City Wide)', detail: 'Combo Propzy Care trị giá 2.000.000', voucher: 2000000, quantity: 10, image: '/svg/lucky-money/propzy-care-2trieu.svg' },
+			{ key: 'Propzy_Care_Special', category: 'propzy-care', name: 'Propzy Care', area: 'HCM (City Wide)', detail: 'Combo Propzy Care trị giá 2.000.000', voucher: 2000000, quantity: 10, image: '/svg/lucky-money/propzy-care-2trieu.svg' },
 		]
 	},
 	{
 		key: 'posm', rate: 8, prizeList: [
-			{ key: 'posm-1', name: 'Combo Shopping bag + Helmet', area: '', detail: 'Combo Shopping bag + Helmet', voucher: 50, quantity: 10, image: '/svg/lucky-money/propzy-tui-giu-nhiet.svg' },
-			{ key: 'posm-2', name: 'Combo Canvas bag + Tumbler', area: '', detail: 'Combo Canvas bag + Tumbler', voucher: 50, quantity: 10, image: '/svg/lucky-money/tui-canvas-binh-giu-nhiet' },
-			{ key: 'posm-3', name: 'Combo Shopping bag + Raincoat', area: '', detail: 'Combo Shopping bag + Raincoat', voucher: 50, quantity: 10, image: '/svg/lucky-money/tui-giu-nhiet-ao-mua.svg' },
-			{ key: 'posm-4', name: 'Combo Notebook + Umbrella', area: '', detail: 'Combo Notebook + Umbrella', voucher: 50, quantity: 10, image: '/svg/lucky-money/so-tay-va-du.svg' }
+			{ key: 'posm-1', category: 'posm', name: 'Combo Shopping bag + Helmet', area: '', detail: 'Combo Shopping bag + Helmet', voucher: 50, quantity: 10, image: '/svg/lucky-money/propzy-tui-giu-nhiet.svg' },
+			{ key: 'posm-2', category: 'posm', name: 'Combo Canvas bag + Tumbler', area: '', detail: 'Combo Canvas bag + Tumbler', voucher: 50, quantity: 10, image: '/svg/lucky-money/tui-canvas-binh-giu-nhiet' },
+			{ key: 'posm-3', category: 'posm', name: 'Combo Shopping bag + Raincoat', area: '', detail: 'Combo Shopping bag + Raincoat', voucher: 50, quantity: 10, image: '/svg/lucky-money/tui-giu-nhiet-ao-mua.svg' },
+			{ key: 'posm-4', category: 'posm', name: 'Combo Notebook + Umbrella', area: '', detail: 'Combo Notebook + Umbrella', voucher: 50, quantity: 10, image: '/svg/lucky-money/so-tay-va-du.svg' }
 		],
 	},
 	{
 		key: 'fail', rate: 70, prizeList: [
 			{
-				key: 'fail-1', name: '', area: '', detail: `Tết này đã khác tết xưa
+				key: 'fail-1', category: 'fail', name: '', area: '', detail: `Tết này đã khác tết xưa
 				Đã thuê nhà mới đã ưa có bồ`, voucher: 0, quantity: 0, image: '/svg/lucky-money/fail/fail-1.svg'
 			},
 			{
-				key: 'fail-2', name: '', area: '', detail: `Năm mới chẳng ước chi xa
+				key: 'fail-2', category: 'fail', name: '', area: '', detail: `Năm mới chẳng ước chi xa
 				Ước thêm vài tỷ, dăm ba căn nhà`, voucher: 0, quantity: 0, image: '/svg/lucky-money/fail/fail-2.svg'
 			},
 			{
-				key: 'fail-3', name: '', area: '', detail: `"Tết này đã khác tết xưa 
+				key: 'fail-3', category: 'fail', name: '', area: '', detail: `"Tết này đã khác tết xưa 
 				Đã có nhà mới đã cưa được nàng"`, voucher: 0, quantity: 0, image: '/svg/lucky-money/fail/fail-3.svg'
 			},
 			{
-				key: 'fail-4', name: '', area: '', detail: `"Tết này hông ước chi xa
+				key: 'fail-4', category: 'fail', name: '', area: '', detail: `"Tết này hông ước chi xa
 				Chỉ ước chân ái cùng ta về nhà"`, voucher: 0, quantity: 0, image: '/svg/lucky-money/fail/fail-4.svg'
 			},
 		],
@@ -74,6 +74,12 @@ const Unregistered = (props) => {
 	useEffect(() => {
 		randomPrize()
 	}, [])
+
+	useEffect(() => {
+		if (!isEmpty(prizeSelected) && prizeSelected.category !== 'fail') {
+			updateCoupon();
+		}
+	}, [prizeSelected])
 
 	// Function to random prize with rate
 	const randomPrize = () => {
@@ -103,6 +109,30 @@ const Unregistered = (props) => {
 		}
 
 		prize === null ? setPrizeSelected(categories[3].prizeList[0]) : setPrizeSelected(prize)
+	}
+
+	const updateCoupon = async () => {
+		const coupon = await prizeServices.updateCoupon({
+			id: prizeSelected.key,
+			owner: props.user.email
+		})
+
+		if (coupon) {
+			console.log('coupon', coupon)
+			sendMail(coupon.data.data.name, coupon.data.data)
+		}
+	}
+
+	const sendMail = async (name, coupon) => {
+		const sendMail = await userServices.sendMail({
+			email: props.user.email,
+			name,
+			user: props.user,
+			coupon
+		})
+		if (sendMail) {
+			console.log('fine')
+		}
 	}
 
 	// Function

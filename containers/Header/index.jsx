@@ -24,7 +24,7 @@ const Header = (props) => {
         { key: 'introduce', label: 'GIỚI THIỆU', link: '/', location: 'propzycare-introduce' },
         { key: 'rule', label: 'THỂ LỆ', link: '/', location: 'rule-event' },
         { key: 'contact', label: 'LIÊN HỆ ', link: '/', location: 'contact-us' },
-        { key: 'see-prize', label: 'XEM QUÀ', link: '/user' },
+        // { key: 'see-prize', label: 'XEM QUÀ', link: '/user' },
     ]
     const router = useRouter();
 
@@ -75,7 +75,7 @@ const Header = (props) => {
     const showRenderMenu = () => {
         return menu.length ? menu.map(item => {
             return item.location ? (
-                <li className='cursor-pointer' onClick={() => scrollToElement(item.location)}>
+                <li key={item.key} className='cursor-pointer' onClick={() => scrollToElement(item.location)}>
                     <a>{item.label}</a>
                 </li>
             ) : (

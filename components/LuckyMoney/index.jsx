@@ -51,7 +51,7 @@ const LuckyMoney = (props) => {
     // Life cycle
     useEffect(() => {
         if (isOpen) {
-            document.querySelector('body').style.overflow = 'hidden';
+            // document.querySelector('body').style.overflow = 'hidden';
 
             setTimeout(() => {
                 if (document.querySelector('#lucky-money-image__wrap')) {
