@@ -8,7 +8,7 @@ import { isEmpty } from 'lodash'
 import { useSelector, useDispatch } from 'react-redux'
 import { connect } from 'react-redux'
 import { Formik } from 'formik';
-import { Modal } from 'antd'
+import { Modal, Dropdown, Menu } from 'antd'
 
 // Redux toolkit
 import { selectUser, getUser } from 'store/user/userSlice'
@@ -25,9 +25,9 @@ import * as prizeServices from 'services/prize'
 import styles from 'components/LuckyMoney/styles.module.scss';
 
 const prizes = [
-    { key: 'VN_Moving', name: 'VN Moving', area: 'HCM (City Wide)', detail: 'Giảm 500K cho khách đặt chuyển nhà', voucher: 500000, quantity: 99999, image: '/svg/lucky-money/voucher-500k.svg' },
-    { key: 'HomeAZ', name: 'HomeAZ', area: 'HCM (City Wide)', detail: 'Giảm 600K cho khách đặt mua nệm trên app HomeAZ', voucher: 600000, quantity: 99999, image: '/svg/lucky-money/coupon-600k.svg' },
-    { key: 'GoDee', name: 'Godee', area: 'HCM (City Wide)', detail: 'Tặng 25 chuyến xe miễn phí (30k/ chuyến) cho khách hàng', voucher: 750000, quantity: 99999, image: '/svg/lucky-money/godee.svg' },
+    { key: 'VN_Moving', name: 'VN Moving', area: 'HCM (City Wide)', detail: 'Giảm 500K cho khách đặt chuyển nhà', voucher: 500000, quantity: 99999, image: '/svg/lucky-money/copy-lucky-money/voucher-500k.svg' },
+    { key: 'HomeAZ', name: 'HomeAZ', area: 'HCM (City Wide)', detail: 'Giảm 600K cho khách đặt mua nệm trên app HomeAZ', voucher: 600000, quantity: 99999, image: '/svg/lucky-money/copy-lucky-money/coupon-600k.svg' },
+    { key: 'GoDee', name: 'Godee', area: 'HCM (City Wide)', detail: 'Tặng 25 chuyến xe miễn phí (30k/ chuyến) cho khách hàng', voucher: 750000, quantity: 99999, image: '/svg/lucky-money/copy-lucky-money/godee.svg' },
 ]
 
 const Unregistered = (props) => {
@@ -45,7 +45,7 @@ const Unregistered = (props) => {
         email: '',
         name: '',
         phone: 0,
-        price: '2000000'
+        price: '6-9 triệu'
     })
     const [listPrize, setListPrize] = useState([]);
 
@@ -60,6 +60,23 @@ const Unregistered = (props) => {
             props.callbackUser(user)
         }
     }, [user])
+
+    const onClickPrice = (e) => {
+        setForm({
+            ...form,
+            price: e.key
+        })
+    }
+
+    const listPrice = (
+        <Menu onClick={onClickPrice} defaultSelectedKeys={'6-9 triệu'}>
+            <Menu.Item key='6-9 triệu' value="6-9 triệu">6-9 triệu</Menu.Item>
+            <Menu.Item key='9-12 triệu' value="9-12 triệu">9-12 triệu</Menu.Item>
+            <Menu.Item key='12-15 triệu' value="12-15 triệu">12-15 triệu</Menu.Item>
+            <Menu.Item key='Trên 15 triệu' value="Trên 15 triệu">Trên 15 triệu</Menu.Item>
+        </Menu>
+    )
+
 
     const getListPrizes = async () => {
         const listPrizes = await prizeServices.getListCoupon();
@@ -89,7 +106,6 @@ const Unregistered = (props) => {
             coupon
         })
         if (sendMail) {
-            console.log('fine')
         }
     }
 
@@ -98,7 +114,6 @@ const Unregistered = (props) => {
         const user = await userServices.create({ ...form });
         // sendMail()
         if (user && user.data) {
-            console.log("🚀 ~ file: index.jsx ~ line 93 ~ onClickRegisterUser ~ user.data", user.data)
             saveUser(user.data)
             setUser(user.data)
             setRegisterSuccess(true)
@@ -143,11 +158,13 @@ const Unregistered = (props) => {
     }
 
     return (
-        <div className='animate__animated animate__fadeIn relative flex items-center'>
+        <div className='animate__animated animate__fadeIn w-screen md:w-max relative flex justify-center md:justify-start items-center'>
             {!isRegisterSuccess ? (
                 <>
                     <div className="relative">
-                        <img className={styles['img-lucky-money']} src={prizeSelected.image} alt="" />
+                        <img className={classnames(styles['img-lucky-money'], 'md:block animate__animated', {
+                            'hidden': isOpenRegister,
+                        })} src={prizeSelected.image} alt="" />
                         <div className="flex justify-center absolute bottom-5 w-full">
                             <div className={classnames(
                                 "btn-orange",
@@ -162,11 +179,12 @@ const Unregistered = (props) => {
                         </div>
                     </div>
                     <div className={classnames(
-                        'bg-white rounded-r-2xl mt-10 w-96 h-full relative -left-5 overflow-x-hidden ',
+                        'bg-white rounded-2xl md:rounded-r-2xl animate__animated mt-10 w-10/12 md:w-96 h-full relative md:-left-5 overflow-x-hidden ',
                         styles['box__register'],
                         {
                             [styles['box--open']]: isOpenRegister,
-                            'px-10': isOpenRegister,
+                            'px-10 animate__fadeIn': isOpenRegister,
+                            'animate__fadeOut animate__faster': !isOpenRegister,
                         }
                     )}>
                         <i
@@ -208,7 +226,7 @@ const Unregistered = (props) => {
                                         if (user.data.email) {
                                             saveUser(user.data)
                                             setUser(user.data)
-                                            setForm(values)
+                                            setForm({ ...form, ...values })
                                             setRegisterSuccess(true)
                                             updateCoupon(user.data.email, user.data)
                                         } else {
@@ -238,38 +256,38 @@ const Unregistered = (props) => {
                                     isSubmitting,
                                     /* and other goodies */
                                 }) => (
-                                    <form onSubmit={handleSubmit}>
-                                        <div className="space-y-3 mt-3">
-                                            <input name="name" type="text" value={values.name} onChange={handleChange} className={classnames('second__input', 'w-full')} placeholder='Họ và tên' />
-                                            {errors.name && touched.name && <div className='text-red-600 my-1'>{errors.name}</div>}
-                                            <input name="email" type="text" value={values.email} onChange={handleChange} className={classnames('second__input', 'w-full')} placeholder='Email' />
-                                            {errors.email && touched.email && <div className='text-red-600 my-1'>{errors.email}</div>}
-                                            <input name="phone" type="number" value={values.phone} onChange={handleChange} className={classnames('second__input', 'w-full')} placeholder='Số điện thoại' />
-                                            {errors.phone && touched.phone && <div className='text-red-600 my-1'>{errors.phone}</div>}
-                                            <div className="flex justify-end w-full">
-                                                <button type='submit'
-                                                    className="btn-orange min-h-0 py-4 min-w-0 px-10 rounded-md"
-                                                // onClick={onClickRegisterUser}
-                                                >
-                                                    ĐĂNG KÝ
+                                        <form onSubmit={handleSubmit}>
+                                            <div className="space-y-3 mt-3">
+                                                <input name="name" type="text" value={values.name} onChange={handleChange} className={classnames('second__input', 'w-full')} placeholder='Họ và tên' />
+                                                {errors.name && touched.name && <div className='text-red-600 my-1'>{errors.name}</div>}
+                                                <input name="email" type="text" value={values.email} onChange={handleChange} className={classnames('second__input', 'w-full')} placeholder='Email' />
+                                                {errors.email && touched.email && <div className='text-red-600 my-1'>{errors.email}</div>}
+                                                <input name="phone" type="number" value={values.phone} onChange={handleChange} className={classnames('second__input', 'w-full')} placeholder='Số điện thoại' />
+                                                {errors.phone && touched.phone && <div className='text-red-600 my-1'>{errors.phone}</div>}
+                                                <div className="flex justify-end w-full">
+                                                    <button type='submit'
+                                                        className="btn-orange min-h-0 py-4 min-w-0 px-10 rounded-md"
+                                                    // onClick={onClickRegisterUser}
+                                                    >
+                                                        ĐĂNG KÝ
                                                 </button>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </form>
-                                )}
+                                        </form>
+                                    )}
                             </Formik>
                         </div>
                     </div>
 
                 </>
             ) : (
-                    <div className="bg-white rounded-3xl animate__animated animate__fadeIn">
+                    <div className="bg-white rounded-3xl  animate__animated animate__fadeIn">
                         {isRegisterRent ? (
                             <div className={classnames(styles['message--success'], 'animate__animated animate__fadeIn')}>
                                 <div className='px-10 pt-20'>
                                     <i
                                         onClick={() => { props.onClose && props.onClose() }}
-                                        className="icon-out-remove absolute cursor-pointer right-5 text-2xl top-5"
+                                        className="icon-out-remove absolute cursor-pointer right-10 md:right-5 text-2xl top-5"
                                     ></i>
                                     <strong className='font-semibold text-xl text__color--orange'>BẠN CÓ NHU CẦU THUÊ BẤT ĐỘNG SẢN?</strong>
                                     <p className='text-base pt-5 pb-7'>
@@ -282,11 +300,6 @@ const Unregistered = (props) => {
                                             if (!values.name) {
                                                 errors.name = 'Vui lòng nhập tên'
                                             }
-
-                                            if (!values.price) {
-                                                errors.price = 'Vui lòng nhập giá tiền muốn thuê'
-                                            }
-
                                             if (!values.phone) {
                                                 errors.phone = 'Vui lòng nhập số điện thoại'
                                             } else if (values.phone.length < 0 && values.phone.length > 11) {
@@ -306,9 +319,12 @@ const Unregistered = (props) => {
                                             typeof onClose == 'function' && onClose();
                                             props.getUser(user)
 
-                                            const order = await userServices.createOrders({ ...values });
+                                            const order = await userServices.createOrders({ ...values, price: form.price });
 
                                             if (order) {
+                                                const sendThanksMail = await userServices.sendThanks({
+                                                    user: { ...values }
+                                                })
                                                 typeof onClose == 'function' && onClose();
                                             }
                                         }}
@@ -323,23 +339,24 @@ const Unregistered = (props) => {
                                             isSubmitting,
                                             /* and other goodies */
                                         }) => (
-                                            <form onSubmit={handleSubmit}>
-                                                <div className="space-y-3 mt-3">
-                                                    <input name="name" type="text" value={values.name} onChange={handleChange} className={classnames('second__input', 'w-full')} placeholder='Họ và tên' />
-                                                    {errors.name && touched.name && <div className='text-red-600 my-1'>{errors.name}</div>}
-                                                    <input name="email" type="text" value={values.email} onChange={handleChange} className={classnames('second__input', 'w-full')} placeholder='Email' />
-                                                    {errors.email && touched.email && <div className='text-red-600 my-1'>{errors.email}</div>}
-                                                    <input name="phone" type="number" value={values.phone} onChange={handleChange} className={classnames('second__input', 'w-full')} placeholder='Số điện thoại' />
-                                                    {errors.phone && touched.phone && <div className='text-red-600 my-1'>{errors.phone}</div>}
-                                                    <input name='price' type="number" value={form['price']} onChange={handleChange} className={classnames('second__input', 'w-full')} placeholder='Giá muốn thuê'></input>
-                                                    {errors.price && touched.price && <div className='text-red-600 my-1'>{errors.price}</div>}
-                                                    <div className="flex justify-between py-7 items-center">
-                                                        <span onClick={onClickOpenNext} className='cursor-pointer text__color--orange'>Hái lì xì tiếp</span>
-                                                        <button type='submit' className="btn-orange min-h-0 py-3 min-w-0 px-5 rounded-md">TƯ VẤN NGAY</button>
+                                                <form onSubmit={handleSubmit}>
+                                                    <div className="space-y-3 mt-3">
+                                                        <input name="name" type="text" value={values.name} onChange={handleChange} className={classnames('second__input', 'w-full')} placeholder='Họ và tên' />
+                                                        {errors.name && touched.name && <div className='text-red-600 my-1'>{errors.name}</div>}
+                                                        <input name="email" type="text" value={values.email} onChange={handleChange} className={classnames('second__input', 'w-full')} placeholder='Email' />
+                                                        {errors.email && touched.email && <div className='text-red-600 my-1'>{errors.email}</div>}
+                                                        <input name="phone" type="number" value={values.phone} onChange={handleChange} className={classnames('second__input', 'w-full')} placeholder='Số điện thoại' />
+                                                        {errors.phone && touched.phone && <div className='text-red-600 my-1'>{errors.phone}</div>}
+                                                        <Dropdown trigger={['click']} overlay={listPrice}>
+                                                            <input name="price" value={form.price} readOnly className={classnames('second__input', 'w-full', 'cursor-pointer')} placeholder='Giá muốn thuê'></input>
+                                                        </Dropdown>
+                                                        <div className="flex justify-between py-7 items-center">
+                                                            <span onClick={onClickOpenNext} className='cursor-pointer text__color--orange'>Hái lì xì tiếp</span>
+                                                            <button type='submit' className="btn-orange min-h-0 py-3 min-w-0 px-5 rounded-md">TƯ VẤN NGAY</button>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            </form>
-                                        )}
+                                                </form>
+                                            )}
                                     </Formik>
                                 </div>
                             </div>
@@ -351,7 +368,7 @@ const Unregistered = (props) => {
                                             <span className='w-1/2 text-center'>Chúc mừng bạn nhận quà thành công và nhận thêm 2 lượt quay</span>
                                         </div>
                                     </div>
-                                    <div className='px-20 pt-7'>
+                                    <div className='px-5 md:px-20 pt-7'>
                                         <strong className='font-semibold text-xl text__color--orange'>ĐĂNG KÝ THUÊ NHÀ TẠI ĐÂY</strong>
                                         <p className='text-base pt-5 pb-7'>
                                             Từ 25/01 - 28/02/2021 để nhận gói ưu đãi Propzy CARE trị giá 2.000.000 VNĐ khi phát sinh giao dịch trước ngày 30/03/2021.

@@ -37,3 +37,27 @@
         bottom: 125px;
     }
 }
+
+
+// Responsive
+@media (max-width: 640px) {
+    .box__register {
+        width: 90% !important;
+        &.box--open {
+            max-width: 100% !important;
+            opacity: 1;
+        }
+    }
+
+    .img-lucky-money {
+        max-width: 300px !important;
+    }
+
+    .btn-make-mission {
+        bottom: 90px !important;
+    }
+
+    .message--success {
+        width: 350px !important;
+      }
+}

@@ -5,6 +5,8 @@ import { useRouter } from 'next/router'
 import classnames from 'classnames'
 import { isEmpty } from 'lodash'
 import { connect } from 'react-redux'
+import { Modal } from 'antd'
+import { Formik } from 'formik'
 
 // Redux toolkit
 import { getUser } from 'store/user/userSlice';
@@ -18,6 +20,8 @@ const Header = (props) => {
     // State
     const [isChangeHeader, setChangeHeader] = useState(false);
     const [menuItemSelected, setMenuItemSelected] = useState({})
+    console.log("Header -> menuItemSelected", menuItemSelected)
+    const [isOpenModal, setOpenModal] = useState(false)
 
     const menu = [
         { key: 'home', label: 'TRANG CHỦ', link: '/' },
@@ -72,21 +76,35 @@ const Header = (props) => {
         }
     }
 
+    const onClickSeePrize = () => {
+        if (isEmpty(props.user)) {
+            setOpenModal(true)
+        } else {
+            router.push('/user')
+        }
+    }
+
     const showRenderMenu = () => {
         return menu.length ? menu.map(item => {
             return item.location ? (
                 <li key={item.key} className='cursor-pointer' onClick={() => scrollToElement(item.location)}>
                     <a>{item.label}</a>
                 </li>
-            ) : (
-                    <li key={item.key} className={classnames({
+            ) :
+                item.key === 'see-prize' ? (
+                    <a className={classnames({
                         'text__color--orange': item.key === menuItemSelected.key
-                    })}>
-                        <Link href={item.link}>
-                            <a>{item.label}</a>
-                        </Link>
-                    </li>
-                )
+                    })} key={item.key} onClick={onClickSeePrize}>{item.label}</a>
+                ) : (
+                        <li key={item.key} className={classnames({
+                            'text__color--orange': item.key === menuItemSelected.key
+                        })}>
+                            <Link href={item.link}>
+                                <a>{item.label}</a>
+                            </Link>
+                        </li>
+                    )
+
         }) : null
     }
 
@@ -104,6 +122,95 @@ const Header = (props) => {
                     </ul>
                 </div>
             </div>
+            <Modal
+                visible={isOpenModal}
+                // onOk={handleOk}
+                onCancel={() => setOpenModal(false)}
+                footer={null}
+            >
+                <div className='font-semibold text-xl text__color--orange mt-10'>
+                    ĐĂNG KÝ ĐỂ NHẬN THÊM 2 LƯỢT CHƠI
+                    </div>
+                <Formik
+                    initialValues={{ email: '', name: '', phone: '' }}
+                    validate={values => {
+                        const errors = {};
+                        if (!values.name) {
+                            errors.name = 'Vui lòng nhập tên'
+                        }
+
+                        if (!values.phone) {
+                            errors.phone = 'Vui lòng nhập số điện thoại'
+                        } else if (values.phone.length < 0 && values.phone.length > 11) {
+                            errors.phone = 'Vui lòng nhập số điện thoại hợp lệ'
+                        }
+
+                        if (!values.email) {
+                            errors.email = 'Vui lòng nhập email';
+                        } else if (
+                            !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
+                        ) {
+                            errors.email = 'Địa chỉ email không đúng';
+                        }
+                        return errors;
+                    }}
+                    onSubmit={async (values, { setSubmitting }) => {
+                        const user = await userServices.create({ ...values });
+                        // sendMail()
+                        if (user && user.data) {
+                            if (user.data.email) {
+                                router.push('/user')
+                                props.getUser(user.data)
+                                localStorage.setItem('user-email', user.data.email);
+                            } else {
+                                Modal.error({
+                                    title: 'Đăng ký thất bại',
+                                    content: 'Email đăng ký đã tồn tại, xin vui lòng đăng ký email khác',
+                                    okText: '  Đăng ký lại'
+                                })
+                            }
+
+                        } else {
+                            Modal.error({
+                                title: 'Đăng ký thất bại',
+                                content: 'Email đăng ký đã tồn tại, xin vui lòng đăng ký email khác',
+                                okText: '  Đăng ký lại'
+                            })
+                        }
+                    }}
+                >
+                    {({
+                        values,
+                        errors,
+                        touched,
+                        handleChange,
+                        handleBlur,
+                        handleSubmit,
+                        isSubmitting,
+                        /* and other goodies */
+                    }) => (
+                            <form onSubmit={handleSubmit}>
+                                <div className="space-y-3 mt-3">
+                                    <input name="name" type="text" value={values.name} onChange={handleChange} className={classnames('second__input', 'w-full')} placeholder='Họ và tên' />
+                                    {errors.name && touched.name && <div className='text-red-600 my-1'>{errors.name}</div>}
+                                    <input name="email" type="text" value={values.email} onChange={handleChange} className={classnames('second__input', 'w-full')} placeholder='Email' />
+                                    {errors.email && touched.email && <div className='text-red-600 my-1'>{errors.email}</div>}
+                                    <input name="phone" type="number" value={values.phone} onChange={handleChange} className={classnames('second__input', 'w-full')} placeholder='Số điện thoại' />
+                                    {errors.phone && touched.phone && <div className='text-red-600 my-1'>{errors.phone}</div>}
+                                    <div className="flex justify-end w-full">
+                                        <button type='submit'
+                                            className="btn-orange min-h-0 py-4 min-w-0 px-10 rounded-md"
+                                        // onClick={onClickRegisterUser}
+                                        >
+                                            ĐĂNG KÝ
+                                                </button>
+                                    </div>
+                                </div>
+                            </form>
+                        )}
+                </Formik>
+
+            </Modal>
         </header>
     );
 };
