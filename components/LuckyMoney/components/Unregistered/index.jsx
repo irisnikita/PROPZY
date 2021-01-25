@@ -57,7 +57,6 @@ const Unregistered = (props) => {
 
     useEffect(() => {
         if (!isEmpty(user)) {
-            console.log("🚀 ~ file: index.jsx ~ line 60 ~ useEffect ~ user", user)
             props.callbackUser(user)
         }
     }, [user])
@@ -128,7 +127,7 @@ const Unregistered = (props) => {
     }
 
     const onClickOpenNext = () => {
-        typeof onClose == 'function' && onClose();
+        typeof onClose == 'function' && onClose('open-next');
         props.getUser(user)
     }
 
