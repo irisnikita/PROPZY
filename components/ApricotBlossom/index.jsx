@@ -4,6 +4,10 @@ import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import { AnimateSharedLayout, AnimatePresence } from "framer-motion";
 import { motion } from 'framer-motion';
+import { connect } from 'react-redux';
+
+// Redux
+import { getUser } from 'store/user/userSlice'
 
 // Components
 import LuckyMoney from 'components/LuckyMoney'
@@ -67,7 +71,7 @@ const ApricotBlossom = () => {
     }
 
     const onCloseLuckyMoney = (newProps) => {
-        setOpenLuckyMoneyModal(false)
+        setOpenLuckyMoneyModal(false);
 
         if (newProps === 'open-next') {
             setTimeout(() => {
@@ -115,7 +119,7 @@ const ApricotBlossom = () => {
             </div>
             <img width={'80%'} className='absolute z-10 bottom-0 left-0' src="/images/home/buffalo.png" alt="" />
             <AnimatePresence>
-                <LuckyMoney isOpen={isOpenLuckyMoneyModal} onClose={onCloseLuckyMoney} id={idLuckyMoneySelected} />
+                {isOpenLuckyMoneyModal ? <LuckyMoney isOpen={isOpenLuckyMoneyModal} onClose={onCloseLuckyMoney} id={idLuckyMoneySelected} /> : null}
             </AnimatePresence>
         </AnimateSharedLayout>
     );
@@ -123,4 +127,6 @@ const ApricotBlossom = () => {
 
 ApricotBlossom.propTypes = {};
 
-export default ApricotBlossom;
+const mapDispatchToProps = { getUser }
+
+export default connect(null, mapDispatchToProps)(ApricotBlossom);
