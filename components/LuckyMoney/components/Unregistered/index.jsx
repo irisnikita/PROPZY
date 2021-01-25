@@ -49,7 +49,7 @@ const Unregistered = (props) => {
     const [listPrize, setListPrize] = useState([]);
 
     useEffect(() => {
-        // randomPrize()
+        randomPrize()
         // getListPrizes()
     }, [])
 
