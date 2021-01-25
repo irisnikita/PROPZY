@@ -13,6 +13,16 @@ const FlipLuckyMoney = (props) => {
         setFlip(true);
     }
 
+    const onCloseLuckyMoney = (newProps) => {
+        setOpenLuckyMoney(false)
+
+        if (newProps === 'open-next') {
+            setTimeout(() => {
+                setOpenLuckyMoney(true)
+            }, 200)
+        }
+    }
+
     return (
         <div>
             {isFlip ? (
@@ -30,7 +40,7 @@ const FlipLuckyMoney = (props) => {
                         </div>
                     </div>
                 )}
-            <LuckMoney isOpen={isOpenLuckyMoney} id={'flip-lucky0=-money'} onClose={() => setOpenLuckyMoney(false)} />
+            <LuckMoney isOpen={isOpenLuckyMoney} id={'flip-lucky0=-money'} onClose={onCloseLuckyMoney} />
         </div>
     );
 };

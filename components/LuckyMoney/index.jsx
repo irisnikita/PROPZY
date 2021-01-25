@@ -62,14 +62,16 @@ const LuckyMoney = (props) => {
                     setStepOpen(true);
                 }, [1000])
             }, 2000)
+
+
+            if (!isEmpty(props.user)) {
+                updateTurnUser();
+                setRegister(true);
+            }
         } else {
             document.querySelector('body').style.overflow = 'auto';
         }
 
-        if (!isEmpty(props.user)) {
-            updateTurnUser();
-            setRegister(true);
-        }
 
         return () => {
             resetState()

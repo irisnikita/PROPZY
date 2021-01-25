@@ -39,6 +39,16 @@ const HomeContainer = () => {
         setFormContact(draftForm)
     }
 
+    const onCloseLuckyMoney = (newProps) => {
+        setOpenLuckyMoney(false)
+
+        if (newProps === 'open-next') {
+            setTimeout(() => {
+                setOpenLuckyMoney(true)
+            }, 200)
+        }
+    }
+
 
     return (
         <div className='home-page__wrap overflow-x-hidden'>
@@ -185,7 +195,7 @@ const HomeContainer = () => {
                 </section>
             </section>
             <Footer />
-            <LuckyMoney isOpen={isOpenLuckyMoney} onClose={() => setOpenLuckyMoney(false)} id='home-page' />
+            <LuckyMoney isOpen={isOpenLuckyMoney} onClose={onCloseLuckyMoney} id='home-page' />
         </div>
     );
 };
