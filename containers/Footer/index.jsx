@@ -3,7 +3,7 @@ import React from 'react'
 const Footer = () => {
     return (
         <footer id={'contact-us'} className='footer-container'>
-            <div className='flex flex-wrap f-Sans-pro text-white text-xl w-12/12 md:px-32 pt-96 md:pt-56 md:space-x-28 '>
+            <div className='flex md:flex-nowrap flex-wrap f-Sans-pro text-white text-xl w-12/12 md:px-32 pt-96 md:pt-56 md:space-x-28 '>
                 <div className='relative md:w-3/12 w-full md:px-0 px-10 '>
                     <img src="/svg/logo-white-footer.svg" alt="" />
                     <p> Tầng 4, Tòa Nhà Flemington, Số 182, Lê Đại Hành, P.15, Q.11, TP.HCM</p>

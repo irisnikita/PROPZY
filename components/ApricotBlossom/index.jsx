@@ -119,7 +119,7 @@ const ApricotBlossom = () => {
             </div>
             <img width={'80%'} className='absolute z-10 bottom-0 left-0' src="/images/home/buffalo.png" alt="" />
             <AnimatePresence>
-                {isOpenLuckyMoneyModal ? <LuckyMoney isOpen={isOpenLuckyMoneyModal} onClose={onCloseLuckyMoney} id={idLuckyMoneySelected} /> : null}
+                <LuckyMoney isOpen={isOpenLuckyMoneyModal} onClose={onCloseLuckyMoney} id={idLuckyMoneySelected} />
             </AnimatePresence>
         </AnimateSharedLayout>
     );

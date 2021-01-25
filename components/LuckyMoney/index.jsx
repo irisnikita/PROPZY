@@ -65,18 +65,23 @@ const LuckyMoney = (props) => {
             }, 2000)
 
 
+
+
             if (!isEmpty(props.user)) {
                 updateTurnUser();
                 setRegister(true);
             }
         } else {
             document.querySelector('body').style.overflow = 'auto';
+            if (!isEmpty(user)) {
+                console.log("🚀 ~ file: index.jsx ~ line 69 ~ useEffect ~ user", user)
+                props.getUser(user)
+            }
         }
 
 
         return () => {
-            console.log('unmount luckymoney', user)
-            props.getUser(user)
+            console.log('unmount')
             resetState()
 
         }
@@ -96,6 +101,7 @@ const LuckyMoney = (props) => {
     const resetState = () => {
         setCurrentStep(steps[0])
         setStepOpen(false)
+        setUser({})
     }
 
     const onCloseModal = (newProps) => {
