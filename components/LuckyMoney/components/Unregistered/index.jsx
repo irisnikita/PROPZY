@@ -6,7 +6,8 @@ import classnames from 'classnames';
 import axios from 'axios'
 import { isEmpty } from 'lodash'
 import { useSelector, useDispatch } from 'react-redux'
-
+import { connect } from 'react-redux'
+import { Formik } from 'formik';
 
 // Redux toolkit
 import { selectUser, getUser } from 'store/user/userSlice'
@@ -43,13 +44,13 @@ const Unregistered = (props) => {
         email: '',
         name: '',
         phone: '',
-        price: ''
+        price: '2000000'
     })
     const [listPrize, setListPrize] = useState([]);
 
     useEffect(() => {
-        randomPrize()
-        getListPrizes()
+        // randomPrize()
+        // getListPrizes()
     }, [])
 
     const getListPrizes = async () => {
@@ -86,11 +87,12 @@ const Unregistered = (props) => {
 
     // Function
     const onClickRegisterUser = async () => {
-        // const user = await userServices.create({ ...form });
-        sendMail()
+        const user = await userServices.create({ ...form });
+        // sendMail()
         if (user && user.data) {
-            // saveUser(user.data)
-            // setRegisterSuccess(true)
+            saveUser(user.data)
+            setUser(user.data)
+            setRegisterSuccess(true)
         }
     }
 
@@ -100,6 +102,7 @@ const Unregistered = (props) => {
 
         if (order) {
             typeof onClose == 'function' && onClose();
+            getUser(user)
         }
     }
 
@@ -112,6 +115,11 @@ const Unregistered = (props) => {
         }
 
         setForm(draftForm)
+    }
+
+    const onClickOpenNext = () => {
+        typeof onClose == 'function' && onClose('open-next');
+        getUser(user)
     }
 
     return (
@@ -149,19 +157,71 @@ const Unregistered = (props) => {
                             <div className='font-semibold text-xl text__color--orange'>
                                 ĐĂNG KÝ
                     </div>
-                            <div className="space-y-3 mt-3">
-                                <input type="text" onChange={(e) => onChangeForm(e.target.value, 'name')} className={classnames('second__input', 'w-full')} placeholder='Họ và tên' />
-                                <input type="text" onChange={(e) => onChangeForm(e.target.value, 'email')} className={classnames('second__input', 'w-full')} placeholder='Email' />
-                                <input type="text" onChange={(e) => onChangeForm(e.target.value, 'phone')} className={classnames('second__input', 'w-full')} placeholder='Số điện thoại' />
-                                <div className="flex justify-end w-full">
-                                    <div
-                                        className="btn-orange min-h-0 py-4 min-w-0 px-10 rounded-md"
-                                        onClick={onClickRegisterUser}
-                                    >
-                                        ĐĂNG KÝ
-                            </div>
-                                </div>
-                            </div>
+
+                            <Formik
+                                initialValues={{ email: '', name: '', phone: '' }}
+                                validate={values => {
+                                    const errors = {};
+                                    if (!values.name) {
+                                        errors.name = 'Vui lòng nhập tên'
+                                    }
+
+                                    if (!values.phone) {
+                                        errors.phone = 'Vui lòng nhập số điện thoại'
+                                    } else if (values.phone.length < 0 && values.phone.length > 11) {
+                                        errors.phone = 'Vui lòng nhập số điện thoại hợp lệ'
+                                    }
+
+                                    if (!values.email) {
+                                        errors.email = 'Vui lòng nhập email';
+                                    } else if (
+                                        !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
+                                    ) {
+                                        errors.email = 'Địa chỉ email không đúng';
+                                    }
+                                    return errors;
+                                }}
+                                onSubmit={async (values, { setSubmitting }) => {
+                                    const user = await userServices.create({ ...values });
+                                    // sendMail()
+                                    if (user && user.data) {
+                                        saveUser(user.data)
+                                        setUser(user.data)
+                                        setForm(values)
+                                        setRegisterSuccess(true)
+                                    }
+                                }}
+                            >
+                                {({
+                                    values,
+                                    errors,
+                                    touched,
+                                    handleChange,
+                                    handleBlur,
+                                    handleSubmit,
+                                    isSubmitting,
+                                    /* and other goodies */
+                                }) => (
+                                    <form onSubmit={handleSubmit}>
+                                        <div className="space-y-3 mt-3">
+                                            <input name="name" type="text" value={values.name} onChange={handleChange} className={classnames('second__input', 'w-full')} placeholder='Họ và tên' />
+                                            {errors.name && touched.name && <div className='text-red-600 my-1'>{errors.name}</div>}
+                                            <input name="email" type="text" value={values.email} onChange={handleChange} className={classnames('second__input', 'w-full')} placeholder='Email' />
+                                            {errors.email && touched.email && <div className='text-red-600 my-1'>{errors.email}</div>}
+                                            <input name="phone" type="text" value={values.phone} onChange={handleChange} className={classnames('second__input', 'w-full')} placeholder='Số điện thoại' />
+                                            {errors.phone && touched.phone && <div className='text-red-600 my-1'>{errors.phone}</div>}
+                                            <div className="flex justify-end w-full">
+                                                <button type='submit'
+                                                    className="btn-orange min-h-0 py-4 min-w-0 px-10 rounded-md"
+                                                // onClick={onClickRegisterUser}
+                                                >
+                                                    ĐĂNG KÝ
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                )}
+                            </Formik>
                         </div>
                     </div>
 
@@ -179,16 +239,81 @@ const Unregistered = (props) => {
                                     <p className='text-base pt-5 pb-7'>
                                         Hơn 100.000 bất động sản tại Propzy sẵn sàng giao dịch!
                                 </p>
-                                    <div className="space-y-3">
+                                    <Formik
+                                        initialValues={{ ...form }}
+                                        validate={values => {
+                                            const errors = {};
+                                            if (!values.name) {
+                                                errors.name = 'Vui lòng nhập tên'
+                                            }
+
+                                            if (!values.price) {
+                                                errors.price = 'Vui lòng nhập giá tiền muốn thuê'
+                                            }
+
+                                            if (!values.phone) {
+                                                errors.phone = 'Vui lòng nhập số điện thoại'
+                                            } else if (values.phone.length < 0 && values.phone.length > 11) {
+                                                errors.phone = 'Vui lòng nhập số điện thoại hợp lệ'
+                                            }
+
+                                            if (!values.email) {
+                                                errors.email = 'Vui lòng nhập email';
+                                            } else if (
+                                                !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
+                                            ) {
+                                                errors.email = 'Địa chỉ email không đúng';
+                                            }
+                                            return errors;
+                                        }}
+                                        onSubmit={async (values, { setSubmitting }) => {
+                                            typeof onClose == 'function' && onClose();
+                                            const order = await userServices.createOrders({ ...values });
+
+                                            if (order) {
+                                                typeof onClose == 'function' && onClose();
+                                                getUser(user)
+                                            }
+                                        }}
+                                    >
+                                        {({
+                                            values,
+                                            errors,
+                                            touched,
+                                            handleChange,
+                                            handleBlur,
+                                            handleSubmit,
+                                            isSubmitting,
+                                            /* and other goodies */
+                                        }) => (
+                                            <form onSubmit={handleSubmit}>
+                                                <div className="space-y-3 mt-3">
+                                                    <input name="name" type="text" value={values.name} onChange={handleChange} className={classnames('second__input', 'w-full')} placeholder='Họ và tên' />
+                                                    {errors.name && touched.name && <div className='text-red-600 my-1'>{errors.name}</div>}
+                                                    <input name="email" type="text" value={values.email} onChange={handleChange} className={classnames('second__input', 'w-full')} placeholder='Email' />
+                                                    {errors.email && touched.email && <div className='text-red-600 my-1'>{errors.email}</div>}
+                                                    <input name="phone" type="text" value={values.phone} onChange={handleChange} className={classnames('second__input', 'w-full')} placeholder='Số điện thoại' />
+                                                    {errors.phone && touched.phone && <div className='text-red-600 my-1'>{errors.phone}</div>}
+                                                    <input name='price' type="text" value={form['price']} onChange={handleChange} className={classnames('second__input', 'w-full')} placeholder='Giá muốn thuê'></input>
+                                                    {errors.price && touched.price && <div className='text-red-600 my-1'>{errors.price}</div>}
+                                                    <div className="flex justify-between py-7 items-center">
+                                                        <span onClick={onClickOpenNext} className='cursor-pointer text__color--orange'>Hái lì xì tiếp</span>
+                                                        <button type='submit' className="btn-orange min-h-0 py-3 min-w-0 px-5 rounded-md">TƯ VẤN NGAY</button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        )}
+                                    </Formik>
+                                    {/* <div className="space-y-3">
                                         <input type="text" value={form['name']} onChange={(e) => onChangeForm(e.target.value, 'name')} className={classnames('second__input', 'w-full')} placeholder='Họ và tên' />
                                         <input type="email" value={form['email']} onChange={(e) => onChangeForm(e.target.value, 'email')} className={classnames('second__input', 'w-full')} placeholder='Email' />
                                         <input type='number' value={form['phone']} onChange={(e) => onChangeForm(e.target.value, 'phone')} className={classnames('second__input', 'w-full')} placeholder='Số điện thoại' />
                                         <input type="text" value={form['price']} onChange={(e) => onChangeForm(e.target.value, 'price')} className={classnames('second__input', 'w-full')} placeholder='Giá muốn thuê'></input>
                                     </div>
                                     <div className="flex justify-between py-7 items-center">
-                                        <span className='cursor-pointer text__color--orange'>Hái lì xì tiếp</span>
+                                        <span onClick={onClickOpenNext} className='cursor-pointer text__color--orange'>Hái lì xì tiếp</span>
                                         <div onClick={onClickAdvisory} className="btn-orange min-h-0 py-3 min-w-0 px-5 rounded-md">TƯ VẤN NGAY</div>
-                                    </div>
+                                    </div> */}
                                 </div>
                             </div>
                         ) : (
@@ -205,7 +330,7 @@ const Unregistered = (props) => {
                                             Từ 25/01 - 28/02/2021 để nhận gói ưu đãi Propzy CARE trị giá 2.000.000 VNĐ khi phát sinh giao dịch trước ngày 30/03/2021.
                                 </p>
                                         <div className="flex justify-between pb-7 items-center">
-                                            <span className='cursor-pointer text__color--orange'>Hái lì xì tiếp</span>
+                                            <span onClick={onClickOpenNext} className='cursor-pointer text__color--orange'>Hái lì xì tiếp</span>
                                             <div onClick={() => setRegisterRent(true)} className="btn-orange min-h-0 py-3 min-w-0 px-10 rounded-md">ĐĂNG KÝ</div>
                                         </div>
                                     </div>
@@ -213,8 +338,9 @@ const Unregistered = (props) => {
 
                             )}
                     </div>
-                )}
-        </div>
+                )
+            }
+        </div >
     );
 };
 
@@ -225,4 +351,6 @@ Unregistered.defaultProps = {
     onClose: () => { }
 };
 
-export default Unregistered;
+const mapDispatchToProps = { getUser }
+
+export default connect(null, mapDispatchToProps)(Unregistered);

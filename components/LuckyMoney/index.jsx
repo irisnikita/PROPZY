@@ -7,6 +7,8 @@ import { motion } from 'framer-motion';
 import { isEmpty } from 'lodash'
 import { connect } from 'react-redux'
 
+// Redux
+import { getUser } from 'store/user/userSlice'
 
 // Styles
 import styles from './styles.module.scss';
@@ -45,12 +47,6 @@ const LuckyMoney = (props) => {
     const [isStepOpen, setStepOpen] = useState(false);
     const [isRegister, setRegister] = useState(false);
 
-    useEffect(() => {
-        if (!isEmpty(props.user)) {
-            setRegister(true)
-        }
-    }, [props.user])
-
     // Life cycle
     useEffect(() => {
         if (isOpen) {
@@ -70,25 +66,40 @@ const LuckyMoney = (props) => {
             document.querySelector('body').style.overflow = 'auto';
         }
 
+        if (!isEmpty(props.user)) {
+            updateTurnUser();
+            setRegister(true);
+        }
+
         return () => {
             resetState()
         }
     }, [isOpen])
+
+    const updateTurnUser = async () => {
+        const updateTurn = await userServices.update({
+            id: props.user.email,
+            turn: +props.user.turn
+        });
+
+        if (updateTurn && updateTurn.data) {
+            props.getUser(updateTurn.data)
+        }
+    }
 
     const resetState = () => {
         setCurrentStep(steps[0])
         setStepOpen(false)
     }
 
-    const onCloseModal = () => {
+    const onCloseModal = (newProps) => {
         if (document.querySelector('#lucky-money-image__wrap')) {
             document.querySelector('#lucky-money-image__wrap').classList.remove('animate__slow')
             document.querySelector('#lucky-money-image__wrap').classList.add('animate__fadeOut')
-
             document.querySelector('#lucky-money__wrap').classList.add('animate__fadeOut')
 
             setTimeout(() => {
-                props.onClose();
+                props.onClose(newProps);
             }, 1000)
         }
     }
@@ -100,7 +111,7 @@ const LuckyMoney = (props) => {
     const showRenderStepOpen = () => {
 
 
-        return +props.user.turn <= 0 ? <OutOfLuckyMoney /> : isRegister ? (
+        return +props.user.turn < 0 ? <OutOfLuckyMoney /> : isRegister ? (
             <Registered onClose={onCloseModal} />
         ) : (
                 <Unregistered onClose={onCloseModal} />
@@ -146,4 +157,6 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps)(LuckyMoney);
+const mapDispatchToProps = { getUser }
+
+export default connect(mapStateToProps, mapDispatchToProps)(LuckyMoney);

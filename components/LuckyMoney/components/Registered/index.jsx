@@ -7,7 +7,6 @@ import { connect } from 'react-redux';
 
 // Styles
 import styles from 'components/LuckyMoney/styles.module.scss';
-import { type } from 'os';
 
 // Services 
 import * as userServices from 'services/user'
@@ -76,19 +75,6 @@ const Unregistered = (props) => {
 		randomPrize()
 	}, [])
 
-	useEffect(() => {
-		if (user) {
-			updateTurnUser();
-		}
-	}, [user])
-
-	const updateTurnUser = async () => {
-		const updateTurn = await userServices.update({
-			id: user.email,
-			turn: user.turn
-		});
-	}
-
 	// Function to random prize with rate
 	const randomPrize = () => {
 		let totalProb = 0;
@@ -137,7 +123,7 @@ const Unregistered = (props) => {
 						XEM QUÀ
                 </div>
 				</div>
-				<div className="text-xs absolute -bottom-6 text-white">{`Bạn còn ${user.turn || 2} lượt chơi`}</div>
+				<div className="text-xs absolute -bottom-6 text-white">{`Bạn còn ${user.turn || 0} lượt chơi`}</div>
 			</div>
 
 		</>

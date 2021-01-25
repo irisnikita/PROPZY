@@ -66,6 +66,16 @@ const ApricotBlossom = () => {
         setIdLuckyMoneySelected(null)
     }
 
+    const onCloseLuckyMoney = (newProps) => {
+        setOpenLuckyMoneyModal(false)
+
+        if (newProps === 'open-next') {
+            setTimeout(() => {
+                setOpenLuckyMoneyModal(true)
+            }, 200)
+        }
+    }
+
     return (
         <AnimateSharedLayout type='crossfade'>
             <div
@@ -105,7 +115,7 @@ const ApricotBlossom = () => {
             </div>
             <img width={'80%'} className='absolute z-10 bottom-0 left-0' src="/images/home/buffalo.png" alt="" />
             <AnimatePresence>
-                <LuckyMoney isOpen={isOpenLuckyMoneyModal} onClose={() => { setOpenLuckyMoneyModal(false) }} id={idLuckyMoneySelected} />
+                <LuckyMoney isOpen={isOpenLuckyMoneyModal} onClose={onCloseLuckyMoney} id={idLuckyMoneySelected} />
             </AnimatePresence>
         </AnimateSharedLayout>
     );
