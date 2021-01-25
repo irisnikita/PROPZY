@@ -161,7 +161,9 @@ const Unregistered = (props) => {
         <div className='animate__animated animate__fadeIn w-screen md:w-max relative flex justify-center md:justify-start items-center'>
             {!isRegisterSuccess ? (
                 <>
-                    <div className="relative">
+                    <div className={classnames("relative", {
+                        'hidden': isOpenRegister
+                    })}>
                         <img className={classnames(styles['img-lucky-money'], 'md:block animate__animated', {
                             'hidden': isOpenRegister,
                         })} src={prizeSelected.image} alt="" />
@@ -278,7 +280,6 @@ const Unregistered = (props) => {
                             </Formik>
                         </div>
                     </div>
-
                 </>
             ) : (
                     <div className="bg-white rounded-3xl  animate__animated animate__fadeIn">
