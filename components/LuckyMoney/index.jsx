@@ -86,15 +86,13 @@ const LuckyMoney = (props) => {
     }, [isOpen])
 
     const updateTurnUser = async () => {
-        if (props.user.turn > 0) {
-            const updateTurn = await userServices.update({
-                id: props.user.email,
-                turn: +props.user.turn
-            });
+        const updateTurn = await userServices.update({
+            id: props.user.email,
+            turn: +props.user.turn
+        });
 
-            if (updateTurn && updateTurn.data) {
-                props.getUser(updateTurn.data)
-            }
+        if (updateTurn && updateTurn.data) {
+            props.getUser(updateTurn.data)
         }
     }
 
