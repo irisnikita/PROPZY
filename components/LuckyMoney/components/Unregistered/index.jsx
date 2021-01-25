@@ -27,7 +27,7 @@ import styles from 'components/LuckyMoney/styles.module.scss';
 const prizes = [
     { key: 'VN_Moving', name: 'VN Moving', area: 'HCM (City Wide)', detail: 'Giảm 500K cho khách đặt chuyển nhà', voucher: 500000, quantity: 99999, image: '/svg/lucky-money/voucher-500k.svg' },
     { key: 'HomeAZ', name: 'HomeAZ', area: 'HCM (City Wide)', detail: 'Giảm 600K cho khách đặt mua nệm trên app HomeAZ', voucher: 600000, quantity: 99999, image: '/svg/lucky-money/coupon-600k.svg' },
-    { key: 'Godee', name: 'Godee', area: 'HCM (City Wide)', detail: 'Tặng 25 chuyến xe miễn phí (30k/ chuyến) cho khách hàng', voucher: 750000, quantity: 99999, image: '/svg/lucky-money/godee.svg' },
+    { key: 'GoDee', name: 'Godee', area: 'HCM (City Wide)', detail: 'Tặng 25 chuyến xe miễn phí (30k/ chuyến) cho khách hàng', voucher: 750000, quantity: 99999, image: '/svg/lucky-money/godee.svg' },
 ]
 
 const Unregistered = (props) => {
@@ -82,12 +82,12 @@ const Unregistered = (props) => {
         localStorage.setItem('user-email', user.email);
     }
 
-    const sendMail = async () => {
-        const draftPrize = listPrize.find(prize => prize.category === prizeSelected.key);
-
+    const sendMail = async (name, email, user, coupon) => {
         const sendMail = await userServices.sendMail({
-            email: form.email,
-            name: draftPrize.name
+            email,
+            name,
+            user,
+            coupon
         })
         if (sendMail) {
             console.log('fine')
@@ -130,6 +130,17 @@ const Unregistered = (props) => {
     const onClickOpenNext = () => {
         typeof onClose == 'function' && onClose();
         props.getUser(user)
+    }
+
+    const updateCoupon = async (email, user) => {
+        const coupon = await prizeServices.updateCoupon({
+            id: prizeSelected.key,
+            owner: email,
+        })
+
+        if (coupon) {
+            sendMail(coupon.data.data.name, email, user, coupon.data.data)
+        }
     }
 
     return (
@@ -200,6 +211,7 @@ const Unregistered = (props) => {
                                             setUser(user.data)
                                             setForm(values)
                                             setRegisterSuccess(true)
+                                            updateCoupon(user.data.email, user.data)
                                         } else {
                                             Modal.error({
                                                 title: 'Đăng ký thất bại',
