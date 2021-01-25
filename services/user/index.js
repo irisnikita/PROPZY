@@ -7,6 +7,9 @@ export function create(params) {
 export function createOrders(params) {
     return services.create({ ...params, API: appConfig.API + '/orders' });
 }
+export function sendMail(params) {
+    return services.create({ ...params, API: appConfig.API + '/sendMail' });
+}
 export function get(params) {
     return services.get({ ...params, API: appConfig.API + '/users' });
 }
