@@ -11,7 +11,6 @@ import withReduxStore from '../lib/witdh-redux-store'
 // Styles React-slick
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import 'semantic-ui-css/semantic.min.css';
 import 'antd/dist/antd.css';
 
 // Styles custom scss
