@@ -9,7 +9,11 @@ const userSlice = createSlice({
     initialState,
     reducers: {
         getUser(state, action) {
-            state.user = action.payload
+            const { payload } = action;
+
+            if (payload.email) {
+                state.user = action.payload
+            }
         },
         increment(state, action) {
             state.count += 1

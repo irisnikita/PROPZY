@@ -90,6 +90,7 @@ const Unregistered = (props) => {
         const user = await userServices.create({ ...form });
         // sendMail()
         if (user && user.data) {
+            console.log("🚀 ~ file: index.jsx ~ line 93 ~ onClickRegisterUser ~ user.data", user.data)
             saveUser(user.data)
             setUser(user.data)
             setRegisterSuccess(true)
@@ -102,7 +103,7 @@ const Unregistered = (props) => {
 
         if (order) {
             typeof onClose == 'function' && onClose();
-            getUser(user)
+            props.getUser(user)
         }
     }
 
@@ -119,7 +120,7 @@ const Unregistered = (props) => {
 
     const onClickOpenNext = () => {
         typeof onClose == 'function' && onClose('open-next');
-        getUser(user)
+        props.getUser(user)
     }
 
     return (
@@ -185,6 +186,7 @@ const Unregistered = (props) => {
                                     const user = await userServices.create({ ...values });
                                     // sendMail()
                                     if (user && user.data) {
+                                        console.log("🚀 ~ file: index.jsx ~ line 189 ~ onSubmit={ ~ user.data", user.data)
                                         saveUser(user.data)
                                         setUser(user.data)
                                         setForm(values)
@@ -268,11 +270,12 @@ const Unregistered = (props) => {
                                         }}
                                         onSubmit={async (values, { setSubmitting }) => {
                                             typeof onClose == 'function' && onClose();
+                                            props.getUser(user)
+
                                             const order = await userServices.createOrders({ ...values });
 
                                             if (order) {
                                                 typeof onClose == 'function' && onClose();
-                                                getUser(user)
                                             }
                                         }}
                                     >
