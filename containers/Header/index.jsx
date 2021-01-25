@@ -28,7 +28,7 @@ const Header = (props) => {
         { key: 'introduce', label: 'GIỚI THIỆU', link: '/', location: 'propzycare-introduce' },
         { key: 'rule', label: 'THỂ LỆ', link: '/', location: 'rule-event' },
         { key: 'contact', label: 'LIÊN HỆ ', link: '/', location: 'contact-us' },
-        // { key: 'see-prize', label: 'XEM QUÀ', link: '/user' },
+        { key: 'see-prize', label: 'XEM QUÀ', link: '/user' },
     ]
     const router = useRouter();
 

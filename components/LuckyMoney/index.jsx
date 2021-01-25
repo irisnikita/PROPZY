@@ -80,7 +80,6 @@ const LuckyMoney = (props) => {
 
 
         return () => {
-            console.log('unmount')
             resetState()
 
         }
