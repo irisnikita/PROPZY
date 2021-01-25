@@ -46,6 +46,7 @@ const LuckyMoney = (props) => {
     const [currentStep, setCurrentStep] = useState(steps[0]);
     const [isStepOpen, setStepOpen] = useState(false);
     const [isRegister, setRegister] = useState(false);
+    const [user, setUser] = useState({})
 
     // Life cycle
     useEffect(() => {
@@ -74,7 +75,10 @@ const LuckyMoney = (props) => {
 
 
         return () => {
+            console.log('unmount luckymoney', user)
+            props.getUser(user)
             resetState()
+
         }
     }, [isOpen])
 
@@ -110,13 +114,18 @@ const LuckyMoney = (props) => {
         e.stopPropagation();
     }
 
+    const callbackUser = (user) => {
+        console.log("🚀 ~ file: index.jsx ~ line 118 ~ callbackUser ~ user", user)
+        setUser(user)
+    }
+
     const showRenderStepOpen = () => {
 
 
         return +props.user.turn < 0 ? <OutOfLuckyMoney /> : isRegister ? (
             <Registered onClose={onCloseModal} />
         ) : (
-                <Unregistered onClose={onCloseModal} />
+                <Unregistered callbackUser={callbackUser} onClose={onCloseModal} />
             )
     }
 

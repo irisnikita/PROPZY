@@ -8,6 +8,7 @@ import { isEmpty } from 'lodash'
 import { useSelector, useDispatch } from 'react-redux'
 import { connect } from 'react-redux'
 import { Formik } from 'formik';
+import { Modal } from 'antd'
 
 // Redux toolkit
 import { selectUser, getUser } from 'store/user/userSlice'
@@ -31,7 +32,7 @@ const prizes = [
 
 const Unregistered = (props) => {
     // Props
-    const { onClose } = props;
+    const { onClose, callbackUser } = props;
     const dispatch = useDispatch();
 
     // State 
@@ -43,15 +44,23 @@ const Unregistered = (props) => {
     const [form, setForm] = useState({
         email: '',
         name: '',
-        phone: '',
+        phone: 0,
         price: '2000000'
     })
     const [listPrize, setListPrize] = useState([]);
+
 
     useEffect(() => {
         randomPrize()
         // getListPrizes()
     }, [])
+
+    useEffect(() => {
+        if (!isEmpty(user)) {
+            console.log("🚀 ~ file: index.jsx ~ line 60 ~ useEffect ~ user", user)
+            props.callbackUser(user)
+        }
+    }, [user])
 
     const getListPrizes = async () => {
         const listPrizes = await prizeServices.getListCoupon();
@@ -119,7 +128,7 @@ const Unregistered = (props) => {
     }
 
     const onClickOpenNext = () => {
-        typeof onClose == 'function' && onClose('open-next');
+        typeof onClose == 'function' && onClose();
         props.getUser(user)
     }
 
@@ -186,11 +195,25 @@ const Unregistered = (props) => {
                                     const user = await userServices.create({ ...values });
                                     // sendMail()
                                     if (user && user.data) {
-                                        console.log("🚀 ~ file: index.jsx ~ line 189 ~ onSubmit={ ~ user.data", user.data)
-                                        saveUser(user.data)
-                                        setUser(user.data)
-                                        setForm(values)
-                                        setRegisterSuccess(true)
+                                        if (user.data.email) {
+                                            saveUser(user.data)
+                                            setUser(user.data)
+                                            setForm(values)
+                                            setRegisterSuccess(true)
+                                        } else {
+                                            Modal.error({
+                                                title: 'Đăng ký thất bại',
+                                                content: 'Email đăng ký đã tồn tại, xin vui lòng đăng ký email khác',
+                                                okText: '  Đăng ký lại'
+                                            })
+                                        }
+
+                                    } else {
+                                        Modal.error({
+                                            title: 'Đăng ký thất bại',
+                                            content: 'Email đăng ký đã tồn tại, xin vui lòng đăng ký email khác',
+                                            okText: '  Đăng ký lại'
+                                        })
                                     }
                                 }}
                             >
@@ -210,7 +233,7 @@ const Unregistered = (props) => {
                                             {errors.name && touched.name && <div className='text-red-600 my-1'>{errors.name}</div>}
                                             <input name="email" type="text" value={values.email} onChange={handleChange} className={classnames('second__input', 'w-full')} placeholder='Email' />
                                             {errors.email && touched.email && <div className='text-red-600 my-1'>{errors.email}</div>}
-                                            <input name="phone" type="text" value={values.phone} onChange={handleChange} className={classnames('second__input', 'w-full')} placeholder='Số điện thoại' />
+                                            <input name="phone" type="number" value={values.phone} onChange={handleChange} className={classnames('second__input', 'w-full')} placeholder='Số điện thoại' />
                                             {errors.phone && touched.phone && <div className='text-red-600 my-1'>{errors.phone}</div>}
                                             <div className="flex justify-end w-full">
                                                 <button type='submit'
@@ -295,9 +318,9 @@ const Unregistered = (props) => {
                                                     {errors.name && touched.name && <div className='text-red-600 my-1'>{errors.name}</div>}
                                                     <input name="email" type="text" value={values.email} onChange={handleChange} className={classnames('second__input', 'w-full')} placeholder='Email' />
                                                     {errors.email && touched.email && <div className='text-red-600 my-1'>{errors.email}</div>}
-                                                    <input name="phone" type="text" value={values.phone} onChange={handleChange} className={classnames('second__input', 'w-full')} placeholder='Số điện thoại' />
+                                                    <input name="phone" type="number" value={values.phone} onChange={handleChange} className={classnames('second__input', 'w-full')} placeholder='Số điện thoại' />
                                                     {errors.phone && touched.phone && <div className='text-red-600 my-1'>{errors.phone}</div>}
-                                                    <input name='price' type="text" value={form['price']} onChange={handleChange} className={classnames('second__input', 'w-full')} placeholder='Giá muốn thuê'></input>
+                                                    <input name='price' type="number" value={form['price']} onChange={handleChange} className={classnames('second__input', 'w-full')} placeholder='Giá muốn thuê'></input>
                                                     {errors.price && touched.price && <div className='text-red-600 my-1'>{errors.price}</div>}
                                                     <div className="flex justify-between py-7 items-center">
                                                         <span onClick={onClickOpenNext} className='cursor-pointer text__color--orange'>Hái lì xì tiếp</span>
@@ -307,16 +330,6 @@ const Unregistered = (props) => {
                                             </form>
                                         )}
                                     </Formik>
-                                    {/* <div className="space-y-3">
-                                        <input type="text" value={form['name']} onChange={(e) => onChangeForm(e.target.value, 'name')} className={classnames('second__input', 'w-full')} placeholder='Họ và tên' />
-                                        <input type="email" value={form['email']} onChange={(e) => onChangeForm(e.target.value, 'email')} className={classnames('second__input', 'w-full')} placeholder='Email' />
-                                        <input type='number' value={form['phone']} onChange={(e) => onChangeForm(e.target.value, 'phone')} className={classnames('second__input', 'w-full')} placeholder='Số điện thoại' />
-                                        <input type="text" value={form['price']} onChange={(e) => onChangeForm(e.target.value, 'price')} className={classnames('second__input', 'w-full')} placeholder='Giá muốn thuê'></input>
-                                    </div>
-                                    <div className="flex justify-between py-7 items-center">
-                                        <span onClick={onClickOpenNext} className='cursor-pointer text__color--orange'>Hái lì xì tiếp</span>
-                                        <div onClick={onClickAdvisory} className="btn-orange min-h-0 py-3 min-w-0 px-5 rounded-md">TƯ VẤN NGAY</div>
-                                    </div> */}
                                 </div>
                             </div>
                         ) : (

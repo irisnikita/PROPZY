@@ -5,7 +5,6 @@ import React, { useEffect } from 'react'
 import { AnimateSharedLayout, AnimatePresence } from "framer-motion";
 import { Provider } from 'react-redux'
 
-
 // Store redux toolkit
 import withReduxStore from '../lib/witdh-redux-store'
 
@@ -13,6 +12,7 @@ import withReduxStore from '../lib/witdh-redux-store'
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import 'semantic-ui-css/semantic.min.css';
+import 'antd/dist/antd.css';
 
 // Styles custom scss
 import '../styles/global.scss';
