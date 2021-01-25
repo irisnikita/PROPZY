@@ -74,27 +74,27 @@ const LuckyMoney = (props) => {
         } else {
             document.querySelector('body').style.overflow = 'auto';
             if (!isEmpty(user)) {
-                console.log("🚀 ~ file: index.jsx ~ line 69 ~ useEffect ~ user", user)
                 props.getUser(user)
             }
         }
 
 
         return () => {
-            console.log('unmount')
             resetState()
 
         }
     }, [isOpen])
 
     const updateTurnUser = async () => {
-        const updateTurn = await userServices.update({
-            id: props.user.email,
-            turn: +props.user.turn
-        });
+        if (props.user.turn > 0) {
+            const updateTurn = await userServices.update({
+                id: props.user.email,
+                turn: +props.user.turn
+            });
 
-        if (updateTurn && updateTurn.data) {
-            props.getUser(updateTurn.data)
+            if (updateTurn && updateTurn.data) {
+                props.getUser(updateTurn.data)
+            }
         }
     }
 
@@ -121,14 +121,13 @@ const LuckyMoney = (props) => {
     }
 
     const callbackUser = (user) => {
-        console.log("🚀 ~ file: index.jsx ~ line 118 ~ callbackUser ~ user", user)
         setUser(user)
     }
 
     const showRenderStepOpen = () => {
 
 
-        return +props.user.turn < 0 ? <OutOfLuckyMoney /> : isRegister ? (
+        return +props.user.turn < 0 ? <OutOfLuckyMoney onClose={onCloseModal} /> : isRegister ? (
             <Registered onClose={onCloseModal} />
         ) : (
                 <Unregistered callbackUser={callbackUser} onClose={onCloseModal} />

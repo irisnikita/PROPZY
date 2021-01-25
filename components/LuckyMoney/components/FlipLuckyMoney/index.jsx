@@ -24,7 +24,7 @@ const FlipLuckyMoney = (props) => {
     }
 
     return (
-        <div>
+        <div className={props.className}>
             {isFlip ? (
                 <div className='flip-lucky-money relative animate__animated animate__flipInY flex items-center justify-center flex-col'>
                     <img src={backImage} alt="" />

@@ -5,6 +5,11 @@ import {
     motion,
 } from 'framer-motion';
 import axios from 'axios'
+import { Select, Dropdown, Menu, Modal } from 'antd';
+import Head from 'next/head'
+
+// Services
+import * as userServices from 'services/user'
 
 // Containers
 import Header from 'containers/Header';
@@ -16,11 +21,35 @@ import Collapse from 'components/Collapse';
 import ApricotBlossom from 'components/ApricotBlossom';
 import FlipLuckyMoney from 'components/LuckyMoney/components/FlipLuckyMoney';
 import LuckyMoney from 'components/LuckyMoney';
+import { Formik } from 'formik';
+import { EMULTIHOP } from 'constants';
+
+const { Option } = Select;
 
 const HomeContainer = () => {
     // State
     const [isOpenLuckyMoney, setOpenLuckyMoney] = useState(false);
-    const [formContact, setFormContact] = useState({});
+    const [formContact, setFormContact] = useState({
+        price: '6-9 triệu'
+    });
+
+
+    const onClickPrice = (e) => {
+        setFormContact({
+            ...formContact,
+            price: e.key
+        })
+    }
+
+    const listPrice = (
+        <Menu onClick={onClickPrice} defaultSelectedKeys={'6-9 triệu'}>
+            <Menu.Item key='6-9 triệu' value="6-9 triệu">6-9 triệu</Menu.Item>
+            <Menu.Item key='9-12 triệu' value="9-12 triệu">9-12 triệu</Menu.Item>
+            <Menu.Item key='12-15 triệu' value="12-15 triệu">12-15 triệu</Menu.Item>
+            <Menu.Item key='Trên 15 triệu' value="Trên 15 triệu">Trên 15 triệu</Menu.Item>
+        </Menu>
+    )
+
 
     const onClickAdvisory = () => {
         typeof onClose == 'function' && onClose();
@@ -52,6 +81,15 @@ const HomeContainer = () => {
 
     return (
         <div className='home-page__wrap overflow-x-hidden'>
+
+            <Head>
+                <title>Hái Lì Xì Với Propzy - Khai Xuân Đón Lộc</title>
+                <link rel="icon" href="https://propzy.vn/assets/images/icons/favicon.ico?v=2.2" />
+                <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+                <meta property='og:image' content={`/images/Thumbnail.png`} />
+                <meta property='og:title' content={'Hái Lì Xì Với Propzy - Khai Xuân Đón Lộc'} />
+                <meta property='og:description' content='Tham gia ngay Hái Lì Xì “Có nhà là có Tết – Propzy Care hết” để rinh nhiều phần quà hấp dẫn lên đến 1 tỷ đồng. Đăng ký xem nhà (Thuê) trước ngày 28/02/2021 để nhận gói ưu đãi Propzy CARE trị giá 2.000.000 VNĐ. Khám phá ngay' />
+            </Head>
             <Header />
             <section className='home-page__main'>
                 <section className='main-content--1 md:py-5'>
@@ -85,8 +123,8 @@ const HomeContainer = () => {
                     <div className="flex justify-center">
                         <div className="flex space-x-5 items-center w-10/12 pt-5 md:flex-nowrap flex-wrap justify-center">
                             <FlipLuckyMoney frontImage={'/images/home/phong-bi-1.png'} backImage={'/images/home/phong-bi-1-back.png'} />
-                            <FlipLuckyMoney frontImage={'/images/home/phong-bi-2.png'} backImage={'/images/home/phong-bi-2-back.png'} />
-                            <FlipLuckyMoney frontImage={'/images/home/phong-bi-3.png'} backImage={'/images/home/phong-bi-3-back.png'} />
+                            <FlipLuckyMoney className='wrap__flip-image' frontImage={'/images/home/phong-bi-2.png'} backImage={'/images/home/phong-bi-2-back.png'} />
+                            <FlipLuckyMoney className='wrap__flip-image' frontImage={'/images/home/phong-bi-3.png'} backImage={'/images/home/phong-bi-3-back.png'} />
                         </div>
                     </div>
 
@@ -111,9 +149,9 @@ const HomeContainer = () => {
                     </div>
 
                     <div id={'rule-event'} className='flex mt-10 justify-center items-center'>
-                        <img src="/svg/logo-banner-tittle.svg" alt="" />
-                        <p className='md:text-3xl font-semibold mb-5 text-white absolute '>THỂ LỆ CHƯƠNG TRÌNH</p>
+                        <img src="/svg/banner-title/banner-title-3.svg" alt="" />
                     </div>
+
 
 
                     {/* component collapse */}
@@ -121,10 +159,8 @@ const HomeContainer = () => {
                         <Collapse />
                     </div>
 
-                    {/* Component Đối tác                              */}
                     <div className='flex mt-10 justify-center items-center'>
-                        <img src="/svg/logo-banner-tittle.svg" alt="" />
-                        <p className='md:text-3xl font-semibold mb-5 text-white absolute '>ĐỐI TÁC CỦA PROPZY</p>
+                        <img src="/svg/banner-title/banner-title-4.svg" alt="" />
                     </div>
 
                     <div className="container w-10/12  mx-auto flex flex-row space-x-2 md:space-x-8 md:justify-center ">
@@ -145,11 +181,10 @@ const HomeContainer = () => {
                         </div>
                     </div>
 
-                    {/* Component giới thiệu */}
                     <div id={'propzycare-introduce'} className='flex mt-10 justify-center items-center'>
-                        <img src="/svg/logo-banner-tittle.svg" alt="" />
-                        <p className='md:text-3xl font-semibold mb-5 text-white absolute '>GIỚI THIỆU PROPZYCARE</p>
+                        <img src="/svg/banner-title/banner-title-5.svg" alt="" />
                     </div>
+
                     <div className='relative w-10/12 mx-auto flex flex-wrap flex-row'>
                         <div className='md:w-4/12 w-full'>
                             <img src="/svg/img-propzycare.svg" className='w-full' alt="" />
@@ -158,7 +193,7 @@ const HomeContainer = () => {
                                 </p>
 
                             <p className='pt-5 text-white'>
-                                Đăng Ký xem nhà (Mua hoặc Thuê) ngay tại đây từ 25/01 - 28/02/2021 để nhận gói ưu đãi Propzy CARE trị giá 2.000.000 VNĐ và phát sinh giao dịch trước ngày 30/03/2021.
+                                Đăng Ký xem nhà (Thuê) ngay tại đây từ 25/01 - 28/02/2021 để nhận gói ưu đãi Propzy CARE trị giá 2.000.000 VNĐ và phát sinh giao dịch trước ngày 30/03/2021.
                                 </p>
                         </div>
                         <div className='md:w-6/12 w-full flex py-6 flex-col justify-center md:ml-40'>
@@ -171,22 +206,76 @@ const HomeContainer = () => {
                                                 <p className="text-1xl text-white font-normal">Hơn 100.000 bất động sản tại Propzy sẵn sàng giao dịch!</p>
                                             </div>
                                         </div>
-                                        <div className='py-7 space-y-3'>
-                                            <input onChange={(e) => onChangeForm(e.target.value, 'name')} type="text" className='default__input w-full' placeholder="Họ và tên" />
+                                        <Formik
+                                            initialValues={{ name: '', email: '', phone: '', price: '' }}
+                                            validate={values => {
+                                                const errors = {};
+                                                if (!values.name) {
+                                                    errors.name = 'Vui lòng nhập tên'
+                                                }
 
-                                            <input onChange={(e) => onChangeForm(e.target.value, 'phone')} type="number" className='default__input w-full' placeholder="Số điện thoại" />
+                                                if (!values.phone) {
+                                                    errors.phone = 'Vui lòng nhập số điện thoại'
+                                                } else if (values.phone.length < 0 && values.phone.length > 11) {
+                                                    errors.phone = 'Vui lòng nhập số điện thoại hợp lệ'
+                                                }
 
-                                            <input onChange={(e) => onChangeForm(e.target.value, 'email')} type="email" className='default__input w-full' placeholder="Email" />
+                                                if (!values.email) {
+                                                    errors.email = 'Vui lòng nhập email';
+                                                } else if (
+                                                    !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
+                                                ) {
+                                                    errors.email = 'Địa chỉ email không đúng';
+                                                }
+                                                return errors;
+                                            }}
+                                            onSubmit={async (values, { setSubmitting }) => {
+                                                const order = await userServices.createOrders({ ...values, price: formContact.price });
 
-                                            <select onChange={(e) => { onChangeForm(e.target.value, 'price') }} name='price' className='default__input w-full' >
-                                                <option className='text-white bg-transparent' value="0" > Giá muốn thuê </option>
-                                                <option className='text-black bg-transparent' value='dưới 1 tỷ '> Dưới 1 tỷ  </option>
-                                                <option className='text-black bg-transparent' value='dưới 2 tỷ '> 1 -3 tỷ  </option>
-                                                <option className='text-black bg-transparent' value='dưới 3 tỷ '> trên 3 tỷ </option>
-
-                                            </select>
-                                            <div onClick={onClickAdvisory} className="btn-orange place-self-center mt-5 mx-auto w-2/5">TƯ VẤN NGAY</div>
-                                        </div>
+                                                if (order && order.data) {
+                                                    const sendThanksMail = await userServices.sendThanks({
+                                                        user: order.data
+                                                    })
+                                                    Modal.success({
+                                                        title: 'Cảm ơn bạn đã gửi thông tin',
+                                                        content: 'Cảm ơn bạn đã tin tưởng dịch vụ của chúng tôi. Chúng tôi sẽ liên lạc nhanh nhất có thể ',
+                                                        okText: 'Đồng ý'
+                                                    })
+                                                } else {
+                                                    Modal.error({
+                                                        title: 'Email đã tồn tại',
+                                                        content: 'Email bạn gửi tư vấn đã tồn tại, vui lòng gửi lại email khác',
+                                                        okText: 'Đồng ý'
+                                                    })
+                                                }
+                                            }}
+                                        >
+                                            {({
+                                                values,
+                                                errors,
+                                                touched,
+                                                handleChange,
+                                                handleBlur,
+                                                handleSubmit,
+                                                isSubmitting,
+                                                /* and other goodies */
+                                            }) => (
+                                                    <form onSubmit={handleSubmit}>
+                                                        <div className="py-7 space-y-3">
+                                                            <input name="name" type="text" value={values.name} onChange={handleChange} className='default__input w-full' placeholder='Họ và tên' />
+                                                            {errors.name && touched.name && <div className='my-1 text-red-300'>{errors.name}</div>}
+                                                            <input name="email" type="text" value={values.email} onChange={handleChange} className='default__input w-full' placeholder='Email' />
+                                                            {errors.email && touched.email && <div className='my-1 text-red-300'>{errors.email}</div>}
+                                                            <input name="phone" type="number" value={values.phone} onChange={handleChange} className='default__input w-full' placeholder='Số điện thoại' />
+                                                            {errors.phone && touched.phone && <div className='my-1 text-red-300'>{errors.phone}</div>}
+                                                            <Dropdown trigger={['click']} overlay={listPrice}>
+                                                                <input value={formContact.price} readOnly className='cursor-pointer default__input w-full' placeholder='Giá muốn thuê'></input>
+                                                            </Dropdown>
+                                                            <button type='submit' className="btn-orange place-self-center mt-5 mx-auto w-2/5">TƯ VẤN NGAY</button>
+                                                        </div>
+                                                    </form>
+                                                )}
+                                        </Formik>
                                     </div>
                                 </div>
                             </div>

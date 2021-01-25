@@ -10,6 +10,12 @@ export function createOrders(params) {
 export function sendMail(params) {
     return services.create({ ...params, API: appConfig.API + '/sendMail' });
 }
+export function sendMailCoupons(params) {
+    return services.create({ ...params, API: appConfig.API + '/sendMail/type2' });
+}
+export function sendThanks(params) {
+    return services.create({ ...params, API: appConfig.API + '/sendMail/type3' });
+}
 export function get(params) {
     return services.get({ ...params, API: appConfig.API + '/users' });
 }

@@ -31,13 +31,25 @@ const ImageSlider = () => {
         },
     };
 
+    const onCloseModalMoneyLucky = (newProps) => {
+        setOpenLuckyMoney(false);
+
+        if (newProps === 'open-next') {
+            setTimeout(() => {
+                setOpenLuckyMoney(true)
+            }, 200)
+        }
+    }
+
+    const onClickCare = () => {
+        if (document.getElementById('propzycare-introduce')) {
+            document.getElementById('propzycare-introduce').scrollIntoView()
+        }
+    }
+
     return (
         <div className='w-full md:w-8/12 mx-auto'>
             <Slider {...settingsSlider}>
-                <div className='relative outline-none slider-wrap__item'>
-                    <img className='w-full' src="/svg/image-slider-1.svg" alt="" />
-                    <div className="btn-orange mt-5 md:mt-0 relative mx-auto md:absolute md:bottom-0 pl-8-rem">PROPZY CARE</div>
-                </div>
                 <div className='relative outline-none'>
                     <div className='relative flex flex-wrap flex-col-reverse items-center md:flex-row'>
                         <img className={'md:w-96 w-2/3'} src='/images/Slider/slider-2-left.png' alt="" />
@@ -50,8 +62,12 @@ const ImageSlider = () => {
                         HÁI LÌ XÌ NGAY
                     </div>
                 </div>
+                <div className='relative outline-none slider-wrap__item'>
+                    <img className='w-full' src="/svg/image-slider-1.svg" alt="" />
+                    <div onClick={onClickCare} className="btn-orange mt-5 md:mt-0 relative mx-auto md:absolute md:bottom-0 pl-8-rem">PROPZY CARE</div>
+                </div>
             </Slider>
-            <LuckyMoney isOpen={isOpenLuckyMoney} onClose={() => setOpenLuckyMoney(false)} id='image-slider' />
+            <LuckyMoney isOpen={isOpenLuckyMoney} onClose={onCloseModalMoneyLucky} id='image-slider' />
         </div>
     );
 };

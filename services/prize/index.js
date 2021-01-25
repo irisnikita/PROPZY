@@ -4,9 +4,13 @@ import { appConfig } from '../../constant';
 export function getListCoupon(params) {
     return services.getList({ ...params, API: appConfig.API + '/prize/type1' });
 }
+export function getPrizeByUser(params) {
+    return services.get({ ...params, API: appConfig.API + '/prize/getUser' });
+}
 export function updateCoupon(params) {
     return services.update({ ...params, API: appConfig.API + '/prize/update' });
 }
+
 // export function createOrders(params) {
 //     return services.create({ ...params, API: appConfig.API + '/orders' });
 // }
