@@ -25,7 +25,7 @@ const Header = (props) => {
 
     const menu = [
         { key: 'home', label: 'TRANG CHỦ', link: '/' },
-        { key: 'introduce', label: 'GIỚI THIỆU', link: '/', location: 'propzycare-introduce' },
+        { key: 'introduce', label: 'GIỚI THIỆU', link: '/', location: 'propzythree-step' },
         { key: 'rule', label: 'THỂ LỆ', link: '/', location: 'rule-event' },
         { key: 'contact', label: 'LIÊN HỆ ', link: '/', location: 'contact-us' },
         { key: 'see-prize', label: 'XEM QUÀ', link: '/user' },
@@ -195,7 +195,7 @@ const Header = (props) => {
                                     {errors.name && touched.name && <div className='text-red-600 my-1'>{errors.name}</div>}
                                     <input name="email" type="text" value={values.email} onChange={handleChange} className={classnames('second__input', 'w-full')} placeholder='Email' />
                                     {errors.email && touched.email && <div className='text-red-600 my-1'>{errors.email}</div>}
-                                    <input name="phone" type="number" value={values.phone} onChange={handleChange} className={classnames('second__input', 'w-full')} placeholder='Số điện thoại' />
+                                    <input name="phone" type="tel" value={values.phone} onChange={handleChange} className={classnames('second__input', 'w-full')} placeholder='Số điện thoại' />
                                     {errors.phone && touched.phone && <div className='text-red-600 my-1'>{errors.phone}</div>}
                                     <div className="flex justify-end w-full">
                                         <button type='submit'

@@ -106,7 +106,11 @@ const User = (props) => {
             })
         }
     }
-
+    
+    const scrollToElementOfHome = (element) => {
+        window.location.href = '/tet#propzytree-lixi';
+    }
+    
     const showRenderContentTab = () => {
         switch (tabSelected.key) {
             case 'tab-1':
@@ -144,14 +148,14 @@ const User = (props) => {
                             XEM MÃ COUPON
                 </div>
                         <a className='text-white my-10'>{`Bạn còn ${user && user.turn >= 0 ? user.turn : 0} lượt chơi `}</a>
-                        <div onClick={() => setOpenLuckyMoney(true)} className="btn-orange">HÁI LÌ XÌ NGAY</div>
+                        <div onClick={() => scrollToElementOfHome('propzytree-lixi')} className="btn-orange">HÁI LÌ XÌ NGAY</div>
                     </>
                 )
             case 'tab-2':
-                return (<div style={{ minHeight: '50vh' }} className='text-white font-bold text-3xl flex items-center'>Comming soon</div>)
+                return (<div style={{ minHeight: '50vh' }} className='text-white font-bold text-3xl flex items-center'>Chức năng sắp ra mắt, trở lại sau bạn nhé</div>)
 
             case 'tab-3':
-                return (<div style={{ minHeight: '50vh' }} className='text-white font-bold text-3xl flex items-center'>Comming soon</div>)
+                return (<div style={{ minHeight: '50vh' }} className='text-white font-bold text-3xl flex items-center'>Chức năng sắp ra mắt, trở lại sau bạn nhé</div>)
 
             default:
                 break;

@@ -28,6 +28,8 @@ const prizes = [
     { key: 'VN_Moving', name: 'VN Moving', area: 'HCM (City Wide)', detail: 'Giảm 500K cho khách đặt chuyển nhà', voucher: 500000, quantity: 99999, image: '/svg/lucky-money/copy-lucky-money/voucher-500k.svg' },
     { key: 'HomeAZ', name: 'HomeAZ', area: 'HCM (City Wide)', detail: 'Giảm 600K cho khách đặt mua nệm trên app HomeAZ', voucher: 600000, quantity: 99999, image: '/svg/lucky-money/copy-lucky-money/coupon-600k.svg' },
     { key: 'GoDee', name: 'Godee', area: 'HCM (City Wide)', detail: 'Tặng 25 chuyến xe miễn phí (30k/ chuyến) cho khách hàng', voucher: 750000, quantity: 99999, image: '/svg/lucky-money/copy-lucky-money/godee.svg' },
+    { key: 'Lalamove', name: 'Lalamove', area: 'HCM (City Wide)', detail: 'Giảm 75K cho khách đặt chuyển nhà', voucher: 750000, quantity: 300, image: '/svg/lucky-money/75k-lalamove.svg' },
+    { key: 'Jupviec', name: 'JupViec.vn', area: 'HCM (City Wide)', detail: 'Giảm 75K cho khách đặt dọn nhà', voucher: 750000, quantity: 700, image: '/svg/lucky-money/copy-lucky-money/75k-giup-viec.svg' },
 ]
 
 const Unregistered = (props) => {
@@ -145,7 +147,14 @@ const Unregistered = (props) => {
         typeof onClose == 'function' && onClose('open-next');
         props.getUser(user)
     }
+    
+    const scrollToElement = (element) => {
+        if (document.getElementById(element)) {
 
+            document.getElementById(element).scrollIntoView({ block: 'start' });
+        }
+    }
+    
     const updateCoupon = async (email, user) => {
         const coupon = await prizeServices.updateCoupon({
             id: prizeSelected.key,
@@ -264,11 +273,11 @@ const Unregistered = (props) => {
                                                 {errors.name && touched.name && <div className='text-red-600 my-1'>{errors.name}</div>}
                                                 <input name="email" type="text" value={values.email} onChange={handleChange} className={classnames('second__input', 'w-full')} placeholder='Email' />
                                                 {errors.email && touched.email && <div className='text-red-600 my-1'>{errors.email}</div>}
-                                                <input name="phone" type="number" value={values.phone} onChange={handleChange} className={classnames('second__input', 'w-full')} placeholder='Số điện thoại' />
+                                                <input name="phone" type="tel" value={values.phone} onChange={handleChange} className={classnames('second__input', 'w-full')} placeholder='Số điện thoại' />
                                                 {errors.phone && touched.phone && <div className='text-red-600 my-1'>{errors.phone}</div>}
                                                 <div className="flex justify-end w-full">
                                                     <button type='submit'
-                                                        className="btn-orange min-h-0 py-4 min-w-0 px-10 rounded-md"
+                                                        className="onhover-btn btn-orange min-h-0 py-4 min-w-0 px-10 rounded-md"
                                                     // onClick={onClickRegisterUser}
                                                     >
                                                         ĐĂNG KÝ
@@ -290,7 +299,7 @@ const Unregistered = (props) => {
                                         onClick={() => { props.onClose && props.onClose() }}
                                         className="icon-out-remove absolute cursor-pointer right-10 md:right-5 text-2xl top-5"
                                     ></i>
-                                    <strong className='font-semibold text-xl text__color--orange'>BẠN CÓ NHU CẦU THUÊ BẤT ĐỘNG SẢN?</strong>
+                                    <strong className='font-semibold text-xl text__color--orange'>BẠN CÓ DỰ ĐỊNH THUÊ NHÀ?</strong>
                                     <p className='text-base pt-5 pb-7'>
                                         Hơn 100.000 bất động sản tại Propzy sẵn sàng giao dịch!
                                 </p>
@@ -346,7 +355,7 @@ const Unregistered = (props) => {
                                                         {errors.name && touched.name && <div className='text-red-600 my-1'>{errors.name}</div>}
                                                         <input name="email" type="text" value={values.email} onChange={handleChange} className={classnames('second__input', 'w-full')} placeholder='Email' />
                                                         {errors.email && touched.email && <div className='text-red-600 my-1'>{errors.email}</div>}
-                                                        <input name="phone" type="number" value={values.phone} onChange={handleChange} className={classnames('second__input', 'w-full')} placeholder='Số điện thoại' />
+                                                        <input name="phone" type="tel" value={values.phone} onChange={handleChange} className={classnames('second__input', 'w-full')} placeholder='Số điện thoại' />
                                                         {errors.phone && touched.phone && <div className='text-red-600 my-1'>{errors.phone}</div>}
                                                         <Dropdown trigger={['click']} overlay={listPrice}>
                                                             <input name="price" value={form.price} readOnly className={classnames('second__input', 'w-full', 'cursor-pointer')} placeholder='Giá muốn thuê'></input>
@@ -370,7 +379,7 @@ const Unregistered = (props) => {
                                         </div>
                                     </div>
                                     <div className='px-5 md:px-20 pt-7'>
-                                        <strong className='font-semibold text-xl text__color--orange'>ĐĂNG KÝ THUÊ NHÀ TẠI ĐÂY</strong>
+                                        <strong className='font-semibold text-xl text__color--orange'>BẠN CÓ DỰ ĐỊNH THUÊ NHÀ?</strong>
                                         <p className='text-base pt-5 pb-7'>
                                             Từ 25/01 - 28/02/2021 để nhận gói ưu đãi Propzy CARE trị giá 2.000.000 VNĐ khi phát sinh giao dịch trước ngày 30/03/2021.
                                 </p>

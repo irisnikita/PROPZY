@@ -54,7 +54,7 @@ const HomeContainer = () => {
     const onClickAdvisory = () => {
         typeof onClose == 'function' && onClose();
 
-        axios.post("http://localhost:5000/api/orders", { ...formContact })
+        axios.post("http://10.2.5.171:8102/api/orders", { ...formContact })
     }
 
     const onChangeForm = (value, type) => {
@@ -78,7 +78,13 @@ const HomeContainer = () => {
         }
     }
 
+    const scrollToElement = (element) => {
+        if (document.getElementById(element)) {
 
+            document.getElementById(element).scrollIntoView({ block: 'start' });
+        }
+    }
+    
     return (
         <div className='home-page__wrap overflow-x-hidden'>
 
@@ -95,7 +101,7 @@ const HomeContainer = () => {
                 <section className='main-content--1 md:py-5'>
                     <ImageSlider />
                 </section>
-                <section className='main-content--2 pt-5 md:pt-40'>
+                <section id={'propzytree-lixi'} className='main-content--2 pt-5 md:pt-40'>
                     <img src="/images/home/home-02.png" className='absolute -top-20 md:-top-20' alt="" />
                     <div className='relative w-10/12 mx-auto flex flex-wrap md:flex-row flex-col-reverse'>
                         <div className='md:w-4/12 relative flex md:block items-center justify-center flex-col mt-10 md:mt-0'>
@@ -129,7 +135,7 @@ const HomeContainer = () => {
                     </div>
 
                     {/* component tham gia chương trình */}
-                    <div className='flex mt-10 justify-center items-center'>
+                    <div id={'propzythree-step'} className='flex mt-10 justify-center items-center'>
                         <img src="/svg/banner-title/banner-title-2.svg" alt="" />
                     </div>
 
@@ -145,7 +151,7 @@ const HomeContainer = () => {
                     </div>
 
                     <div className='flex mt-4 justify-center items-center'>
-                        <div onClick={() => setOpenLuckyMoney(true)} className="btn-orange w-2/12">HÁI LÌ XÌ NGAY</div>
+                        <div onClick={() => scrollToElement('propzytree-lixi')} className="btn-orange w-2/12">HÁI LÌ XÌ NGAY</div>
                     </div>
 
                     <div id={'rule-event'} className='flex mt-10 justify-center items-center'>
@@ -163,7 +169,7 @@ const HomeContainer = () => {
                         <img src="/svg/banner-title/banner-title-4.svg" alt="" />
                     </div>
 
-                    <div className="container w-10/12  mx-auto flex flex-row space-x-2 md:space-x-8 md:justify-center ">
+                    <div className="container desktop-section w-10/12  mx-auto flex flex-row space-x-2 md:space-x-8 md:justify-center ">
                         <div className='md:w-2/12 w-4/12 overflow-hidden rounded-lg shadow-lg  '>
                             <img src="/svg/logo-partner-1.svg" alt="" />
                         </div>
@@ -181,6 +187,27 @@ const HomeContainer = () => {
                         </div>
                     </div>
 
+                    <div className="container mobile-section w-10/12  mx-auto flex flex-row space-x-2 md:space-x-8 justify-center ">
+                        <div className='md:w-2/12 w-4/12 overflow-hidden rounded-lg shadow-lg  '>
+                            <img src="/svg/logo-partner-1.svg" alt="" />
+                        </div>
+                        <div className='md:w-2/12 w-4/12 overflow-hidden rounded-lg shadow-lg'>
+                            <img src="/svg/logo-partner-2.svg" alt="" />
+                        </div>
+                        <div className='md:w-2/12 w-4/12 overflow-hidden rounded-lg shadow-lg'>
+                            <img src="/svg/logo-partner-3.svg" alt="" />
+                        </div>
+                    </div>
+                    <br/>
+                    <div className="container mobile-section w-10/12  mx-auto flex flex-row space-x-2 md:space-x-8 justify-center ">
+                        <div className='md:w-2/12 w-4/12 overflow-hidden rounded-lg shadow-lg'>
+                            <img src="/svg/logo-partner-4.svg" alt="" />
+                        </div>
+                        <div className='md:w-2/12 w-4/12 overflow-hidden rounded-lg shadow-lg'>
+                            <img src="/svg/logo-partner-5.svg" alt="" />
+                        </div>
+                    </div>
+
                     <div id={'propzycare-introduce'} className='flex mt-10 justify-center items-center'>
                         <img src="/svg/banner-title/banner-title-5.svg" alt="" />
                     </div>
@@ -189,12 +216,12 @@ const HomeContainer = () => {
                         <div className='md:w-4/12 w-full'>
                             <img src="/svg/img-propzycare.svg" className='w-full' alt="" />
                             <p className='pt-10 text-white'>
-                                <span className='font-bold'>Propzy Care  </span>  – Gói dịch vụ chăm sóc khách hàng xuyên suốt trước – trong và cả sau khi giao dịch bất động sản tại Propzy. Với gói dịch vụ Propzy Care, khách hàng được chăm sóc miễn phí như: Hưởng các ưu đãi như vận chuyển và dọn nhà, Tư vấn miễn phí dịch vụ thẩm định - pháp lý – tín dụng – vay vốn, cùng nhiều gói dịch vụ cộng thêm khác.
+                                <span className='font-bold'>Propzy Care  </span>  – Gói dịch vụ chăm sóc khách hàng xuyên suốt trước – trong và cả sau khi giao dịch bất động sản tại Propzy. Với gói dịch vụ Propzy Care, khách hàng được chăm sóc & hưởng ưu đãi miễn phí như vận chuyển, dọn nhà, cùng nhiều gói dịch vụ cộng thêm khác từ các đối tác của Propzy.
                                 </p>
 
                             <p className='pt-5 text-white'>
-                                Đăng Ký xem nhà (Thuê) ngay tại đây từ 25/01 - 28/02/2021 để nhận gói ưu đãi Propzy CARE trị giá 2.000.000 VNĐ và phát sinh giao dịch trước ngày 30/03/2021.
-                                </p>
+                            Nhận ngay gói Propzy Care trị giá 2.000.000 VND khi đăng ký thuê nhà từ ngày 25/01 - 28/02/2021 và hoàn tất hợp đồng trước 30/03/2021
+                            </p>
                         </div>
                         <div className='md:w-6/12 w-full flex py-6 flex-col justify-center md:ml-40'>
                             <div className='relative py-3 '>
@@ -202,7 +229,7 @@ const HomeContainer = () => {
                                     <div className='max-w-md mx-auto'>
                                         <div className='flex items-center '>
                                             <div className="block pl-2 pt-16 font-bold text-xl text-center ">
-                                                <h2 className="text-3xl font-semibold hight-light justify-center">BẠN CÓ NHU CẦU THUÊ BẤT ĐỘNG SẢN?</h2>
+                                                <h2 className="text-3xl font-semibold hight-light justify-center">BẠN CÓ DỰ ĐỊNH THUÊ NHÀ?</h2>
                                                 <p className="text-1xl text-white font-normal">Hơn 100.000 bất động sản tại Propzy sẵn sàng giao dịch!</p>
                                             </div>
                                         </div>
@@ -262,16 +289,16 @@ const HomeContainer = () => {
                                             }) => (
                                                     <form onSubmit={handleSubmit}>
                                                         <div className="py-7 space-y-3">
-                                                            <input name="name" type="text" value={values.name} onChange={handleChange} className='default__input w-full' placeholder='Họ và tên' />
+                                                            <input name="name" type="text" value={values.name} onChange={handleChange} className='default__input w-full' placeholder='Họ và tên(*)' />
                                                             {errors.name && touched.name && <div className='my-1 text-red-300'>{errors.name}</div>}
-                                                            <input name="email" type="text" value={values.email} onChange={handleChange} className='default__input w-full' placeholder='Email' />
+                                                            <input name="email" type="text" value={values.email} onChange={handleChange} className='default__input w-full' placeholder='Email(*)' />
                                                             {errors.email && touched.email && <div className='my-1 text-red-300'>{errors.email}</div>}
-                                                            <input name="phone" type="number" value={values.phone} onChange={handleChange} className='default__input w-full' placeholder='Số điện thoại' />
+                                                            <input name="phone" type="tel" value={values.phone} onChange={handleChange} className='default__input w-full' placeholder='Số điện thoại(*)' />
                                                             {errors.phone && touched.phone && <div className='my-1 text-red-300'>{errors.phone}</div>}
                                                             <Dropdown trigger={['click']} overlay={listPrice}>
-                                                                <input value={formContact.price} readOnly className='cursor-pointer default__input w-full' placeholder='Giá muốn thuê'></input>
+                                                                <input value={formContact.price} readOnly className='cursor-pointer default__input w-full' placeholder='Giá muốn thuê(*)'></input>
                                                             </Dropdown>
-                                                            <button type='submit' className="btn-orange place-self-center mt-5 mx-auto w-2/5">TƯ VẤN NGAY</button>
+                                                            <button type='submit' className="onhover-btn btn-orange place-self-center mt-5 mx-auto w-2/5">TƯ VẤN NGAY</button>
                                                         </div>
                                                     </form>
                                                 )}

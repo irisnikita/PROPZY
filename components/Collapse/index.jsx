@@ -36,10 +36,10 @@ const index = () => {
                     <div className='font-bold'>-Khách hàng phải là công dân Việt Nam từ 18 tuổi trở lên.</div>
                     <div className='font-bold'>-Mỗi khách hàng có 01 LƯỢT hái lì xì khi đăng ký tham gia hái lì xì.</div>
                     <div className='font-bold'> -Để có thêm lượt hái lì xì, bạn có thể thực hiện các cách sau:</div>
-                    <div className='ml-5'>+ Chia sẻ bài viết thành công: +1 lượt chơi  <a href="">Chia sẻ ngay</a></div>
-                    <div className='ml-5'>+ Thích (divke) trang Propzy Fanpage: +1 lượt chơi  <a href="">like Fanapage</a></div>
-                    <div className='ml-5'>+ Follow Zalo OA: + 1 lượt chơi  <a href="">Follow Zalo OA</a></div>
-                    <div className='ml-5'>+ Subcribe Yotube chanel: +1 lượt chơi <a href=""> Subcribe ngay</a></div>
+                    <div className='ml-5'>+ Chia sẻ bài viết thành công: +1 lượt chơi  <a target="_blank" href="https://www.facebook.com/propzyvietnam">Chia sẻ ngay</a></div>
+                    <div className='ml-5'>+ Thích (like) trang Propzy Fanpage: +1 lượt chơi  <a target="_blank" href="https://www.facebook.com/propzyvietnam">like Fanpage</a></div>
+                    <div className='ml-5'>+ Follow Zalo OA: + 1 lượt chơi  <a target="_blank" href="https://zalo.me/310578488608053699">Follow Zalo OA</a></div>
+                    <div className='ml-5'>+ Subscribe Youtube channel: +1 lượt chơi <a target="_blank" href="https://www.youtube.com/channel/UCeIN3NL1ms3rSB6jWYUr19g?view_as=subscriber"> Subscribe ngay</a></div>
                     <div className='ml-5'>+ Mời bạn bè tham gia thành công: tối đa +10 lượt chơi Mời chơi ngay</div>
 
                     <div className="font-bold">-Hệ thống tự động thêm lượt khi bạn thực hiện thành công những cách trên.</div>
@@ -55,8 +55,6 @@ const index = () => {
                     <div className="font-bold">- Khách hàng liên hệ nhận thưởng theo 03 cách:</div>
                     <div className="ml-5">
                         + Cách 1: Nhắn tin trực tiếp trên Fanpage của Propzy TẠI ĐÂY.
-                        + Cách 2: Gọi Hotline: *4663 hoặc Email: vietnam@propzy.com
-                        + Cách 3: Đến trực tiếp Công ty Propzy để nhận thưởng: Phòng Marketing - Trụ sở Công ty TNHH Dịch vụ Propzy - Tầng 5, Tòa Nhà Flemington, Số 182, Lê Đại Hành, Phường 15, Quận 11, TP.HCM.
                     </div>
                     <div className="ml-5">
                         + Cách 2: Gọi Hotline: *4663 hoặc Email: vietnam@propzy.com
