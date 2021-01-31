@@ -8,13 +8,14 @@ import { isEmpty } from 'lodash'
 import { useSelector, useDispatch } from 'react-redux'
 import { connect } from 'react-redux'
 import { Formik } from 'formik';
+import moment from 'moment'
 import { Modal, Dropdown, Menu } from 'antd'
 
 // Redux toolkit
 import { selectUser, getUser } from 'store/user/userSlice'
 
 // App config
-import { appConfig } from 'constant'
+import { appConfig, notificationTypes } from 'constant'
 
 // Services
 import * as userServices from 'services/user'
@@ -231,12 +232,22 @@ const Unregistered = (props) => {
                                     return errors;
                                 }}
                                 onSubmit={async (values, { setSubmitting }) => {
-                                    let draftValues = {
-                                        ...values,
-                                        invitelink: localStorage.getItem('linkShare') || ''
+                                    let userUpdateNotification = null;
+
+                                    if (localStorage.getItem('linkShare')) {
+                                        userUpdateNotification = notificationTypes.find(notification => notification.type === 'invite-people');
                                     }
 
-                                    const user = await userServices.create({ ...draftValues });
+                                    let draftValues = {
+                                        ...values,
+                                        invitelink: localStorage.getItem('linkShare') || '',
+                                        userUpdateNotification
+                                    }
+
+                                    console.log("Unregistered -> userUpdateNotification", userUpdateNotification)
+                                    let notification = notificationTypes.find(notification => notification.type === 'register');
+
+                                    const user = await userServices.create({ ...draftValues, notifications: [notification] });
                                     // sendMail()
                                     if (user && user.data) {
                                         if (user.data.email) {

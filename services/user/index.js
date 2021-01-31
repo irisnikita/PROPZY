@@ -16,6 +16,12 @@ export function sendMailCoupons(params) {
 export function sendThanks(params) {
     return services.create({ ...params, API: appConfig.API + '/sendMail/type3' });
 }
+export function createNotification(params) {
+    return services.create({ ...params, API: appConfig.API + '/users/notification' });
+}
+export function updatePermission(params) {
+    return services.put({ ...params, API: appConfig.API + '/users/updateMission' });
+}
 export function get(params) {
     return services.get({ ...params, API: appConfig.API + '/users' });
 }

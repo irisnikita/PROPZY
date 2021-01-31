@@ -6,15 +6,17 @@ import { isEmpty } from 'lodash'
 import { useRouter } from 'next/router'
 import { connect } from 'react-redux'
 import { appConfig } from '../../constant'
+import Link from 'next/link'
 import classnames from 'classnames'
 import Slider from 'react-slick'
-import { Row, Col, Modal } from 'antd'
+import { Row, Col, Modal, Badge } from 'antd'
 import Head from 'next/head'
 
 import LuckMoney from 'components/LuckyMoney'
 
 // Components
 import Permision from '../../components/User/components/Permision'
+import Notification from '../../components/User/components/Notification'
 
 // Services 
 import * as userServices from 'services/user'
@@ -49,6 +51,18 @@ const User = (props) => {
     useEffect(() => {
         getDataUser()
     }, []);
+
+    useEffect(() => {
+        if (router) {
+            console.log('router', router)
+            const { tab } = router.query;
+
+            const selectedTab = tabs.find(cTab => cTab.key === tab)
+            if (selectedTab) {
+                setTabSelected(selectedTab)
+            }
+        }
+    }, [router])
 
     useEffect(() => {
         if (!isEmpty(user)) {
@@ -113,10 +127,6 @@ const User = (props) => {
         }
     }
 
-    const scrollToElementOfHome = (element) => {
-        window.location.href = '/tet#propzytree-lixi';
-    }
-
     const showRenderContentTab = () => {
         switch (tabSelected.key) {
             case 'tab-1':
@@ -154,7 +164,10 @@ const User = (props) => {
                             XEM MÃ COUPON
                 </div>
                         <a className='text-white my-10'>{`Bạn còn ${user && user.turn >= 0 ? user.turn : 0} lượt chơi `}</a>
-                        <div onClick={() => scrollToElementOfHome('propzytree-lixi')} className="btn-orange">HÁI LÌ XÌ NGAY</div>
+                        <Link href='/#propzytree-lixi'>
+
+                            <div className="btn-orange">HÁI LÌ XÌ NGAY</div>
+                        </Link>
                     </>
                 )
             case 'tab-2':
@@ -162,12 +175,25 @@ const User = (props) => {
                     <div style={{ minHeight: '50vh' }} className='text-white font-bold text-3xl flex items-center'>Comming soon</div>
                 ) : (
                         <div className='w-full'>
-                            <Permision />
+                            <div className='justify-center flex items-center'>
+                                <div className="w-7/12 space-y-5">
+                                    <Permision />
+                                </div>
+                            </div>
                         </div>
                     )
             case 'tab-3':
-                return (<div style={{ minHeight: '50vh' }} className='text-white font-bold text-3xl flex items-center'>Chức năng sắp ra mắt, trở lại sau bạn nhé</div>)
-
+                return false ? (
+                    <div style={{ minHeight: '50vh' }} className='text-white font-bold text-3xl flex items-center'>Comming soon</div>
+                ) : (
+                        <div className='w-full'>
+                            <div className='justify-center flex items-center'>
+                                <div className="w-7/12 space-y-5">
+                                    <Notification />
+                                </div>
+                            </div>
+                        </div>
+                    )
             default:
                 break;
         }
@@ -195,7 +221,13 @@ const User = (props) => {
                                         'space-y-5 cursor-pointer md:w-full text-center': true,
                                         'transform scale-125': tab.key === tabSelected.key
                                     })}>
-                                        <img src={tab.image} alt="" />
+                                        {tab.key === 'tab-3' ? (
+                                            <Badge count={user.notifications ? user.notifications.length : 0} size='default' offset={[-14, 37]}>
+                                                <img src={tab.image} alt="" />
+                                            </Badge>
+                                        ) : (
+                                                <img src={tab.image} alt="" />
+                                            )}
                                         <p className='f-Sans-pro text-white font-bold md:text-lg mb-20'>{tab.name}</p>
                                     </div>
                                 )

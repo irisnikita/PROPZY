@@ -4,7 +4,6 @@ import NextApp from "next/app";
 import React, { useEffect } from 'react'
 import { AnimateSharedLayout, AnimatePresence } from "framer-motion";
 import { Provider } from 'react-redux'
-// import { initFacebookSdk, errorInterceptor } from '../_helper';
 
 // Store redux toolkit
 import withReduxStore from '../lib/witdh-redux-store'
@@ -26,9 +25,6 @@ import "tailwindcss/tailwind.css";
 // Styles AOS
 import "aos/dist/aos.css";
 
-// initFacebookSdk();
-
-
 class App extends NextApp {
 	static async getInitialProps({ Component, ctx }) {
 		let pageProps = {};
@@ -43,9 +39,6 @@ class App extends NextApp {
 	}
 
 	componentDidMount() {
-		if (window) {
-		}
-
 		AOS.init({
 			duration: 1200,
 			mirror: true

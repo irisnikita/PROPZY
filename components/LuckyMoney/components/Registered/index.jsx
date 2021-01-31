@@ -13,6 +13,7 @@ import styles from 'components/LuckyMoney/styles.module.scss';
 import * as userServices from 'services/user'
 import * as prizeServices from 'services/prize'
 // Constant
+import { notificationTypes } from 'constant'
 
 /**
  * @description Đây là danh sách các phần quà để hiển thị khi người dùng mở lì xí có 4 loại đó là voucher: 10% fail: 
@@ -26,7 +27,7 @@ const categories = [
 			{ key: 'GoDee', category: 'voucher', name: 'Godee', area: 'HCM (City Wide)', detail: 'Tặng 25 chuyến xe miễn phí (30k/ chuyến) cho khách hàng', voucher: 750000, quantity: 99999, image: '/svg/lucky-money/copy-lucky-money/godee.svg' },
 			{ key: 'Lalamove', category: 'voucher', name: 'Lalamove', area: 'HCM (City Wide)', detail: 'Giảm 75K cho khách đặt chuyển nhà', voucher: 75000, quantity: 300, image: '/svg/lucky-money/copy-lucky-money/75k-lalamove.svg' },
 			{ key: 'Jupviec', category: 'voucher', name: 'JupViec.vn', area: 'HCM (City Wide)', detail: 'Giảm 75K cho khách đặt dọn nhà', voucher: 75000, quantity: 700, image: '/svg/lucky-money/copy-lucky-money/75k-giup-viec.svg' },
-		], 
+		],
 	},
 	{
 		key: 'propzy-care', rate: 1, prizeList: [
@@ -119,7 +120,20 @@ const Unregistered = (props) => {
 		})
 
 		if (coupon) {
+			createNotification();
 			sendMail(coupon.data.data.name, coupon.data.data)
+		}
+	}
+
+	const createNotification = async (coupon) => {
+		let notification = notificationTypes.find(notification => notification.type === 'prize');
+
+		const createNotification = await userServices.createNotification({
+			userEmail: user.email,
+			notification
+		})
+
+		if (createNotification) {
 		}
 	}
 

@@ -7,14 +7,14 @@ import { isEmpty } from 'lodash'
 import { connect } from 'react-redux'
 import { Modal } from 'antd'
 import { Formik } from 'formik'
-
+import moment from 'moment'
 // Redux toolkit
 import { getUser } from 'store/user/userSlice';
 
 // Services 
 import * as userServices from 'services/user'
 
-import { appConfig } from 'constant'
+import { appConfig, notificationTypes } from 'constant'
 
 const Header = (props) => {
     // State
@@ -155,12 +155,21 @@ const Header = (props) => {
                         return errors;
                     }}
                     onSubmit={async (values, { setSubmitting }) => {
-                        let draftValues = {
-                            ...values,
-                            invitelink: localStorage.getItem('linkShare') || ''
+                        let userUpdateNotification = null;
+
+                        if (localStorage.getItem('linkShare')) {
+                            userUpdateNotification = notificationTypes.find(notification => notification.type === 'invite-people');
                         }
 
-                        const user = await userServices.create({ ...draftValues });
+                        let draftValues = {
+                            ...values,
+                            invitelink: localStorage.getItem('linkShare') || '',
+                            userUpdateNotification
+                        }
+
+                        let notification = notificationTypes.find(notification => notification.type === 'register');
+
+                        const user = await userServices.create({ ...draftValues, notifications: [notification] });
                         // sendMail()
                         if (user && user.data) {
                             if (user.data.email) {

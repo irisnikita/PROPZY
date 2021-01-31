@@ -6,8 +6,6 @@ import Header from 'containers/Header';
 import HomeContainer from 'containers/Home';
 
 
-import { initFacebookSdk, errorInterceptor } from '../_helper';
-initFacebookSdk();
 
 const Home = () => {
 	return (

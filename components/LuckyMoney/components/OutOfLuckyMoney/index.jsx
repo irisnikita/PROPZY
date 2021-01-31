@@ -11,7 +11,7 @@ const OutOfLuckyMoney = (props) => {
         <div className='animate__animated animate__fadeIn relative flex flex-row justify-center items-center'>
             <img className={styles['img-lucky-money']} src={'/svg/lucky-money/out-lucky-money.svg'} alt="" />
             <div className={classnames('flex justify-center absolute w-full', styles['btn-make-mission'])}>
-                <Link href='/user'>
+                <Link href='/user?tab=tab-2'>
                     <div className="btn-orange" onClick={props.onClose}>
                         LÀM NHIỆM VỤ
                 </div>

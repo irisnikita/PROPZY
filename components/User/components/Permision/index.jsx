@@ -1,16 +1,19 @@
 import React, { useEffect, useState } from 'react'
 import classnames from 'classnames';
 import { message } from 'antd'
-import { FacebookProvider, Share, Like } from 'react-facebook';
+import { FacebookProvider, Share, Like, ShareButton } from 'react-facebook';
 import { connect } from 'react-redux'
+import YouTubeSubscribe from 'components/YoutubeSubscribe'
 // Styles
 import styles from './styles.module.scss'
 
 import { accountService } from '../../../../_service';
 
+import * as userServices from 'services/user'
+
 //import Like from 'react-facebook/dist/Like';
 
-import { appConfig } from 'constant'
+import { appConfig, notificationTypes } from 'constant'
 
 const API_KEY = 'AIzaSyAp_L-1kufbnEMyZN2o2LqwYJKkBIjHjcM';
 
@@ -24,6 +27,9 @@ const permisions = [
 
 const Permision = (props) => {
     // Props
+
+    let channelid = "UCeIN3NL1ms3rSB6jWYUr19g";
+
     const { user = '' } = props;
 
     const [tabOpen, setTapOpen] = useState(0);
@@ -115,6 +121,26 @@ const Permision = (props) => {
         message.success('Sao chép link chia sẻ thành công')
     }
 
+    const updatePermission = async (permission) => {
+        let draftNotification = notificationTypes.find(notification => notification.type === permission.type)
+
+        const updatePermission = await userServices.updatePermission({
+            id: permission.type,
+            email: user.email
+        })
+
+        if (updatePermission) {
+            const createNotification = await userServices.createNotification({
+                userEmail: user.email,
+                notification: draftNotification
+            })
+
+            if (createNotification) {
+                console.log(createNotification.data, 'notification data')
+            }
+        }
+    }
+
     const showRenderContentTab = (permision) => {
 
         switch (permision.type) {
@@ -126,28 +152,34 @@ const Permision = (props) => {
                     </button>
                     </div>
                 )
+            case 'share':
+
+                return (
+                    <div className='flex items-center' onClick={() => updatePermission(permision)}>
+
+                        <ShareButton className='rounded-md bg-blue-500 px-5 py-2 text-white' href="https://www.facebook.com/propzyvietnam">
+                            Chia sẻ
+                        </ShareButton>
+                    </div>
+                )
             case 'subcribe-youtube':
                 return (
-                    <div className='flex justify-end'>
-                        <button className="btn-orange w-20 px-10">
-                            LIKE NGAY
-                    </button>
+                    <div className='flex items-center'>
+                        <YouTubeSubscribe
+                            // channelName={channelName}
+                            channelid={channelid}
+                            theme={"default"}
+                            layout={"full"}
+                            count={"default"}
+                        />
                     </div>
                 )
             case 'like-face':
                 return (
-                    <div className='flex justify-end'>
-                        <button className="btn-orange w-20 px-10" onClick={accountService.login}>
-                            LIKE NGAY 222
-                    </button>
-                        <Like href="https://www.facebook.com/propzyvietnam" colorScheme="dark" showFaces share />
-
-                        <Share href="https://propzy.vn">
-                            {({ handleClick, loading }) => (
-                                <button type="button" disabled={loading} onClick={handleClick}>Share</button>
-                            )}
-                        </Share>
-
+                    <div className='flex items-center'>
+                        <div>
+                            <Like href="https://www.facebook.com/propzyvietnam" onResponse={(e) => { console.log(e) }} colorScheme="dark" showFaces />
+                        </div>
                     </div >
                 )
             case 'invite-people':
@@ -187,33 +219,29 @@ const Permision = (props) => {
 
     return (
         <FacebookProvider appId="838159696723984">
-            <div className='justify-center flex items-center'>
-                <div className="w-7/12 space-y-5">
-                    {permisions.map((permision, index) => {
-                        return (
-                            <div key={permision.key} className='relative' >
-                                <div className="default__input max flex justify-between">
-                                    <div className="flex items-center space-x-5">
-                                        <img src={permision.icon} alt="" />
-                                        <span>{permision.label}</span>
-                                    </div>
-                                    <div className='space-x-5 flex items-center cursor-pointer' onClick={() => onClickOpenTab(index)}>
-                                        <span>{permision.description}</span>
-                                        <img src='/svg/icons/caret-down.svg' />
-                                    </div>
-                                </div>
-                                <div className={classnames({
-                                    [styles['pane_open']]: true,
-                                    'rounded-b-md': true,
-                                    [styles['active']]: index === tabOpen
-                                })}>
-                                    {showRenderContentTab(permision)}
-                                </div>
+            {permisions.map((permision, index) => {
+                return (
+                    <div key={permision.key} className='relative' >
+                        <div className="default__input max flex justify-between">
+                            <div className="flex items-center space-x-5">
+                                <img src={permision.icon} alt="" />
+                                <span>{permision.label}</span>
                             </div>
-                        )
-                    })}
-                </div>
-            </div>
+                            <div className='space-x-5 flex items-center cursor-pointer' onClick={() => onClickOpenTab(index)}>
+                                <span>{permision.description}</span>
+                                <img src='/svg/icons/caret-down.svg' />
+                            </div>
+                        </div>
+                        <div className={classnames({
+                            [styles['pane_open']]: true,
+                            'rounded-b-md': true,
+                            [styles['active']]: index === tabOpen
+                        })}>
+                            {showRenderContentTab(permision)}
+                        </div>
+                    </div>
+                )
+            })}
         </FacebookProvider>
     )
 }
