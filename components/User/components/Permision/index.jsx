@@ -1,12 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import classnames from 'classnames';
+import { message } from 'antd'
 import { FacebookProvider, Share, Like } from 'react-facebook';
+import { connect } from 'react-redux'
 // Styles
 import styles from './styles.module.scss'
 
 import { accountService } from '../../../../_service';
 
 //import Like from 'react-facebook/dist/Like';
+
+import { appConfig } from 'constant'
 
 const API_KEY = 'AIzaSyAp_L-1kufbnEMyZN2o2LqwYJKkBIjHjcM';
 
@@ -18,7 +22,10 @@ const permisions = [
     { key: "5", icon: '/svg/icons/people.svg', type: "invite-people", label: 'Mời bạn bè tham gia mini game thành công', description: 'Sẽ thêm tối đa 10 lượt' },
 ]
 
-export default function Permision() {
+const Permision = (props) => {
+    // Props
+    const { user = '' } = props;
+
     const [tabOpen, setTapOpen] = useState(0);
     const [gapiReady, setGapiReady] = useState(false)
 
@@ -96,6 +103,18 @@ export default function Permision() {
     //             function (err) { console.error("onClickScrubileYoutube error", err); });
     // }
 
+    const onClickCoppyLink = () => {
+        const el = document.createElement("textarea");
+        const elLink = document.getElementById('link-invite')
+        el.value = elLink.innerText;
+
+        document.body.appendChild(el);
+        el.select();
+        document.execCommand("copy");
+        document.body.removeChild(el);
+        message.success('Sao chép link chia sẻ thành công')
+    }
+
     const showRenderContentTab = (permision) => {
 
         switch (permision.type) {
@@ -130,6 +149,29 @@ export default function Permision() {
                         </Share>
 
                     </div >
+                )
+            case 'invite-people':
+                return (
+                    <div className={classnames({
+                        'flex justify-between items-center': true,
+                        'opacity-50': +user.sharefriend === 10,
+                        'pointer-events-none': +user.sharefriend === 10
+                    })}>
+                        <div className='font-semibold text-white'>
+                            <div>
+                                <strong className='text-lg'>Link chia sẻ:</strong> &nbsp;
+                            <span id='link-invite'>{`${appConfig.URL}?linkShare=${user.invitelink}`}</span>
+                            </div>
+                            <div className='text-base'>
+                                Còn lại {10 - user.sharefriend} lượt chia sẻ
+                           </div>
+                        </div>
+                        <button className={
+                            classnames({
+                                "btn-orange": true
+                            })
+                        } onClick={onClickCoppyLink}>Sao chép</button>
+                    </div>
                 )
 
             default:
@@ -175,3 +217,11 @@ export default function Permision() {
         </FacebookProvider>
     )
 }
+
+const mapStateToProps = (state) => {
+    return {
+        user: state.userSlice.user
+    }
+}
+
+export default connect(mapStateToProps)(Permision)

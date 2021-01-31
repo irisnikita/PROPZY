@@ -112,11 +112,11 @@ const User = (props) => {
             })
         }
     }
-    
+
     const scrollToElementOfHome = (element) => {
         window.location.href = '/tet#propzytree-lixi';
     }
-    
+
     const showRenderContentTab = () => {
         switch (tabSelected.key) {
             case 'tab-1':

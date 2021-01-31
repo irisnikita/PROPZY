@@ -1,5 +1,5 @@
 // Libraries
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import {
     motion,
@@ -7,6 +7,7 @@ import {
 import axios from 'axios'
 import { Select, Dropdown, Menu, Modal } from 'antd';
 import Head from 'next/head'
+import { useRouter } from 'next/router'
 
 // Services
 import * as userServices from 'services/user'
@@ -27,12 +28,21 @@ import { EMULTIHOP } from 'constants';
 const { Option } = Select;
 
 const HomeContainer = () => {
+    const router = useRouter()
+
     // State
     const [isOpenLuckyMoney, setOpenLuckyMoney] = useState(false);
     const [formContact, setFormContact] = useState({
         price: '6-9 triệu'
     });
 
+    useEffect(() => {
+        console.log('router', router)
+        if (router && router.query && router.query.linkShare) {
+            localStorage.setItem('linkShare', router.query.linkShare)
+        }
+
+    }, [router])
 
     const onClickPrice = (e) => {
         setFormContact({
@@ -84,7 +94,7 @@ const HomeContainer = () => {
             document.getElementById(element).scrollIntoView({ block: 'start' });
         }
     }
-    
+
     return (
         <div className='home-page__wrap overflow-x-hidden'>
 
@@ -198,7 +208,7 @@ const HomeContainer = () => {
                             <img src="/svg/logo-partner-3.svg" alt="" />
                         </div>
                     </div>
-                    <br/>
+                    <br />
                     <div className="container mobile-section w-10/12  mx-auto flex flex-row space-x-2 md:space-x-8 justify-center ">
                         <div className='md:w-2/12 w-4/12 overflow-hidden rounded-lg shadow-lg'>
                             <img src="/svg/logo-partner-4.svg" alt="" />
@@ -220,7 +230,7 @@ const HomeContainer = () => {
                                 </p>
 
                             <p className='pt-5 text-white'>
-                            Nhận ngay gói Propzy Care trị giá 2.000.000 VND khi đăng ký thuê nhà từ ngày 25/01 - 28/02/2021 và hoàn tất hợp đồng trước 30/03/2021
+                                Nhận ngay gói Propzy Care trị giá 2.000.000 VND khi đăng ký thuê nhà từ ngày 25/01 - 28/02/2021 và hoàn tất hợp đồng trước 30/03/2021
                             </p>
                         </div>
                         <div className='md:w-6/12 w-full flex py-6 flex-col justify-center md:ml-40'>

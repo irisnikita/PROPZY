@@ -8,7 +8,7 @@ var CancelToken = axios.CancelToken;
 
 //         if (userInfo) {
 //             const {token = ''} = userInfo;
-    
+
 //             config.params = {
 //                 ...config.params,
 //                 token: token,
@@ -19,11 +19,11 @@ var CancelToken = axios.CancelToken;
 //     }
 // });
 
-export const services =  {
+export const services = {
     get: function get(params) {
         if (typeof params.API !== 'undefined' && typeof params.id !== 'undefined') {
             const API = params.API;
-            const cancelToken = params.cancelToken ? params.cancelToken : new CancelToken(function () {});
+            const cancelToken = params.cancelToken ? params.cancelToken : new CancelToken(function () { });
 
             delete params.API;
             delete params.cancelToken;
@@ -38,22 +38,22 @@ export const services =  {
     },
     getList: function getList(params) {
         if (params) {
-            if (typeof(params.API) !== undefined) {
+            if (typeof (params.API) !== undefined) {
                 const API = params.API;
-                const cancelToken = params.cancelToken ? params.cancelToken : new CancelToken(function () {});
-    
+                const cancelToken = params.cancelToken ? params.cancelToken : new CancelToken(function () { });
+
                 delete params.API;
                 delete params.cancelToken;
-    
+
                 return axios.get(API, {
                     params: params,
                     cancelToken
                 });
-            } else {return false}
+            } else { return false }
         }
     },
     create: function create(params) {
-        if (typeof(params.API) !== undefined) {
+        if (typeof (params.API) !== undefined) {
             const API = params.API;
 
             delete params.API;
@@ -65,7 +65,7 @@ export const services =  {
         }
     },
     upload: function create(params) {
-        if (typeof(params.API) !== undefined) {
+        if (typeof (params.API) !== undefined) {
             const API = params.API;
 
             delete params.API;

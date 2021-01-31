@@ -147,14 +147,14 @@ const Unregistered = (props) => {
         typeof onClose == 'function' && onClose('open-next');
         props.getUser(user)
     }
-    
+
     const scrollToElement = (element) => {
         if (document.getElementById(element)) {
 
             document.getElementById(element).scrollIntoView({ block: 'start' });
         }
     }
-    
+
     const updateCoupon = async (email, user) => {
         const coupon = await prizeServices.updateCoupon({
             id: prizeSelected.key,
@@ -231,7 +231,12 @@ const Unregistered = (props) => {
                                     return errors;
                                 }}
                                 onSubmit={async (values, { setSubmitting }) => {
-                                    const user = await userServices.create({ ...values });
+                                    let draftValues = {
+                                        ...values,
+                                        invitelink: localStorage.getItem('linkShare') || ''
+                                    }
+
+                                    const user = await userServices.create({ ...draftValues });
                                     // sendMail()
                                     if (user && user.data) {
                                         if (user.data.email) {
