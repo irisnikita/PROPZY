@@ -20,6 +20,8 @@ const ImageSlider = () => {
         infinite: true,
         arrows: false,
         speed: 500,
+        autoplay: true,
+        autoplaySpeed: 5000,
         slidesToShow: 1,
         slidesToScroll: 1,
         customPaging: function (i) {
@@ -40,7 +42,14 @@ const ImageSlider = () => {
             }, 200)
         }
     }
+    
+    const scrollToElement = (element) => {
+        if (document.getElementById(element)) {
 
+            document.getElementById(element).scrollIntoView({ block: 'start' });
+        }
+    }
+    
     const onClickCare = () => {
         if (document.getElementById('propzycare-introduce')) {
             document.getElementById('propzycare-introduce').scrollIntoView()
@@ -56,8 +65,8 @@ const ImageSlider = () => {
                         <img className='w-full md:w-10/12 md:absolute relative -left-7 md:left-60 md:top-7' src='/images/Slider/slider-2-right.png' alt="" />
                     </div>
                     <div
-                        onClick={() => setOpenLuckyMoney(true)}
-                        className="btn-orange mb-10 md:mb-0  relative mx-auto mt-5 md:mt-0 md:absolute pb-7-rem md:px-20 md:right-40 animate__animated animate__slow animate__infinite animate__swing"
+                        onClick={() => scrollToElement('propzytree-lixi')}
+                        className="onhover-btn btn-orange mb-10 md:mb-0  relative mx-auto mt-5 md:mt-0 md:absolute pb-7-rem md:px-20 md:right-40 animate__animated animate__slow animate__infinite animate__swing"
                     >
                         HÁI LÌ XÌ NGAY
                     </div>

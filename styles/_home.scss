@@ -53,6 +53,14 @@
     }
 }
 
+
+.desktop-section {
+    display: flex !important;
+}
+.mobile-section {
+    display: none !important;
+}
+
 // Responsive
 @media (max-width: 640px) {
     .slider-wrap__item {
@@ -66,5 +74,12 @@
     }
     .flip-lucky-money {
         width: 300px !important;
+    }
+
+    .desktop-section {
+        display: none !important;
+    }
+    .mobile-section {
+        display: flex !important;
     }
 }

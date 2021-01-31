@@ -13,11 +13,17 @@ import Head from 'next/head'
 
 import LuckMoney from 'components/LuckyMoney'
 
+// Components
+import Permision from '../../components/User/components/Permision'
+
 // Services 
 import * as userServices from 'services/user'
 import * as prizeServices from 'services/prize'
 
 import React, { useEffect, useState } from 'react';
+
+
+
 
 import { getUser } from '../../store/user/userSlice'
 
@@ -106,7 +112,11 @@ const User = (props) => {
             })
         }
     }
-
+    
+    const scrollToElementOfHome = (element) => {
+        window.location.href = '/tet#propzytree-lixi';
+    }
+    
     const showRenderContentTab = () => {
         switch (tabSelected.key) {
             case 'tab-1':
@@ -144,14 +154,19 @@ const User = (props) => {
                             XEM MÃ COUPON
                 </div>
                         <a className='text-white my-10'>{`Bạn còn ${user && user.turn >= 0 ? user.turn : 0} lượt chơi `}</a>
-                        <div onClick={() => setOpenLuckyMoney(true)} className="btn-orange">HÁI LÌ XÌ NGAY</div>
+                        <div onClick={() => scrollToElementOfHome('propzytree-lixi')} className="btn-orange">HÁI LÌ XÌ NGAY</div>
                     </>
                 )
             case 'tab-2':
-                return (<div style={{ minHeight: '50vh' }} className='text-white font-bold text-3xl flex items-center'>Comming soon</div>)
-
+                return false ? (
+                    <div style={{ minHeight: '50vh' }} className='text-white font-bold text-3xl flex items-center'>Comming soon</div>
+                ) : (
+                        <div className='w-full'>
+                            <Permision />
+                        </div>
+                    )
             case 'tab-3':
-                return (<div style={{ minHeight: '50vh' }} className='text-white font-bold text-3xl flex items-center'>Comming soon</div>)
+                return (<div style={{ minHeight: '50vh' }} className='text-white font-bold text-3xl flex items-center'>Chức năng sắp ra mắt, trở lại sau bạn nhé</div>)
 
             default:
                 break;
