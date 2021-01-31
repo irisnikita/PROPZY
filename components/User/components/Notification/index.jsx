@@ -2,6 +2,7 @@
 import React, { useState, useMemo } from 'react';
 import moment from 'moment';
 import { connect } from 'react-redux';
+import { orderBy } from 'lodash'
 import Link from 'next/link'
 
 // Constant
@@ -14,6 +15,15 @@ function Notification(props) {
 
     // State
     const [state, setState] = useState({})
+
+    const newNotifications = useMemo(() => {
+
+        if (notifications.length) {
+
+            return _.sortBy(notifications, function (o) { return new moment(o.date, appConfig.DATE_FORMAT); }).reverse();
+        }
+
+    }, [notifications])
 
     // Function
     const showRenderContent = (notification) => {
@@ -46,7 +56,7 @@ function Notification(props) {
 
     return (
         <div className='space-y-5'>
-            {notifications.length ? notifications.map(notification => (
+            {newNotifications.length ? newNotifications.map(notification => (
                 <div className='flex items-center justify-between border-b border-gray-300 pb-4'>
                     <div className='rounded-full p-4 border-2 border-white flex items-center justify-center'>
                         <img src={notification.icon} alt="" />
