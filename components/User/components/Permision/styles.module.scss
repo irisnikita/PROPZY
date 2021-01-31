@@ -1,0 +1,18 @@
+.pane_open {
+    position: relative;
+    width: 100%;
+    max-height: 0px;
+    border: 1px solid #fff;
+    top: -5px;
+    padding: 0px;
+    background-color: rgba(0, 0, 0, 0.17);
+    border-top: none;
+    opacity: 0;
+    transition: all 300ms;
+
+    &.active {
+        max-height: 1000px;
+        padding: 20px 10px;
+        opacity: 1;
+    }
+}
