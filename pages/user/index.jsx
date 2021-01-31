@@ -13,11 +13,17 @@ import Head from 'next/head'
 
 import LuckMoney from 'components/LuckyMoney'
 
+// Components
+import Permision from '../../components/User/components/Permision'
+
 // Services 
 import * as userServices from 'services/user'
 import * as prizeServices from 'services/prize'
 
 import React, { useEffect, useState } from 'react';
+
+
+
 
 import { getUser } from '../../store/user/userSlice'
 
@@ -152,8 +158,13 @@ const User = (props) => {
                     </>
                 )
             case 'tab-2':
-                return (<div style={{ minHeight: '50vh' }} className='text-white font-bold text-3xl flex items-center'>Chức năng sắp ra mắt, trở lại sau bạn nhé</div>)
-
+                return false ? (
+                    <div style={{ minHeight: '50vh' }} className='text-white font-bold text-3xl flex items-center'>Comming soon</div>
+                ) : (
+                        <div className='w-full'>
+                            <Permision />
+                        </div>
+                    )
             case 'tab-3':
                 return (<div style={{ minHeight: '50vh' }} className='text-white font-bold text-3xl flex items-center'>Chức năng sắp ra mắt, trở lại sau bạn nhé</div>)
 

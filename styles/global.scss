@@ -98,6 +98,10 @@ html, body {
   box-sizing: border-box;
   color: #fff;
 
+  &.max {
+    width: 100%;
+  }
+
   &::placeholder {
     font-style: italic;
     color: #fff;
