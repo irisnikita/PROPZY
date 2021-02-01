@@ -391,10 +391,7 @@ const Unregistered = (props) => {
                         ) : (
                                 <div className={styles['message--success']}>
                                     <div className='relative'>
-                                        <img src="/svg/lucky-money/register-sucess.svg" alt="" />
-                                        <div className="flex absolute top-2/4 w-full items-center justify-center">
-                                            <span className='w-1/2 text-center'>Chúc mừng bạn nhận quà thành công và nhận thêm 2 lượt quay</span>
-                                        </div>
+                                        <img src="/images/lucky-money-2.png" alt="" />
                                     </div>
                                     <div className='px-5 md:px-20 pt-7'>
                                         <strong className='font-semibold text-xl text__color--orange'>BẠN CÓ DỰ ĐỊNH THUÊ NHÀ?</strong>

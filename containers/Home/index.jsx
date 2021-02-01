@@ -96,7 +96,7 @@ const HomeContainer = () => {
     }
 
     return (
-        <div className='home-page__wrap overflow-x-hidden'>
+        <div id='home-container' className='home-page__wrap overflow-x-hidden'>
 
             <Head>
                 <title>Hái Lì Xì Với Propzy - Khai Xuân Đón Lộc</title>

@@ -20,11 +20,12 @@ const Header = (props) => {
     // State
     const [isChangeHeader, setChangeHeader] = useState(false);
     const [menuItemSelected, setMenuItemSelected] = useState({})
-    console.log("Header -> menuItemSelected", menuItemSelected)
     const [isOpenModal, setOpenModal] = useState(false)
+    const [isActive, setActive] = useState('home')
+    console.log("Header -> isActive", isActive)
 
     const menu = [
-        { key: 'home', label: 'TRANG CHỦ', link: '/' },
+        { key: 'home', label: 'TRANG CHỦ', link: '/', location: 'home-container' },
         { key: 'introduce', label: 'GIỚI THIỆU', link: '/', location: 'propzythree-step' },
         { key: 'rule', label: 'THỂ LỆ', link: '/', location: 'rule-event' },
         { key: 'contact', label: 'LIÊN HỆ ', link: '/', location: 'contact-us' },
@@ -67,6 +68,21 @@ const Header = (props) => {
         } else {
             setChangeHeader(false)
         }
+
+        let windowScollY = window.scrollY;
+        console.log("onScroll -> windowScollY", windowScollY)
+
+        for (let i = 0; i < menu.length - 1; i++) {
+            const elementPrevious = document.getElementById(menu[i].location);
+            const elementNext = document.getElementById(menu[i + 1].location);
+
+            if (elementPrevious && elementNext) {
+                if (windowScollY >= elementPrevious.offsetTop && windowScollY <= elementNext.offsetTop) {
+                    setActive(menu[i].key)
+                    break;
+                }
+            }
+        }
     }
 
     const scrollToElement = (element) => {
@@ -88,7 +104,14 @@ const Header = (props) => {
     const showRenderMenu = () => {
         return menu.length ? menu.map(item => {
             return item.location ? (
-                <li key={item.key} className='cursor-pointer' onClick={() => scrollToElement(item.location)}>
+                <li
+                    key={item.key}
+                    className={classnames({
+                        'cursor-pointer': true,
+                        'text__color--orange': isActive === item.key
+                    })}
+                    onClick={() => scrollToElement(item.location)}
+                >
                     <a>{item.label}</a>
                 </li>
             ) :
@@ -111,8 +134,16 @@ const Header = (props) => {
 
     return (
         <header className='relative'>
-            <div className="fixed z-40 f-Sans-pro w-full text-white">
-                <div className={`default__header ${isChangeHeader ? 'header--orange' : ''} static mx-auto w-10/12 flex justify-center md:justify-between`}>
+            <div className={classnames({
+                'transition-all duration-300': true,
+                "fixed z-40 f-Sans-pro w-full text-white": true,
+                'bg-white text-gray-900': isChangeHeader
+            })}>
+                <div
+                    className={classnames({
+                        'default__header static mx-auto w-10/12 flex justify-center md:justify-between': true,
+                    })}
+                >
                     <Link href='/'>
                         <div className='md:w-max cursor-pointer w-6/12 bg-white px-2 pt-2 pb-1 rounded-b-xl' >
                             <img className='md:w-full mx-auto w-8/12' src="/svg/logo.svg" alt="" />
