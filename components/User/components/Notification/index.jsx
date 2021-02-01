@@ -23,6 +23,8 @@ function Notification(props) {
             return _.sortBy(notifications, function (o) { return new moment(o.date, appConfig.DATE_FORMAT); }).reverse();
         }
 
+        return []
+
     }, [notifications])
 
     // Function
@@ -71,7 +73,7 @@ function Notification(props) {
                     </div>
                 </div>
 
-            )) : <div className='text-white font-semibold text-xl'>Không có thông báo</div>}
+            )) : <div className='text-white font-semibold text-xl text-center'>Không có thông báo</div>}
         </div>
     )
 }

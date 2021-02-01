@@ -122,7 +122,8 @@ const User = (props) => {
             Modal.success({
                 title: 'Gửi mã thành công',
                 content: 'Đã gửi mã coupon về email của bạn, vui lòng kiểm tra email',
-                okText: 'Xác nhận'
+                okText: 'Xác nhận',
+                closable: true
             })
         }
     }

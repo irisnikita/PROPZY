@@ -260,7 +260,8 @@ const Unregistered = (props) => {
                                             Modal.error({
                                                 title: 'Đăng ký thất bại',
                                                 content: 'Email đăng ký đã tồn tại, xin vui lòng đăng ký email khác',
-                                                okText: '  Đăng ký lại'
+                                                okText: '  Đăng ký lại',
+                                                closable: true
                                             })
                                         }
 
@@ -268,7 +269,8 @@ const Unregistered = (props) => {
                                         Modal.error({
                                             title: 'Đăng ký thất bại',
                                             content: 'Email đăng ký đã tồn tại, xin vui lòng đăng ký email khác',
-                                            okText: '  Đăng ký lại'
+                                            okText: '  Đăng ký lại',
+                                            closable: true
                                         })
                                     }
                                 }}

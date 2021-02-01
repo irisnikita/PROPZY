@@ -130,7 +130,7 @@ const HomeContainer = () => {
                         </div>
                         <div className='md:w-8/12 relative'>
                             <ApricotBlossom />
-                            <div className='text-yellow-300 italic font-bold absolute right-10'>“Nhấp vào bao lì xì để nhận quà”</div>
+                            <div className='text-yellow-300 animate__animated animate__jello animate__infinite italic text-xl font-bold absolute right-10'>“Nhấp vào bao lì xì để nhận quà”</div>
                         </div>
                     </div>
                     <div className='flex mt-10 justify-center items-center'>
@@ -276,13 +276,15 @@ const HomeContainer = () => {
                                                     Modal.success({
                                                         title: 'Cảm ơn bạn đã gửi thông tin',
                                                         content: 'Cảm ơn bạn đã tin tưởng dịch vụ của chúng tôi. Chúng tôi sẽ liên lạc nhanh nhất có thể ',
-                                                        okText: 'Đồng ý'
+                                                        okText: 'Đồng ý',
+                                                        closable: true
                                                     })
                                                 } else {
                                                     Modal.error({
                                                         title: 'Email đã tồn tại',
                                                         content: 'Email bạn gửi tư vấn đã tồn tại, vui lòng gửi lại email khác',
-                                                        okText: 'Đồng ý'
+                                                        okText: 'Đồng ý',
+                                                        closable: true
                                                     })
                                                 }
                                             }}
