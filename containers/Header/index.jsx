@@ -70,10 +70,11 @@ const Header = (props) => {
     }
 
     const scrollToElement = (element) => {
-        if (document.getElementById(element)) {
+        router.push(`/#${element}`)
+        // if (document.getElementById(element)) {
 
-            document.getElementById(element).scrollIntoView({ block: 'start' });
-        }
+        //     document.getElementById(element).scrollIntoView({ block: 'start' });
+        // }
     }
 
     const onClickSeePrize = () => {

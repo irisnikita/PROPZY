@@ -17,9 +17,10 @@ export const translations = {
 }
 
 export const appConfig = {
-    URL: 'http://localhost:3000',
-    // API: 'https://vmotel.me/api',
-    API: 'http://localhost:5000/api',
+    // URL: 'http://localhost:3000',
+    URL: 'https://propzy.vercel.app',
+    API: 'https://vmotel.me/api',
+    // API: 'http://localhost:5000/api',
     LOCAL_EMAIL: 'user-email',
     DATE_FORMAT: 'HH:mm DD/MM/YYYY'
 }
