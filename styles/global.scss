@@ -40,6 +40,8 @@ html, body {
     min-height: 57px;
     font-weight: 700;
     min-width: 200px;
+    overflow: hidden;
+    white-space: nowrap;
     width: max-content;
     display: flex;
     cursor: pointer;
