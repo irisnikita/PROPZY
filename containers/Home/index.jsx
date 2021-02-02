@@ -112,7 +112,7 @@ const HomeContainer = () => {
                     <ImageSlider />
                 </section>
                 <section id={'propzytree-lixi'} className='main-content--2 pt-5 md:pt-40'>
-                    <img src="/images/home/home-02.jpg" className='absolute -top-20 md:-top-20' alt="" />
+                    <img src="/images/home/home-02.png" className='absolute -top-20 md:-top-20' alt="" />
                     <div className='relative w-10/12 mx-auto flex flex-wrap md:flex-row flex-col-reverse'>
                         <div className='md:w-4/12 relative flex md:block items-center justify-center flex-col mt-10 md:mt-0'>
                             <img src="/images/home/home-03.png" className='md:w-full w-3/4' alt="" />
@@ -130,7 +130,7 @@ const HomeContainer = () => {
                         </div>
                         <div className='md:w-8/12 relative'>
                             <ApricotBlossom />
-                            <div className='text-yellow-300 animate__animated animate__jello animate__infinite italic text-xl font-bold absolute right-10'>“Nhấp vào bao lì xì để nhận quà”</div>
+                            <div className='text-yellow-300 animate__animated animate__infinite animate__fadeInUp animate__slower italic text-xl font-bold absolute right-10'>“Nhấp vào bao lì xì để nhận quà”</div>
                         </div>
                     </div>
                     <div className='flex mt-10 justify-center items-center'>

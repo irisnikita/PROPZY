@@ -4,6 +4,9 @@ import { message } from 'antd'
 import { FacebookProvider, Share, Like, ShareButton } from 'react-facebook';
 import { connect } from 'react-redux'
 import YouTubeSubscribe from 'components/YoutubeSubscribe'
+
+import {getUser} from 'store/user/userSlice'
+
 // Styles
 import styles from './styles.module.scss'
 
@@ -136,7 +139,7 @@ const Permision = (props) => {
             })
 
             if (createNotification) {
-                console.log(createNotification.data, 'notification data')
+                props.getUser(createNotification.data)
             }
         }
     }
@@ -146,27 +149,34 @@ const Permision = (props) => {
         switch (permision.type) {
             case 'follow-zalo':
                 return (
-                    <div className='flex justify-end'>
+                    <div className={classnames({
+                        'flex justify-end': true,
+                        'pointer-events-none opacity-50': user.subzalo
+                    })}>
                         <button className="btn-orange w-20 px-10">
-                            LIKE NGAY
+                            FLOW NGAY
                     </button>
                     </div>
                 )
             case 'share':
 
                 return (
-                    <div className='flex items-center' onClick={() => updatePermission(permision)}>
-
-                        <ShareButton className='rounded-md bg-blue-500 px-5 py-2 text-white' href="https://www.facebook.com/propzyvietnam">
+                    <div className={classnames({
+                        'flex items-center': true,
+                        'pointer-events-none opacity-50': user.sharefb
+                    })}> onClick={() => updatePermission(permision)}>
+                        <ShareButton onResponse={(response) => {console.log('response', response)}} className='rounded-md bg-blue-500 px-5 py-2 text-white' href="https://www.facebook.com/propzyvietnam">
                             Chia sẻ
                         </ShareButton>
                     </div>
                 )
             case 'subcribe-youtube':
                 return (
-                    <div className='flex items-center'>
+                    <div className={classnames({
+                        'flex items-center': true,
+                        'pointer-events-none opacity-50': user.subytb
+                    })} onClick={() => updatePermission(permision)}>
                         <YouTubeSubscribe
-                            onClick={() => updatePermission(permision)}
                             channelid={channelid}
                             theme={"default"}
                             layout={"full"}
@@ -176,11 +186,12 @@ const Permision = (props) => {
                 )
             case 'like-face':
                 return (
-                    <div className='flex items-center'>
-                        <div>
-
-                            <Like href="https://www.facebook.com/propzyvietnam" onClick={updatePermission(permision)} colorScheme="dark" showFaces />
-
+                    <div className={classnames({
+                        'flex items-center': true,
+                        'pointer-events-none opacity-50': user.likefb
+                    })}>
+                        <div onClick={() => updatePermission(permision)}>
+                            <Like href="https://www.facebook.com/propzyvietnam" colorScheme="dark" showFaces />
                         </div>
                     </div >
                 )
@@ -220,7 +231,7 @@ const Permision = (props) => {
     }
 
     return (
-        <FacebookProvider appId="838159696723984">
+        <FacebookProvider appId="838159696723984" >
             {permisions.map((permision, index) => {
                 return (
                     <div key={permision.key} className='relative' >
@@ -254,4 +265,8 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps)(Permision)
+const mapDispatchToProps = {
+    getUser
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Permision)
