@@ -20,7 +20,7 @@ const ImageSlider = () => {
         infinite: true,
         arrows: false,
         speed: 500,
-        autoplay: true,
+        autoplay: false,
         autoplaySpeed: 5000,
         slidesToShow: 1,
         slidesToScroll: 1,
@@ -64,17 +64,25 @@ const ImageSlider = () => {
                         <img className={'md:w-96 w-2/3'} src='/images/Slider/slider-2-left.png' alt="" />
                         <img className='w-full md:w-10/12 md:absolute relative -left-7 md:left-60 md:top-7' src='/images/Slider/slider-2-right.png' alt="" />
                     </div>
-                    <img src="/images/Group 63.png" width={'100%'} className='hidden md:block' alt="" />
+                    <div className='hidden md:block'>
+                        <img src="/images/Group 63.png" width={'100%'} alt="" />
+                    </div>
                     <div
                         onClick={() => scrollToElement('propzytree-lixi')}
-                        className="onhover-btn btn-orange mb-10 md:mb-0  relative mx-auto mt-5 md:mt-0 md:absolute bottom-16 md:px-20 md:right-40 animate__animated animate__slow animate__infinite animate__swing"
+                        className="onhover-btn btn-orange mb-10 md:mb-0  relative mx-auto mt-5 md:mt-0 md:absolute bottom-0 md:bottom-16 md:px-20 md:right-40 animate__animated animate__slow animate__infinite animate__swing"
                     >
                         HÁI LÌ XÌ NGAY
                     </div>
                 </div>
-                <div className='relative outline-none slider-wrap__item'>
-                    <img className='w-full' src="/images/propzy-care-hết-14 1.png" alt="" />
-                    <div onClick={onClickCare} className="btn-orange mt-5 md:mt-0 relative mx-auto md:absolute md:bottom-5 pl-8-rem">PROPZY CARE</div>
+                <div className='relative outline-none justify-center slider-wrap__item'>
+                    <div className='hidden md:block'>
+                        <img className='w-full hidden relative' src="/images/propzy-care-hết-14 1.png" alt="" />
+                    </div>
+                    <div className='relative flex flex-wrap justify-center md:hidden'>
+                        <img className='w-3/4' src="/images/Asset 13.png" alt=""/>
+                        <img className='w-3/4' src="/images/Asset 14.png" alt=""/>
+                    </div>
+                    <div onClick={onClickCare} className="btn-orange md:mt-0 relative mx-auto md:absolute md:bottom-5 pl-8-rem">PROPZY CARE</div>
                 </div>
             </Slider>
             <LuckyMoney isOpen={isOpenLuckyMoney} onClose={onCloseModalMoneyLucky} id='image-slider' />
