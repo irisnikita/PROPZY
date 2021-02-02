@@ -164,7 +164,7 @@ const Permision = (props) => {
                     <div className={classnames({
                         'flex items-center': true,
                         'pointer-events-none opacity-50': user.sharefb
-                    })}> onClick={() => updatePermission(permision)}>
+                    })} onClick={() => updatePermission(permision)}>
                         <ShareButton onResponse={(response) => {console.log('response', response)}} className='rounded-md bg-blue-500 px-5 py-2 text-white' href="https://www.facebook.com/propzyvietnam">
                             Chia sẻ
                         </ShareButton>
