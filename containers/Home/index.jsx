@@ -218,11 +218,12 @@ const HomeContainer = () => {
                         </div>
                     </div>
 
-                    <div id={'propzycare-introduce'} className='flex mt-10 justify-center items-center'>
+                    <div  className='flex mt-10 justify-center items-center'>
                         <img src="/svg/banner-title/banner-title-5.svg" alt="" />
                     </div>
 
-                    <div className='relative w-10/12 mx-auto flex flex-wrap flex-row'>
+
+                    <div id={'propzycare-introduce'} className='relative w-10/12 mx-auto flex flex-wrap flex-row'>
                         <div className='md:w-4/12 w-full'>
                             <img src="/svg/img-propzycare.svg" className='w-full' alt="" />
                             <p className='pt-10 text-white'>

@@ -28,9 +28,18 @@ const Header = (props) => {
         { key: 'home', label: 'TRANG CHỦ', link: '/', location: 'home-container' },
         { key: 'introduce', label: 'GIỚI THIỆU', link: '/', location: 'propzythree-step' },
         { key: 'rule', label: 'THỂ LỆ', link: '/', location: 'rule-event' },
-        { key: 'contact', label: 'LIÊN HỆ ', link: '/', location: 'contact-us' },
+        { key: 'contact', label: 'LIÊN HỆ ', link: '/', location: 'propzycare-introduce' },
         { key: 'see-prize', label: 'XEM QUÀ', link: '/user' },
     ]
+
+    const elements = [
+        { key: 'home',  location: 'home-container' },
+        { key: 'introduce', location: 'propzythree-step' },
+        { key: 'rule',  location: 'rule-event' },
+        { key: 'contact', location: 'propzycare-introduce' },
+        { key: 'see-prize',location: 'contact-us'},
+    ]
+
     const router = useRouter();
 
     useEffect(() => {
@@ -46,6 +55,10 @@ const Header = (props) => {
 
     useEffect(() => {
         let draftMenuItem = menu.find(item => item.link === router.pathname)
+
+        if (router.pathname === '/user') {
+            setActive('see-prize')
+        }
 
         draftMenuItem && setMenuItemSelected(draftMenuItem)
     }, [router])
@@ -70,15 +83,14 @@ const Header = (props) => {
         }
 
         let windowScollY = window.scrollY;
-        console.log("onScroll -> windowScollY", windowScollY)
 
-        for (let i = 0; i < menu.length - 1; i++) {
-            const elementPrevious = document.getElementById(menu[i].location);
-            const elementNext = document.getElementById(menu[i + 1].location);
+        for (let i = 0; i < elements.length - 1; i++) {
+            const elementPrevious = document.getElementById(elements[i].location);
+            const elementNext = document.getElementById(elements[i + 1].location);
 
             if (elementPrevious && elementNext) {
                 if (windowScollY >= elementPrevious.offsetTop && windowScollY <= elementNext.offsetTop) {
-                    setActive(menu[i].key)
+                    setActive(elements[i].key)
                     break;
                 }
             }
@@ -107,7 +119,7 @@ const Header = (props) => {
                 <li
                     key={item.key}
                     className={classnames({
-                        'cursor-pointer': true,
+                        'cursor-pointer transition-all duration-200': true,
                         'text__color--orange': isActive === item.key
                     })}
                     onClick={() => scrollToElement(item.location)}
@@ -135,7 +147,7 @@ const Header = (props) => {
     return (
         <header className='relative'>
             <div className={classnames({
-                'transition-all duration-300': true,
+                'duration-500': true,
                 "fixed z-40 f-Sans-pro w-full text-white": true,
                 'bg-white text-gray-900': isChangeHeader
             })}>
