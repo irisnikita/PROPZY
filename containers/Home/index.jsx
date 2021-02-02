@@ -112,7 +112,7 @@ const HomeContainer = () => {
                     <ImageSlider />
                 </section>
                 <section id={'propzytree-lixi'} className='main-content--2 pt-5 md:pt-40'>
-                    <img src="/images/home/home-02.png" className='absolute -top-20 md:-top-20' alt="" />
+                    <img src="/images/home/home-02.jpg" className='absolute -top-20 md:-top-20' alt="" />
                     <div className='relative w-10/12 mx-auto flex flex-wrap md:flex-row flex-col-reverse'>
                         <div className='md:w-4/12 relative flex md:block items-center justify-center flex-col mt-10 md:mt-0'>
                             <img src="/images/home/home-03.png" className='md:w-full w-3/4' alt="" />
@@ -138,9 +138,9 @@ const HomeContainer = () => {
                     </div>
                     <div className="flex justify-center">
                         <div className="flex space-x-5 items-center w-10/12 pt-5 md:flex-nowrap flex-wrap justify-center">
-                            <FlipLuckyMoney frontImage={'/images/home/phong-bi-1.png'} backImage={'/images/home/phong-bi-1-back.png'} />
-                            <FlipLuckyMoney className='wrap__flip-image' frontImage={'/images/home/phong-bi-2.png'} backImage={'/images/home/phong-bi-2-back.png'} />
-                            <FlipLuckyMoney className='wrap__flip-image' frontImage={'/images/home/phong-bi-3.png'} backImage={'/images/home/phong-bi-3-back.png'} />
+                            <FlipLuckyMoney className='wrap__flip-image' frontImage={'/images/home/phong-bi-1.png'} backImage={'/images/home/phong-bi-1-back.jpg'} />
+                            <FlipLuckyMoney className='wrap__flip-image' frontImage={'/images/home/phong-bi-2.png'} backImage={'/images/home/phong-bi-2-back.jpg'} />
+                            <FlipLuckyMoney className='wrap__flip-image' frontImage={'/images/home/phong-bi-3.png'} backImage={'/images/home/phong-bi-3-back.jpg'} />
                         </div>
                     </div>
 
@@ -218,7 +218,7 @@ const HomeContainer = () => {
                         </div>
                     </div>
 
-                    <div  className='flex mt-10 justify-center items-center'>
+                    <div className='flex mt-10 justify-center items-center'>
                         <img src="/svg/banner-title/banner-title-5.svg" alt="" />
                     </div>
 

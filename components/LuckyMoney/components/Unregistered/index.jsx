@@ -60,6 +60,7 @@ const Unregistered = (props) => {
 
     useEffect(() => {
         if (!isEmpty(user)) {
+            updateTurnUser();
             props.callbackUser(user)
         }
     }, [user])
@@ -80,6 +81,17 @@ const Unregistered = (props) => {
         </Menu>
     )
 
+    const updateTurnUser = async () => {
+        console.log('tru luot')
+        const updateTurn = await userServices.update({
+            id: user.email,
+            turn: +user.turn
+        });
+
+        if (updateTurn && updateTurn.data) {
+            props.getUser(updateTurn.data)
+        }
+    }
 
     const getListPrizes = async () => {
         const listPrizes = await prizeServices.getListCoupon();

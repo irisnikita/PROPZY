@@ -16,16 +16,16 @@ const index = () => {
                     Từ ngày 25/01/2021 đến 28/02/2021, chỉ cần hái lì xì và để lại thông tin là bạn có cơ hội nhận cơn mưa quà tặng với tổng giải thưởng lên đến 1.000.000.000 VNĐ.
                     <ul>
                         <li>
-                            Gói quà tặng PROPZY CARE THẬT ĐONG ĐẦY trị giá 2.000.000 VNĐ: số lượng giới hạn
+                            Gói quà tặng PROPZY CARE THẬT ĐONG ĐẦY trị giá hơn 2.000.000 VNĐ: số lượng giới hạn
                     </li>
                         <li>
-                            Gói quà THẬT NHƯ Ý  - Coupon giảm giá từ 75.000 - 750.000 VNĐ: số lượng không giới hạn
+                            Gói quà THẬT NHƯ Ý  - Coupon giảm giá từ 100.000 - 1.000.000 VNĐ: số lượng không giới hạn
                     </li>
                         <li>
                             Gói quà THẬT MAY MẮN - Propzy mùa Lễ hội: Số lượng không giới hạn
                     </li>
                         <li>
-                            Cùng hàng nghìn câu chúc Tết mang đến Xuân Tài Lộc Hạnh Phúc Bình An.
+                            Cùng hàng nghìn câu chúc Tết mang đến Xuân Tài Lộc - Hạnh Phúc - Bình An.
                     </li>
                     </ul>
                 </div>

@@ -9,7 +9,7 @@ import styles from './styles.module.scss'
 
 import { accountService } from '../../../../_service';
 
-import * as userServices from 'services/user'
+import * as userServices from '../../../../services/user'
 
 //import Like from 'react-facebook/dist/Like';
 
@@ -123,7 +123,7 @@ const Permision = (props) => {
 
     const updatePermission = async (permission) => {
         let draftNotification = notificationTypes.find(notification => notification.type === permission.type)
-
+        console.log('them turn')
         const updatePermission = await userServices.updatePermission({
             id: permission.type,
             email: user.email
@@ -166,7 +166,7 @@ const Permision = (props) => {
                 return (
                     <div className='flex items-center'>
                         <YouTubeSubscribe
-                            // channelName={channelName}
+                            onClick={() => updatePermission(permision)}
                             channelid={channelid}
                             theme={"default"}
                             layout={"full"}
@@ -178,7 +178,9 @@ const Permision = (props) => {
                 return (
                     <div className='flex items-center'>
                         <div>
-                            <Like href="https://www.facebook.com/propzyvietnam" onResponse={(e) => { console.log(e) }} colorScheme="dark" showFaces />
+
+                            <Like href="https://www.facebook.com/propzyvietnam" onClick={updatePermission(permision)} colorScheme="dark" showFaces />
+
                         </div>
                     </div >
                 )

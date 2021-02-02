@@ -20,7 +20,7 @@ export function createNotification(params) {
     return services.create({ ...params, API: appConfig.API + '/users/notification' });
 }
 export function updatePermission(params) {
-    return services.put({ ...params, API: appConfig.API + '/users/updateMission' });
+    return services.update({ ...params, API: appConfig.API + '/users/updateMission' });
 }
 export function get(params) {
     return services.get({ ...params, API: appConfig.API + '/users' });
