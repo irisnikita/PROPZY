@@ -79,7 +79,7 @@ const ImageSlider = () => {
                     <div className='hidden md:block'>
                         <img className='w-full hidden relative' src="/images/propzy-care-hết-14 1.png" alt="" />
                     </div>
-                    <div className='relative'>
+                    <div className='relative block md:hidden'>
                         <img className='w-3/4 mx-auto h-auto' src="/images/Asset 13.png" alt=""/>
                         <img className='w-3/4 mx-auto h-auto' src="/images/Asset 14.png" alt=""/>
                     </div>
