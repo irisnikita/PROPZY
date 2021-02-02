@@ -48,7 +48,6 @@ const index = () => {
                         </Link>
                     </div>
                     <div className=""> - Hệ thống tự động thêm lượt khi bạn thực hiện thành công những cách trên.</div>
-                    <div className=" line-through"> - Nhân viên Công ty TNHH Dịch vụ Propzy không được tham gia chương trình này.</div>
                 </div>
             )
         },

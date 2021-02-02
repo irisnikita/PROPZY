@@ -5,7 +5,7 @@ import { FacebookProvider, Share, Like, ShareButton } from 'react-facebook';
 import { connect } from 'react-redux'
 import YouTubeSubscribe from 'components/YoutubeSubscribe'
 
-import {getUser} from 'store/user/userSlice'
+import { getUser } from 'store/user/userSlice'
 
 // Styles
 import styles from './styles.module.scss'
@@ -153,9 +153,9 @@ const Permision = (props) => {
                         'flex justify-end': true,
                         'pointer-events-none opacity-50': user.subzalo
                     })}>
-                        <button className="btn-orange w-20 px-10">
+                        <a onClick={() => updatePermission(permision)} href='http://zalo.me/propzy' target='_blank' className="btn-orange w-20 px-10">
                             FLOW NGAY
-                    </button>
+                    </a>
                     </div>
                 )
             case 'share':
@@ -165,7 +165,7 @@ const Permision = (props) => {
                         'flex items-center': true,
                         'pointer-events-none opacity-50': user.sharefb
                     })} onClick={() => updatePermission(permision)}>
-                        <ShareButton onResponse={(response) => {console.log('response', response)}} className='rounded-md bg-blue-500 px-5 py-2 text-white' href="https://www.facebook.com/propzyvietnam">
+                        <ShareButton onResponse={(response) => { console.log('response', response) }} className='rounded-md bg-blue-500 px-5 py-2 text-white' href="https://www.facebook.com/propzyvietnam">
                             Chia sẻ
                         </ShareButton>
                     </div>

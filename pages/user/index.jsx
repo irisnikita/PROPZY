@@ -24,9 +24,6 @@ import * as prizeServices from 'services/prize'
 
 import React, { useEffect, useState } from 'react';
 
-
-
-
 import { getUser } from '../../store/user/userSlice'
 
 const tabs = [
@@ -36,11 +33,9 @@ const tabs = [
 ]
 
 const User = (props) => {
-    const [showModal, setShowModal] = React.useState(false);
-    const [name, setName] = useState('');
-    const [email, setEmail] = useState('');
-    const [phone, setPhone] = useState('');
-    const [user, setUser] = useState({})
+    const { user } = props;
+
+    // const [user, setUser] = useState({})
     const [prizes, setPrizes] = useState([])
     const [tabSelected, setTabSelected] = useState(tabs[0])
     const [isOpenLuckyMoney, setOpenLuckyMoney] = useState(false);
@@ -51,6 +46,10 @@ const User = (props) => {
     useEffect(() => {
         getDataUser()
     }, []);
+
+    useEffect(() => {
+
+    })
 
     useEffect(() => {
         if (router) {
@@ -103,7 +102,6 @@ const User = (props) => {
 
             if (user && user.data && user.data.email) {
                 props.getUser({ ...user.data })
-                setUser({ ...user.data })
             } else {
                 router.push('/')
             }
@@ -248,4 +246,10 @@ const mapDispatchToProps = {
     getUser
 }
 
-export default connect(null, mapDispatchToProps)(User);
+const mapStateToProps = (state) => {
+    return {
+        user: state.userSlice.user
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(User);

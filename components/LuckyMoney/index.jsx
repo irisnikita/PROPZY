@@ -47,6 +47,7 @@ const LuckyMoney = (props) => {
     const [isStepOpen, setStepOpen] = useState(false);
     const [isRegister, setRegister] = useState(false);
     const [user, setUser] = useState({})
+    const [isOut, setOut] = useState(false)
 
     // Life cycle
     useEffect(() => {
@@ -91,6 +92,10 @@ const LuckyMoney = (props) => {
             turn: +props.user.turn
         });
 
+        if (props.user.turn === 0) {
+            setOut(true)
+        }
+
         if (updateTurn && updateTurn.data) {
             props.getUser(updateTurn.data)
         }
@@ -125,7 +130,7 @@ const LuckyMoney = (props) => {
     const showRenderStepOpen = () => {
 
 
-        return +props.user.turn < 0 ? <OutOfLuckyMoney onClose={onCloseModal} /> : isRegister ? (
+        return isOut ? <OutOfLuckyMoney onClose={onCloseModal} /> : isRegister ? (
             <Registered onClose={onCloseModal} />
         ) : (
                 <Unregistered callbackUser={callbackUser} onClose={onCloseModal} />

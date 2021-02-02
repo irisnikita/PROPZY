@@ -6,12 +6,14 @@ import classnames from 'classnames';
 import { connect } from 'react-redux';
 import { isEmpty } from 'lodash'
 import Link from 'next/link'
+
 // Styles
 import styles from 'components/LuckyMoney/styles.module.scss';
 
 // Services 
 import * as userServices from 'services/user'
 import * as prizeServices from 'services/prize'
+
 // Constant
 import { notificationTypes } from 'constant'
 
@@ -160,17 +162,16 @@ const Unregistered = (props) => {
 	return (
 		<>
 			<div className='animate__animated animate__fadeIn relative flex flex-row justify-center items-center'>
-				<img className={styles['img-lucky-money']} src={prizeSelected.image} alt="" />
+				<img className={classnames(styles['img-lucky-money'], 'animate__animated animate__fadeIn')} src={prizeSelected.image} alt="" />
 				<div className="flex justify-center absolute bottom-5 w-full">
 					<Link href='/user'>
-						<div className="btn-orange relative top-2 md:top-0" onClick={onClickOpenPrize}>
+						<div className="animate__animated animate__fadeIn btn-orange relative top-2 md:top-0" onClick={onClickOpenPrize}>
 							XEM QUÀ
-                		</div>
+					</div>
 					</Link>
 				</div>
-				<div className="text-xs absolute -bottom-6 text-white">{`Bạn còn ${user.turn || 0} lượt chơi`}</div>
+				<div className="animate__animated animate__fadeIn text-xs absolute -bottom-6 text-white">{`Bạn còn ${user.turn || 0} lượt chơi`}</div>
 			</div>
-
 		</>
 	);
 };

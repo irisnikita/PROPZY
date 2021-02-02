@@ -82,7 +82,6 @@ const Unregistered = (props) => {
     )
 
     const updateTurnUser = async () => {
-        console.log('tru luot')
         const updateTurn = await userServices.update({
             id: user.email,
             turn: +user.turn
@@ -183,15 +182,15 @@ const Unregistered = (props) => {
         <div className='animate__animated animate__fadeIn w-screen md:w-max relative flex justify-center md:justify-start items-center'>
             {!isRegisterSuccess ? (
                 <>
-                    <div className={classnames("relative", {
+                    <div className={classnames("md:block relative", {
                         'hidden': isOpenRegister
                     })}>
-                        <img className={classnames(styles['img-lucky-money'], 'md:block animate__animated', {
-                            'hidden': isOpenRegister,
+                        <img className={classnames(styles['img-lucky-money'], 'md:block animate__animated animate__fadeIn', {
+                            'hidden md:block': isOpenRegister,
                         })} src={prizeSelected.image} alt="" />
                         <div className="flex justify-center absolute bottom-5 w-full">
                             <div className={classnames(
-                                "btn-orange",
+                                "btn-orange animate__animated animate__fadeIn",
                                 {
                                     'hidden': isOpenRegister
                                 }
@@ -203,7 +202,7 @@ const Unregistered = (props) => {
                         </div>
                     </div>
                     <div className={classnames(
-                        'bg-white rounded-2xl md:rounded-r-2xl animate__animated mt-10 w-10/12 md:w-96 h-full relative md:-left-5 overflow-x-hidden ',
+                        'bg-white md:rounded-r-2xl rounded-2xl animate__animated mt-10 w-10/12 md:w-96 h-full relative md:-left-5 overflow-x-hidden ',
                         styles['box__register'],
                         {
                             [styles['box--open']]: isOpenRegister,
@@ -297,25 +296,25 @@ const Unregistered = (props) => {
                                     isSubmitting,
                                     /* and other goodies */
                                 }) => (
-                                        <form onSubmit={handleSubmit}>
-                                            <div className="space-y-3 mt-3">
-                                                <input name="name" type="text" value={values.name} onChange={handleChange} className={classnames('second__input', 'w-full')} placeholder='Họ và tên' />
-                                                {errors.name && touched.name && <div className='text-red-600 my-1'>{errors.name}</div>}
-                                                <input name="email" type="text" value={values.email} onChange={handleChange} className={classnames('second__input', 'w-full')} placeholder='Email' />
-                                                {errors.email && touched.email && <div className='text-red-600 my-1'>{errors.email}</div>}
-                                                <input name="phone" type="tel" value={values.phone} onChange={handleChange} className={classnames('second__input', 'w-full')} placeholder='Số điện thoại' />
-                                                {errors.phone && touched.phone && <div className='text-red-600 my-1'>{errors.phone}</div>}
-                                                <div className="flex justify-end w-full">
-                                                    <button type='submit'
-                                                        className="onhover-btn btn-orange min-h-0 py-4 min-w-0 px-10 rounded-md"
-                                                    // onClick={onClickRegisterUser}
-                                                    >
-                                                        ĐĂNG KÝ
+                                    <form onSubmit={handleSubmit}>
+                                        <div className="space-y-3 mt-3">
+                                            <input name="name" type="text" value={values.name} onChange={handleChange} className={classnames('second__input', 'w-full')} placeholder='Họ và tên' />
+                                            {errors.name && touched.name && <div className='text-red-600 my-1'>{errors.name}</div>}
+                                            <input name="email" type="text" value={values.email} onChange={handleChange} className={classnames('second__input', 'w-full')} placeholder='Email' />
+                                            {errors.email && touched.email && <div className='text-red-600 my-1'>{errors.email}</div>}
+                                            <input name="phone" type="tel" value={values.phone} onChange={handleChange} className={classnames('second__input', 'w-full')} placeholder='Số điện thoại' />
+                                            {errors.phone && touched.phone && <div className='text-red-600 my-1'>{errors.phone}</div>}
+                                            <div className="flex justify-end w-full">
+                                                <button type='submit'
+                                                    className="onhover-btn btn-orange min-h-0 py-4 min-w-0 px-10 rounded-md"
+                                                // onClick={onClickRegisterUser}
+                                                >
+                                                    ĐĂNG KÝ
                                                 </button>
-                                                </div>
                                             </div>
-                                        </form>
-                                    )}
+                                        </div>
+                                    </form>
+                                )}
                             </Formik>
                         </div>
                     </div>
@@ -379,24 +378,24 @@ const Unregistered = (props) => {
                                             isSubmitting,
                                             /* and other goodies */
                                         }) => (
-                                                <form onSubmit={handleSubmit}>
-                                                    <div className="space-y-3 mt-3">
-                                                        <input name="name" type="text" value={values.name} onChange={handleChange} className={classnames('second__input', 'w-full')} placeholder='Họ và tên' />
-                                                        {errors.name && touched.name && <div className='text-red-600 my-1'>{errors.name}</div>}
-                                                        <input name="email" type="text" value={values.email} onChange={handleChange} className={classnames('second__input', 'w-full')} placeholder='Email' />
-                                                        {errors.email && touched.email && <div className='text-red-600 my-1'>{errors.email}</div>}
-                                                        <input name="phone" type="tel" value={values.phone} onChange={handleChange} className={classnames('second__input', 'w-full')} placeholder='Số điện thoại' />
-                                                        {errors.phone && touched.phone && <div className='text-red-600 my-1'>{errors.phone}</div>}
-                                                        <Dropdown trigger={['click']} overlay={listPrice}>
-                                                            <input name="price" value={form.price} readOnly className={classnames('second__input', 'w-full', 'cursor-pointer')} placeholder='Giá muốn thuê'></input>
-                                                        </Dropdown>
-                                                        <div className="flex justify-between py-7 items-center">
-                                                            <span onClick={onClickOpenNext} className='cursor-pointer text__color--orange'>Hái lì xì tiếp</span>
-                                                            <button type='submit' className="btn-orange min-h-0 py-3 min-w-0 px-5 rounded-md">TƯ VẤN NGAY</button>
-                                                        </div>
+                                            <form onSubmit={handleSubmit}>
+                                                <div className="space-y-3 mt-3">
+                                                    <input name="name" type="text" value={values.name} onChange={handleChange} className={classnames('second__input', 'w-full')} placeholder='Họ và tên' />
+                                                    {errors.name && touched.name && <div className='text-red-600 my-1'>{errors.name}</div>}
+                                                    <input name="email" type="text" value={values.email} onChange={handleChange} className={classnames('second__input', 'w-full')} placeholder='Email' />
+                                                    {errors.email && touched.email && <div className='text-red-600 my-1'>{errors.email}</div>}
+                                                    <input name="phone" type="tel" value={values.phone} onChange={handleChange} className={classnames('second__input', 'w-full')} placeholder='Số điện thoại' />
+                                                    {errors.phone && touched.phone && <div className='text-red-600 my-1'>{errors.phone}</div>}
+                                                    <Dropdown trigger={['click']} overlay={listPrice}>
+                                                        <input name="price" value={form.price} readOnly className={classnames('second__input', 'w-full', 'cursor-pointer')} placeholder='Giá muốn thuê'></input>
+                                                    </Dropdown>
+                                                    <div className="flex justify-between py-7 items-center">
+                                                        <span onClick={onClickOpenNext} className='cursor-pointer text__color--orange'>Hái lì xì tiếp</span>
+                                                        <button type='submit' className="btn-orange min-h-0 py-3 min-w-0 px-5 rounded-md">TƯ VẤN NGAY</button>
                                                     </div>
-                                                </form>
-                                            )}
+                                                </div>
+                                            </form>
+                                        )}
                                     </Formik>
                                 </div>
                             </div>

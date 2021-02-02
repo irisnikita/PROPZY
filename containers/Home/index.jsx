@@ -138,9 +138,9 @@ const HomeContainer = () => {
                     </div>
                     <div className="flex justify-center">
                         <div className="flex space-x-5 items-center w-10/12 pt-5 md:flex-nowrap flex-wrap justify-center">
-                            <FlipLuckyMoney className='wrap__flip-image' frontImage={'/images/home/phong-bi-1.png'} backImage={'/images/home/phong-bi-1-back.png'} />
-                            <FlipLuckyMoney className='wrap__flip-image relative -left-2 md:left-0' frontImage={'/images/home/phong-bi-2.png'} backImage={'/images/home/phong-bi-2-back.png'} />
-                            <FlipLuckyMoney className='wrap__flip-image relative -left-2 md:left-0' frontImage={'/images/home/phong-bi-3.png'} backImage={'/images/home/phong-bi-3-back.png'} />
+                            <FlipLuckyMoney className='relative ml-4 md:ml-0 wrap__flip-image' frontImage={'/images/home/phong-bi-1.png'} backImage={'/images/home/phong-bi-1-back.png'} />
+                            <FlipLuckyMoney className='wrap__flip-image' frontImage={'/images/home/phong-bi-2.png'} backImage={'/images/home/phong-bi-2-back.png'} />
+                            <FlipLuckyMoney className='wrap__flip-image' frontImage={'/images/home/phong-bi-3.png'} backImage={'/images/home/phong-bi-3-back.png'} />
                         </div>
                     </div>
 
@@ -300,21 +300,21 @@ const HomeContainer = () => {
                                                 isSubmitting,
                                                 /* and other goodies */
                                             }) => (
-                                                    <form onSubmit={handleSubmit}>
-                                                        <div className="py-7 space-y-3">
-                                                            <input name="name" type="text" value={values.name} onChange={handleChange} className='default__input w-full' placeholder='Họ và tên(*)' />
-                                                            {errors.name && touched.name && <div className='my-1 text-red-300'>{errors.name}</div>}
-                                                            <input name="email" type="text" value={values.email} onChange={handleChange} className='default__input w-full' placeholder='Email(*)' />
-                                                            {errors.email && touched.email && <div className='my-1 text-red-300'>{errors.email}</div>}
-                                                            <input name="phone" type="tel" value={values.phone} onChange={handleChange} className='default__input w-full' placeholder='Số điện thoại(*)' />
-                                                            {errors.phone && touched.phone && <div className='my-1 text-red-300'>{errors.phone}</div>}
-                                                            <Dropdown trigger={['click']} overlay={listPrice}>
-                                                                <input value={formContact.price} readOnly className='cursor-pointer default__input w-full' placeholder='Giá muốn thuê(*)'></input>
-                                                            </Dropdown>
-                                                            <button type='submit' className="onhover-btn btn-orange place-self-center mt-5 mx-auto w-2/5">TƯ VẤN NGAY</button>
-                                                        </div>
-                                                    </form>
-                                                )}
+                                                <form onSubmit={handleSubmit}>
+                                                    <div className="py-7 space-y-3">
+                                                        <input name="name" type="text" value={values.name} onChange={handleChange} className='default__input w-full' placeholder='Họ và tên(*)' />
+                                                        {errors.name && touched.name && <div className='my-1 text-red-300'>{errors.name}</div>}
+                                                        <input name="email" type="text" value={values.email} onChange={handleChange} className='default__input w-full' placeholder='Email(*)' />
+                                                        {errors.email && touched.email && <div className='my-1 text-red-300'>{errors.email}</div>}
+                                                        <input name="phone" type="tel" value={values.phone} onChange={handleChange} className='default__input w-full' placeholder='Số điện thoại(*)' />
+                                                        {errors.phone && touched.phone && <div className='my-1 text-red-300'>{errors.phone}</div>}
+                                                        <Dropdown trigger={['click']} overlay={listPrice}>
+                                                            <input value={formContact.price} readOnly className='cursor-pointer default__input w-full' placeholder='Giá muốn thuê(*)'></input>
+                                                        </Dropdown>
+                                                        <button type='submit' className="onhover-btn btn-orange place-self-center mt-5 mx-auto w-2/5">TƯ VẤN NGAY</button>
+                                                    </div>
+                                                </form>
+                                            )}
                                         </Formik>
                                     </div>
                                 </div>
