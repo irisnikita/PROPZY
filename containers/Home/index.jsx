@@ -139,10 +139,8 @@ const HomeContainer = () => {
                     <div className="flex justify-center">
                         <div className="flex space-x-5 items-center w-10/12 pt-5 md:flex-nowrap flex-wrap justify-center">
                             <FlipLuckyMoney className='wrap__flip-image' frontImage={'/images/home/phong-bi-1.png'} backImage={'/images/home/phong-bi-1-back.png'} />
-                            <div className='relative -left-2 md:left-0'>
-                                <FlipLuckyMoney className='wrap__flip-image' frontImage={'/images/home/phong-bi-2.png'} backImage={'/images/home/phong-bi-2-back.png'} />
-                                <FlipLuckyMoney className='wrap__flip-image' frontImage={'/images/home/phong-bi-3.png'} backImage={'/images/home/phong-bi-3-back.png'} />
-                            </div>
+                            <FlipLuckyMoney className='wrap__flip-image relative -left-2 md:left-0' frontImage={'/images/home/phong-bi-2.png'} backImage={'/images/home/phong-bi-2-back.png'} />
+                            <FlipLuckyMoney className='wrap__flip-image relative -left-2 md:left-0' frontImage={'/images/home/phong-bi-3.png'} backImage={'/images/home/phong-bi-3-back.png'} />
                         </div>
                     </div>
 

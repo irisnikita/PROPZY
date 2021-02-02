@@ -177,7 +177,7 @@ const User = (props) => {
                 ) : (
                         <div className='w-full'>
                             <div className='justify-center flex items-center'>
-                                <div className="w-7/12 space-y-5">
+                                <div className="w-full md:w-7/12 space-y-5">
                                     <Permision />
                                 </div>
                             </div>
@@ -189,7 +189,7 @@ const User = (props) => {
                 ) : (
                         <div className='w-full'>
                             <div className='justify-center flex items-center'>
-                                <div className="w-7/12 space-y-5">
+                                <div className="w-full md:w-7/12 space-y-5">
                                     <Notification />
                                 </div>
                             </div>

@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import Slider from 'react-slick';
 import { motion } from 'framer-motion';
+import {Row, Col} from 'antd'
 
 // Components
 import LuckyMoney from 'components/LuckyMoney'
@@ -78,9 +79,9 @@ const ImageSlider = () => {
                     <div className='hidden md:block'>
                         <img className='w-full hidden relative' src="/images/propzy-care-hết-14 1.png" alt="" />
                     </div>
-                    <div className='relative flex flex-wrap justify-center md:hidden'>
-                        <img className='w-3/4' src="/images/Asset 13.png" alt=""/>
-                        <img className='w-3/4' src="/images/Asset 14.png" alt=""/>
+                    <div className='relative'>
+                        <img className='w-3/4 mx-auto h-auto' src="/images/Asset 13.png" alt=""/>
+                        <img className='w-3/4 mx-auto h-auto' src="/images/Asset 14.png" alt=""/>
                     </div>
                     <div onClick={onClickCare} className="btn-orange md:mt-0 relative mx-auto md:absolute md:bottom-5 pl-8-rem">PROPZY CARE</div>
                 </div>

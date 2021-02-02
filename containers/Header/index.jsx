@@ -22,7 +22,6 @@ const Header = (props) => {
     const [menuItemSelected, setMenuItemSelected] = useState({})
     const [isOpenModal, setOpenModal] = useState(false)
     const [isActive, setActive] = useState('home')
-    console.log("Header -> isActive", isActive)
 
     const menu = [
         { key: 'home', label: 'TRANG CHỦ', link: '/', location: 'home-container' },
@@ -153,7 +152,7 @@ const Header = (props) => {
             })}>
                 <div
                     className={classnames({
-                        'default__header static mx-auto w-10/12 flex justify-center md:justify-between': true,
+                        'default__header static mx-auto w-full md:w-10/12 px-5 md:px-0 items-center flex justify-between': true,
                     })}
                 >
                     <Link href='/'>
@@ -164,6 +163,9 @@ const Header = (props) => {
                     <ul className='menu-header__list hidden md:flex font-semibold list-reset items-center space-x-10 pr-5'>
                         {showRenderMenu()}
                     </ul>
+                        <div onClick={() => onClickSeePrize()} className="block font-semibold md:hidden cursor-pointer">
+                        XEM QUÀ
+                        </div>
                 </div>
             </div>
             <Modal
