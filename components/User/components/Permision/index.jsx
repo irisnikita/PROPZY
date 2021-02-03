@@ -36,81 +36,10 @@ const Permision = (props) => {
     const { user = '' } = props;
 
     const [tabOpen, setTapOpen] = useState(0);
-    const [gapiReady, setGapiReady] = useState(false)
 
     const onClickOpenTab = (index) => {
         setTapOpen(index)
     }
-
-    // useEffect(() => {
-    //     loadYoutubeApi()
-    // }, [])
-
-    // useEffect(() => {
-    //     // if (gapiReady) {
-    //     //     excute()
-    //     // }
-    // }, [gapiReady])
-
-    // const loadYoutubeApi = () => {
-    //     const script = document.createElement("script");
-    //     script.src = "https://apis.google.com/js/client.js";
-
-    //     script.onload = () => {
-    //         gapi.load('client', () => {
-    //             gapi.client.setApiKey(API_KEY);
-    //             gapi.load("client:auth2", function () {
-    //                 gapi.auth2.init({ client_id: "58120078236-5bsquu7njtio04eq533ik836js3lqjgf.apps.googleusercontent.com" });
-    //             });
-    //         });
-    //     };
-
-    //     document.body.appendChild(script);
-    // }
-
-    // function authenticate() {
-    //     return gapi.auth2.getAuthInstance()
-    //         .signIn({ scope: "https://www.googleapis.com/auth/youtube.force-ssl" })
-    //         .then(function () { console.log("Sign-in successful"); },
-    //             function (err) { console.error("Error signing in", err); });
-    // }
-    // function loadClient() {
-    //     gapi.client.setApiKey(API_KEY);
-    //     return gapi.client.load("https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest")
-    //         .then(function () {
-    //             // excute()
-    //             console.log("GAPI client loaded for API");
-    //             console.log(gapi)
-    //             setGapiReady(true)
-    //         },
-    //             function (err) { console.error("Error loading GAPI client for API", err); });
-    // }
-
-    // const onClickScrubileYoutube = () => {
-    //     authenticate().then(loadClient);
-    // }
-
-    // Make sure the client is loaded and sign-in is complete before calling this method.
-    // function excute() {
-    //     return gapi.client.youtube.subscriptions.insert({
-    //         "part": [
-    //             "snippet"
-    //         ],
-    //         "resource": {
-    //             "snippet": {
-    //                 "resourceId": {
-    //                     "kind": "youtube#channel",
-    //                     "channelId": "UCVSG6bty9aR8_2pa6TAoUNQ"
-    //                 }
-    //             }
-    //         }
-    //     })
-    //         .then(function (response) {
-    //             // Handle the results here (response.result has the parsed body).
-    //             console.log("Response", response);
-    //         },
-    //             function (err) { console.error("onClickScrubileYoutube error", err); });
-    // }
 
     const onClickCoppyLink = () => {
         const el = document.createElement("textarea");
@@ -193,7 +122,7 @@ const Permision = (props) => {
                     })}>
                         <div>
 
-                            <Like href="https://www.facebook.com/propzyvietnam" onClick={updatePermission(permision)} colorScheme="dark" showFaces />
+                            <Like href="https://www.facebook.com/propzyvietnam" colorScheme="dark" showFaces />
 
                         </div>
                     </div >
