@@ -172,7 +172,7 @@ const Permision = (props) => {
                 )
             case 'subcribe-youtube':
                 return (
-                    <div className={classnames({
+                    <div id='fjiew' className={classnames({
                         'flex items-center': true,
                         'pointer-events-none opacity-50': user.subytb
                     })} onClick={() => updatePermission(permision)}>
@@ -189,8 +189,10 @@ const Permision = (props) => {
                     <div className={classnames({
                         'flex items-center': true,
                         'pointer-events-none opacity-50': user.likefb
-                    })}>
-                        <div onClick={() => updatePermission(permision)}>
+                    })}
+                        onClick={() => updatePermission(permision)}
+                    >
+                        <div >
                             <Like href="https://www.facebook.com/propzyvietnam" colorScheme="dark" showFaces />
                         </div>
                     </div >
