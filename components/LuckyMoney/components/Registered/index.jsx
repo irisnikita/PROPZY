@@ -23,7 +23,7 @@ import { notificationTypes } from 'constant'
  */
 const categories = [
 	{
-		key: 'voucher', rate: 10, prizeList: [
+		key: 'voucher', rate: 30, prizeList: [
 			{ key: 'VN_Moving', category: 'voucher', name: 'VN Moving', area: 'HCM (City Wide)', detail: 'Giảm 500K cho khách đặt chuyển nhà', voucher: 500000, quantity: 99999, image: '/svg/lucky-money/copy-lucky-money/voucher-500k.svg' },
 			{ key: 'HomeAZ', category: 'voucher', name: 'HomeAZ', area: 'HCM (City Wide)', detail: 'Giảm 600K cho khách đặt mua nệm trên app HomeAZ', voucher: 600000, quantity: 99999, image: '/svg/lucky-money/copy-lucky-money/coupon-600k.svg' },
 			{ key: 'GoDee', category: 'voucher', name: 'Godee', area: 'HCM (City Wide)', detail: 'Tặng 25 chuyến xe miễn phí (30k/ chuyến) cho khách hàng', voucher: 750000, quantity: 99999, image: '/svg/lucky-money/copy-lucky-money/godee.svg' },
@@ -37,7 +37,7 @@ const categories = [
 		]
 	},
 	{
-		key: 'posm', rate: 8, prizeList: [
+		key: 'posm', rate: 20, prizeList: [
 			{ key: 'posm-1', category: 'posm', name: 'Combo Shopping bag + Helmet', area: '', detail: 'Combo Shopping bag + Helmet', voucher: 50, quantity: 10, image: '/svg/lucky-money/copy-lucky-money/propzy-tui-giu-nhiet.svg' },
 			{ key: 'posm-2', category: 'posm', name: 'Combo Canvas bag + Tumbler', area: '', detail: 'Combo Canvas bag + Tumbler', voucher: 50, quantity: 10, image: '/svg/lucky-money/copy-lucky-money/tui-canvas-binh-giu-nhiet' },
 			{ key: 'posm-3', category: 'posm', name: 'Combo Shopping bag + Raincoat', area: '', detail: 'Combo Shopping bag + Raincoat', voucher: 50, quantity: 10, image: '/svg/lucky-money/copy-lucky-money/tui-giu-nhiet-ao-mua.svg' },
@@ -45,7 +45,7 @@ const categories = [
 		],
 	},
 	{
-		key: 'fail', rate: 70, prizeList: [
+		key: 'fail', rate: 50, prizeList: [
 			{
 				key: 'fail-1', category: 'fail', name: '', area: '', detail: `Tết này đã khác tết xưa
 				Đã thuê nhà mới đã ưa có bồ`, voucher: 0, quantity: 0, image: '/svg/lucky-money/fail/fail-1.svg'

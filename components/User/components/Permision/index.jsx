@@ -175,8 +175,9 @@ const Permision = (props) => {
                     <div id='fjiew' className={classnames({
                         'flex items-center': true,
                         'pointer-events-none opacity-50': user.subytb
-                    })} onClick={() => updatePermission(permision)}>
+                    })} >
                         <YouTubeSubscribe
+                            onClick={() => updatePermission(permision)}
                             channelid={channelid}
                             theme={"default"}
                             layout={"full"}
