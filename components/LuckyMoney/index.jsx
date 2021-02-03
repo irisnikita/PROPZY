@@ -65,9 +65,6 @@ const LuckyMoney = (props) => {
                 }, [1000])
             }, 2000)
 
-
-
-
             if (!isEmpty(props.user)) {
                 updateTurnUser();
                 setRegister(true);
@@ -87,14 +84,17 @@ const LuckyMoney = (props) => {
     }, [isOpen])
 
     const updateTurnUser = async () => {
+
+        if (props.user.turn === 0) {
+            console.log('323232')
+
+            setOut(true)
+        }
+
         const updateTurn = await userServices.update({
             id: props.user.email,
             turn: +props.user.turn
         });
-
-        if (props.user.turn === 0) {
-            setOut(true)
-        }
 
         if (updateTurn && updateTurn.data) {
             props.getUser(updateTurn.data)
