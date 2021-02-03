@@ -154,7 +154,7 @@ const Permision = (props) => {
                         'pointer-events-none opacity-50': user.subzalo
                     })}>
                         <a onClick={() => updatePermission(permision)} href='http://zalo.me/propzy' target='_blank' className="btn-orange w-20 px-10">
-                            FLOW NGAY
+                            FOLLOW NGAY
                     </a>
                     </div>
                 )
