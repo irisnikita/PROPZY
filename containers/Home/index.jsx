@@ -227,11 +227,12 @@ const HomeContainer = () => {
                         <div className='md:w-4/12 w-full'>
                             <img src="/svg/img-propzycare.svg" className='w-full' alt="" />
                             <p className='pt-10 text-white'>
-                                <span className='font-bold'>Propzy Care  </span>  – Gói dịch vụ chăm sóc khách hàng xuyên suốt trước – trong và cả sau khi giao dịch bất động sản tại Propzy. Với gói dịch vụ Propzy Care, khách hàng được chăm sóc & hưởng ưu đãi miễn phí như vận chuyển, dọn nhà, cùng nhiều gói dịch vụ cộng thêm khác từ các đối tác của Propzy.
+                                <span className='font-bold'>Propzy Care  </span>  Gói dịch vụ chăm sóc khách hàng xuyên suốt trước – trong và cả sau khi giao dịch bất động sản tại Propzy. Với gói dịch vụ Propzy Care, khách hàng được chăm sóc miễn phí như: Hưởng các ưu đãi như vận chuyển và dọn nhà, Tư vấn miễn phí dịch vụ Thẩm Định - Pháp Lý – Tín Dụng – Vay Vốn, cùng nhiều gói dịch vụ cộng thêm khác.
+
                                 </p>
 
                             <p className='pt-5 text-white'>
-                                Nhận ngay gói Propzy Care trị giá 2.000.000 VND khi đăng ký thuê nhà từ ngày 25/01 - 28/02/2021 và hoàn tất hợp đồng trước 30/03/2021
+                                Đăng Ký xem nhà (Mua hoặc Thuê) ngay tại đây từ 25/01 - 28/02/2021 để nhận gói ưu đãi Propzy CARE trị giá 2.000.000 VNĐ và phát sinh giao dịch trước ngày 30/03/2021.
                             </p>
                         </div>
                         <div className='md:w-6/12 w-full flex py-6 flex-col justify-center md:ml-40'>
@@ -300,21 +301,21 @@ const HomeContainer = () => {
                                                 isSubmitting,
                                                 /* and other goodies */
                                             }) => (
-                                                <form onSubmit={handleSubmit}>
-                                                    <div className="py-7 space-y-3">
-                                                        <input name="name" type="text" value={values.name} onChange={handleChange} className='default__input w-full' placeholder='Họ và tên(*)' />
-                                                        {errors.name && touched.name && <div className='my-1 text-red-300'>{errors.name}</div>}
-                                                        <input name="email" type="text" value={values.email} onChange={handleChange} className='default__input w-full' placeholder='Email(*)' />
-                                                        {errors.email && touched.email && <div className='my-1 text-red-300'>{errors.email}</div>}
-                                                        <input name="phone" type="tel" value={values.phone} onChange={handleChange} className='default__input w-full' placeholder='Số điện thoại(*)' />
-                                                        {errors.phone && touched.phone && <div className='my-1 text-red-300'>{errors.phone}</div>}
-                                                        <Dropdown trigger={['click']} overlay={listPrice}>
-                                                            <input value={formContact.price} readOnly className='cursor-pointer default__input w-full' placeholder='Giá muốn thuê(*)'></input>
-                                                        </Dropdown>
-                                                        <button type='submit' className="onhover-btn btn-orange place-self-center mt-5 mx-auto w-2/5">TƯ VẤN NGAY</button>
-                                                    </div>
-                                                </form>
-                                            )}
+                                                    <form onSubmit={handleSubmit}>
+                                                        <div className="py-7 space-y-3">
+                                                            <input name="name" type="text" value={values.name} onChange={handleChange} className='default__input w-full' placeholder='Họ và tên(*)' />
+                                                            {errors.name && touched.name && <div className='my-1 text-red-300'>{errors.name}</div>}
+                                                            <input name="email" type="text" value={values.email} onChange={handleChange} className='default__input w-full' placeholder='Email(*)' />
+                                                            {errors.email && touched.email && <div className='my-1 text-red-300'>{errors.email}</div>}
+                                                            <input name="phone" type="tel" value={values.phone} onChange={handleChange} className='default__input w-full' placeholder='Số điện thoại(*)' />
+                                                            {errors.phone && touched.phone && <div className='my-1 text-red-300'>{errors.phone}</div>}
+                                                            <Dropdown trigger={['click']} overlay={listPrice}>
+                                                                <input value={formContact.price} readOnly className='cursor-pointer default__input w-full' placeholder='Giá muốn thuê(*)'></input>
+                                                            </Dropdown>
+                                                            <button type='submit' className="onhover-btn btn-orange place-self-center mt-5 mx-auto w-2/5">TƯ VẤN NGAY</button>
+                                                        </div>
+                                                    </form>
+                                                )}
                                         </Formik>
                                     </div>
                                 </div>
