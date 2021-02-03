@@ -189,13 +189,20 @@ const Permision = (props) => {
                     <div className={classnames({
                         'flex items-center': true,
                         'pointer-events-none opacity-50': user.likefb
-                    })}
-                        onClick={() => updatePermission(permision)}
-                    >
-                        <div >
-                            <Like href="https://www.facebook.com/propzyvietnam" colorScheme="dark" showFaces />
+                    })}>
+                        <div>
+
+                            <Like href="https://www.facebook.com/propzyvietnam" onClick={updatePermission(permision)} colorScheme="dark" showFaces />
+
                         </div>
                     </div >
+
+                    //     onClick={() => updatePermission(permision)}
+                    // >
+                    //     <div >
+                    //         <Like href="https://www.facebook.com/propzyvietnam" colorScheme="dark" showFaces />
+                    //     </div>
+                    // </div >
                 )
             case 'invite-people':
                 return (
