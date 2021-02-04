@@ -39,7 +39,7 @@ const categories = [
 	{
 		key: 'posm', rate: 20, prizeList: [
 			{ key: 'posm-1', category: 'posm', name: 'Combo Shopping bag + Helmet', area: '', detail: 'Combo Shopping bag + Helmet', voucher: 50, quantity: 10, image: '/svg/lucky-money/copy-lucky-money/propzy-tui-giu-nhiet.svg' },
-			{ key: 'posm-2', category: 'posm', name: 'Combo Canvas bag + Tumbler', area: '', detail: 'Combo Canvas bag + Tumbler', voucher: 50, quantity: 10, image: '/svg/lucky-money/copy-lucky-money/tui-canvas-binh-giu-nhiet' },
+			{ key: 'posm-2', category: 'posm', name: 'Combo Canvas bag + Tumbler', area: '', detail: 'Combo Canvas bag + Tumbler', voucher: 50, quantity: 10, image: '/svg/lucky-money/copy-lucky-money/tui-canvas-binh-giu-nhiet.svg' },
 			{ key: 'posm-3', category: 'posm', name: 'Combo Shopping bag + Raincoat', area: '', detail: 'Combo Shopping bag + Raincoat', voucher: 50, quantity: 10, image: '/svg/lucky-money/copy-lucky-money/tui-giu-nhiet-ao-mua.svg' },
 			{ key: 'posm-4', category: 'posm', name: 'Combo Notebook + Umbrella', area: '', detail: 'Combo Notebook + Umbrella', voucher: 50, quantity: 10, image: '/svg/lucky-money/copy-lucky-money/so-tay-va-du.svg' }
 		],

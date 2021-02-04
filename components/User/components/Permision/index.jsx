@@ -101,17 +101,13 @@ const Permision = (props) => {
                 )
             case 'subcribe-youtube':
                 return (
-                    <div id='fjiew' className={classnames({
-                        'flex items-center': true,
+                    <div className={classnames({
+                        'flex justify-end': true,
                         'pointer-events-none opacity-50': user.subytb
-                    })} >
-                        <YouTubeSubscribe
-                            onClick={() => updatePermission(permision)}
-                            channelid={channelid}
-                            theme={"default"}
-                            layout={"full"}
-                            count={"default"}
-                        />
+                    })}>
+                        <a onClick={() => updatePermission(permision)} href='https://www.youtube.com/channel/UCeIN3NL1ms3rSB6jWYUr19g?view_as=subscriber' target='_blank' className="btn-orange w-20 px-10">
+                            SUBSCRIBE NGAY
+                    </a>
                     </div>
                 )
             case 'like-face':

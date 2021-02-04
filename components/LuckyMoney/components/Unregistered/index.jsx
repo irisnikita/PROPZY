@@ -29,7 +29,7 @@ const prizes = [
     { key: 'VN_Moving', name: 'VN Moving', area: 'HCM (City Wide)', detail: 'Giảm 500K cho khách đặt chuyển nhà', voucher: 500000, quantity: 99999, image: '/svg/lucky-money/copy-lucky-money/voucher-500k.svg' },
     { key: 'HomeAZ', name: 'HomeAZ', area: 'HCM (City Wide)', detail: 'Giảm 600K cho khách đặt mua nệm trên app HomeAZ', voucher: 600000, quantity: 99999, image: '/svg/lucky-money/copy-lucky-money/coupon-600k.svg' },
     { key: 'GoDee', name: 'Godee', area: 'HCM (City Wide)', detail: 'Tặng 25 chuyến xe miễn phí (30k/ chuyến) cho khách hàng', voucher: 750000, quantity: 99999, image: '/svg/lucky-money/copy-lucky-money/godee.svg' },
-    { key: 'Lalamove', name: 'Lalamove', area: 'HCM (City Wide)', detail: 'Giảm 75K cho khách đặt chuyển nhà', voucher: 750000, quantity: 300, image: '/svg/lucky-money/75k-lalamove.svg' },
+    { key: 'Lalamove', name: 'Lalamove', area: 'HCM (City Wide)', detail: 'Giảm 75K cho khách đặt chuyển nhà', voucher: 750000, quantity: 300, image: '/svg/lucky-money/copy-lucky-money/75k-lalamove.svg' },
     { key: 'Jupviec', name: 'JupViec.vn', area: 'HCM (City Wide)', detail: 'Giảm 75K cho khách đặt dọn nhà', voucher: 750000, quantity: 700, image: '/svg/lucky-money/copy-lucky-money/75k-giup-viec.svg' },
 ]
 
@@ -424,7 +424,7 @@ const Unregistered = (props) => {
                                                         {errors.phone && touched.phone && <div className='text-red-600 my-1'>{errors.phone}</div>}
                                                         <Dropdown trigger={['click']} overlay={listDemand}>
                                                             <div className='relative flex items-center'>
-                                                                <input value={form.demand} readOnly className='cursor-pointer second__input w-full' placeholder='Giá muốn thuê(*)'></input>
+                                                                <input value={form.demand} readOnly className='cursor-pointer second__input w-full' placeholder='Nhu cầu của bạn(*)'></input>
                                                                 <img src="/svg/icons/caret-down.svg" className='text-black absolute right-5' alt="" />
                                                             </div>
                                                         </Dropdown>

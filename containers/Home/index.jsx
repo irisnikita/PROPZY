@@ -353,7 +353,7 @@ const HomeContainer = () => {
                                                             {errors.phone && touched.phone && <div className='my-1 text-red-300'>{errors.phone}</div>}
                                                             <Dropdown trigger={['click']} overlay={listDemand}>
                                                                 <div className='relative flex items-center'>
-                                                                    <input name='demand' value={formContact.demand || 'Nhu cầu của bạn'} readOnly className='cursor-pointer default__input w-full' placeholder='Giá muốn thuê(*)'></input>
+                                                                    <input name='demand' value={formContact.demand || 'Nhu cầu của bạn'} readOnly className='cursor-pointer default__input w-full' placeholder='Nhu cầu của bạn(*)'></input>
                                                                     <img src="/svg/icons/caret-down.svg" className='absolute right-5' alt="" />
                                                                 </div>
                                                             </Dropdown>
