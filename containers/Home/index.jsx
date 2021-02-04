@@ -5,7 +5,7 @@ import {
     motion,
 } from 'framer-motion';
 import axios from 'axios'
-import { Select, Dropdown, Menu, Modal } from 'antd';
+import { Select, Dropdown, Menu, Modal, InputNumber } from 'antd';
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 
@@ -33,7 +33,8 @@ const HomeContainer = () => {
     // State
     const [isOpenLuckyMoney, setOpenLuckyMoney] = useState(false);
     const [formContact, setFormContact] = useState({
-        price: '6-9 triệu'
+        price: '',
+        demand: 'Thuê'
     });
 
     useEffect(() => {
@@ -51,12 +52,28 @@ const HomeContainer = () => {
         })
     }
 
+    const onClickDemand = (e) => {
+        setFormContact({
+            ...formContact,
+            demand: e.key
+        })
+    }
+
     const listPrice = (
         <Menu onClick={onClickPrice} defaultSelectedKeys={'6-9 triệu'}>
             <Menu.Item key='6-9 triệu' value="6-9 triệu">6-9 triệu</Menu.Item>
             <Menu.Item key='9-12 triệu' value="9-12 triệu">9-12 triệu</Menu.Item>
             <Menu.Item key='12-15 triệu' value="12-15 triệu">12-15 triệu</Menu.Item>
             <Menu.Item key='Trên 15 triệu' value="Trên 15 triệu">Trên 15 triệu</Menu.Item>
+        </Menu>
+    )
+
+    const listDemand = (
+        <Menu onClick={onClickDemand}>
+            <Menu.Item key='Thuê'>Thuê</Menu.Item>
+            <Menu.Item key='Mua'>Mua</Menu.Item>
+            <Menu.Item key='Bán'>Bán</Menu.Item>
+            <Menu.Item key='Cho thuê'>Cho thuê</Menu.Item>
         </Menu>
     )
 
@@ -93,6 +110,13 @@ const HomeContainer = () => {
 
             document.getElementById(element).scrollIntoView({ block: 'start' });
         }
+    }
+
+    const onChangeInputNumber = (value) => {
+        setFormContact({
+            ...formContact,
+            price: value
+        })
     }
 
     return (
@@ -269,7 +293,7 @@ const HomeContainer = () => {
                                                 return errors;
                                             }}
                                             onSubmit={async (values, { setSubmitting }) => {
-                                                const order = await userServices.createOrders({ ...values, price: formContact.price });
+                                                const order = await userServices.createOrders({ ...values, price: formContact.price, demand: formContact.demand });
 
                                                 if (order && order.data) {
                                                     const sendThanksMail = await userServices.sendThanks({
@@ -309,9 +333,25 @@ const HomeContainer = () => {
                                                             {errors.email && touched.email && <div className='my-1 text-red-300'>{errors.email}</div>}
                                                             <input name="phone" type="tel" value={values.phone} onChange={handleChange} className='default__input w-full' placeholder='Số điện thoại(*)' />
                                                             {errors.phone && touched.phone && <div className='my-1 text-red-300'>{errors.phone}</div>}
-                                                            <Dropdown trigger={['click']} overlay={listPrice}>
-                                                                <input value={formContact.price} readOnly className='cursor-pointer default__input w-full' placeholder='Giá muốn thuê(*)'></input>
+                                                            <Dropdown trigger={['click']} overlay={listDemand}>
+                                                                <div className='relative flex items-center'>
+                                                                    <input value={formContact.demand} readOnly className='cursor-pointer default__input w-full' placeholder='Giá muốn thuê(*)'></input>
+                                                                    <img src="/svg/icons/caret-down.svg" className='absolute right-5' alt="" />
+                                                                </div>
                                                             </Dropdown>
+                                                            <div className='relative flex text-white items-center'>
+                                                                <InputNumber
+                                                                    min={0}
+                                                                    placeholder='Mức giá mong muốn'
+                                                                    style={{ padding: '0 10px' }}
+                                                                    className='cursor-pointer default__input w-full overflow-hidden flex items-center'
+                                                                    formatter={value => `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                                                                    parser={value => value.replace(/₫\s?|(,*)/g, '')}
+                                                                    onChange={onChangeInputNumber}
+                                                                >
+                                                                </InputNumber>
+                                                                <span className='absolute right-10'>đ</span>
+                                                            </div>
                                                             <button type='submit' className="onhover-btn btn-orange place-self-center mt-5 mx-auto w-2/5">TƯ VẤN NGAY</button>
                                                         </div>
                                                     </form>
