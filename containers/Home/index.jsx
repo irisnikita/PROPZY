@@ -69,7 +69,7 @@ const HomeContainer = () => {
     )
 
     const listDemand = (
-        <Menu onClick={onClickDemand}>
+        <Menu onClick={onClickDemand}>defaultSelectedKeys={'Nhu cầu của bạn'}
             <Menu.Item key='Thuê'>Thuê</Menu.Item>
             <Menu.Item key='Mua'>Mua</Menu.Item>
             <Menu.Item key='Bán'>Bán</Menu.Item>
@@ -265,8 +265,8 @@ const HomeContainer = () => {
                                     <div className='max-w-md mx-auto'>
                                         <div className='flex items-center '>
                                             <div className="block pl-2 pt-16 font-bold text-xl text-center ">
-                                                <h2 className="text-3xl font-semibold hight-light justify-center">BẠN CÓ DỰ ĐỊNH THUÊ NHÀ?</h2>
-                                                <p className="text-1xl text-white font-normal">Hơn 100.000 bất động sản tại Propzy sẵn sàng giao dịch!</p>
+                                                <h2 className="text-3xl font-semibold hight-light justify-center">ĐĂNG KÝ TƯ VẤN MUA - THUÊ NHÀ</h2>
+                                                <p className="text-1xl text-white font-normal">Nhận gói ưu đãi Propzy Care trị giá 2.000.000 VND</p>
                                             </div>
                                         </div>
                                         <Formik

@@ -355,9 +355,9 @@ const Unregistered = (props) => {
                                         onClick={() => { props.onClose && props.onClose() }}
                                         className="icon-out-remove absolute cursor-pointer right-10 md:right-5 text-2xl top-5"
                                     ></i>
-                                    <strong className='font-semibold text-xl text__color--orange'>BẠN CÓ DỰ ĐỊNH THUÊ NHÀ?</strong>
+                                    <strong className='font-semibold text-xl text__color--orange'>ĐĂNG KÝ TƯ VẤN MUA - THUÊ NHÀ</strong>
                                     <p className='text-base pt-5 pb-7'>
-                                        Hơn 100.000 bất động sản tại Propzy sẵn sàng giao dịch!
+                                        Nhận gói ưu đãi Propzy Care trị giá 2.000.000 VND
                                 </p>
                                     <Formik
                                         initialValues={{ ...form }}
@@ -448,13 +448,14 @@ const Unregistered = (props) => {
                                         <img src="/images/lucky-money-2.png" alt="" />
                                     </div>
                                     <div className='px-5 md:px-20 pt-7'>
-                                        <strong className='font-semibold text-xl text__color--orange'>Bạn có nhu cầu mua - bán - thuê bất động sản?</strong>
+                                        <strong className='font-semibold text-xl text__color--orange'>ƯU ĐÃI PROPZY CARE TRỊ GIÁ 2 TRIỆU</strong>
                                         <p className='text-base pt-5 pb-7'>
-                                            Nhận ngay gói Propzy Care trị giá 2.000.000 VND khi đăng ký thuê nhà từ ngày 25/01 - 28/02/2021 và hoàn tất hợp đồng trước 30/03/2021
+                                            Nhận ngay gói Propzy Care trị giá 2.000.000 VND khi đăng ký thuê/mua nhà từ ngày 25/01 - 28/02/2021 và hoàn tất hợp đồng trước 30/03/2021
+
                                 </p>
                                         <div className="flex justify-between pb-7 items-center">
                                             <span onClick={onClickOpenNext} className='cursor-pointer text__color--orange'>Hái lì xì tiếp</span>
-                                            <div onClick={() => setRegisterRent(true)} className="btn-orange min-h-0 py-3 min-w-0 px-10 rounded-md">ĐĂNG KÝ</div>
+                                            <div onClick={() => setRegisterRent(true)} className="btn-orange min-h-0 py-3 min-w-0 px-10 rounded-md">NHẬN NGAY</div>
                                         </div>
                                     </div>
                                 </div>

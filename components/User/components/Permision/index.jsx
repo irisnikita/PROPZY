@@ -116,16 +116,25 @@ const Permision = (props) => {
                 )
             case 'like-face':
                 return (
+                    // <div className={classnames({
+                    //     'flex items-center': true,
+                    //     'pointer-events-none opacity-50': user.likefb
+                    // })}>
+                    //     <div>
+
+                    //         <Like href="https://www.facebook.com/propzyvietnam" colorScheme="dark" showFaces />
+
+                    //     </div>
+                    // </div >
+
                     <div className={classnames({
-                        'flex items-center': true,
+                        'flex justify-end': true,
                         'pointer-events-none opacity-50': user.likefb
                     })}>
-                        <div>
-
-                            <Like href="https://www.facebook.com/propzyvietnam" colorScheme="dark" showFaces />
-
-                        </div>
-                    </div >
+                        <a onClick={() => updatePermission(permision)} href='https://www.facebook.com/propzyvietnam' target='_blank' className="btn-orange w-20 px-10">
+                            LIKE NGAY
+                        </a>
+                    </div>
 
                     //     onClick={() => updatePermission(permision)}
                     // >
