@@ -24,8 +24,9 @@ import FlipLuckyMoney from 'components/LuckyMoney/components/FlipLuckyMoney';
 import LuckyMoney from 'components/LuckyMoney';
 import { Formik } from 'formik';
 import { EMULTIHOP } from 'constants';
-
+import ReactGA from 'react-ga';
 const { Option } = Select;
+ReactGA.initialize('GTM-MH7WSC');
 
 const HomeContainer = () => {
     const router = useRouter()
@@ -44,6 +45,11 @@ const HomeContainer = () => {
         }
 
     }, [router])
+    useEffect(() => {
+        ReactGA.pageview(window.location.pathname + window.location.search);
+
+
+    }, [])
 
     const onClickPrice = (e) => {
         setFormContact({
@@ -352,7 +358,7 @@ const HomeContainer = () => {
                                                                     onChange={onChangeInputNumber}
                                                                 >
                                                                 </InputNumber>
-                                                                <span className='absolute right-10'>000.000.đ</span>
+                                                                <span className='absolute right-10'>đ</span>
                                                             </div>
                                                             <button type='submit' className="onhover-btn btn-orange place-self-center mt-5 mx-auto w-2/5">TƯ VẤN NGAY</button>
                                                         </div>

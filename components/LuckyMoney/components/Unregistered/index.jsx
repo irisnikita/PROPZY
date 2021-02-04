@@ -430,7 +430,7 @@ const Unregistered = (props) => {
                                                                 onChange={onChangeInputNumber}
                                                             >
                                                             </InputNumber>
-                                                            <span className='absolute right-10 text-black'>000.000.đ</span>
+                                                            <span className='absolute right-10 text-black'>đ</span>
                                                         </div>
                                                         <div className="flex justify-between py-7 items-center">
                                                             <span onClick={onClickOpenNext} className='cursor-pointer text__color--orange'>Hái lì xì tiếp</span>
