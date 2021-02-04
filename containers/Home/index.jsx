@@ -76,7 +76,7 @@ const HomeContainer = () => {
     )
 
     const listDemand = (
-        <Menu onClick={onClickDemand}>defaultSelectedKeys={'Nhu cầu của bạn'}
+        <Menu onClick={onClickDemand}>
             <Menu.Item key='Thuê'>Thuê</Menu.Item>
             <Menu.Item key='Mua'>Mua</Menu.Item>
         </Menu>
