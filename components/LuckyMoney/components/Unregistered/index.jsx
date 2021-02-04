@@ -430,7 +430,7 @@ const Unregistered = (props) => {
                                                                 onChange={onChangeInputNumber}
                                                             >
                                                             </InputNumber>
-                                                            <span className='absolute right-10 text-black'>đ</span>
+                                                            <span className='absolute right-10 text-black'>000.000.đ</span>
                                                         </div>
                                                         <div className="flex justify-between py-7 items-center">
                                                             <span onClick={onClickOpenNext} className='cursor-pointer text__color--orange'>Hái lì xì tiếp</span>
@@ -448,9 +448,9 @@ const Unregistered = (props) => {
                                         <img src="/images/lucky-money-2.png" alt="" />
                                     </div>
                                     <div className='px-5 md:px-20 pt-7'>
-                                        <strong className='font-semibold text-xl text__color--orange'>BẠN CÓ DỰ ĐỊNH THUÊ NHÀ?</strong>
+                                        <strong className='font-semibold text-xl text__color--orange'>Bạn có nhu cầu mua - bán - thuê bất động sản?</strong>
                                         <p className='text-base pt-5 pb-7'>
-                                            Từ 25/01 - 28/02/2021 để nhận gói ưu đãi Propzy CARE trị giá 2.000.000 VNĐ khi phát sinh giao dịch trước ngày 30/03/2021.
+                                            Nhận ngay gói Propzy Care trị giá 2.000.000 VND khi đăng ký thuê nhà từ ngày 25/01 - 28/02/2021 và hoàn tất hợp đồng trước 30/03/2021
                                 </p>
                                         <div className="flex justify-between pb-7 items-center">
                                             <span onClick={onClickOpenNext} className='cursor-pointer text__color--orange'>Hái lì xì tiếp</span>

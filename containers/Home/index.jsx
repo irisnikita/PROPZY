@@ -251,12 +251,12 @@ const HomeContainer = () => {
                         <div className='md:w-4/12 w-full'>
                             <img src="/svg/img-propzycare.svg" className='w-full' alt="" />
                             <p className='pt-10 text-white'>
-                                <span className='font-bold'>Propzy Care  </span>  Gói dịch vụ chăm sóc khách hàng xuyên suốt trước – trong và cả sau khi giao dịch bất động sản tại Propzy. Với gói dịch vụ Propzy Care, khách hàng được chăm sóc miễn phí như: Hưởng các ưu đãi như vận chuyển và dọn nhà, Tư vấn miễn phí dịch vụ Thẩm Định - Pháp Lý – Tín Dụng – Vay Vốn, cùng nhiều gói dịch vụ cộng thêm khác.
+                                <span className='font-bold'>Propzy Care  </span>  Gói dịch vụ chăm sóc khách hàng xuyên suốt trước – trong và cả sau khi giao dịch bất động sản tại Propzy. Với gói dịch vụ Propzy Care, khách hàng được chăm sóc & hưởng ưu đãi miễn phí như vận chuyển, dọn nhà, cùng nhiều gói dịch vụ cộng thêm khác từ các đối tác của Propzy.
 
                                 </p>
 
                             <p className='pt-5 text-white'>
-                                Đăng Ký xem nhà (Mua hoặc Thuê) ngay tại đây từ 25/01 - 28/02/2021 để nhận gói ưu đãi Propzy CARE trị giá 2.000.000 VNĐ và phát sinh giao dịch trước ngày 30/03/2021.
+                                Nhận ngay gói ưu đãi <span className='font-bold'>Propzy Care trị giá 2.000.000 VNĐ </span> từ ngày 25/01 - 28/02/2021 và phát sinh giao dịch trước ngày 30/03/2021.
                             </p>
                         </div>
                         <div className='md:w-6/12 w-full flex py-6 flex-col justify-center md:ml-40'>
@@ -290,6 +290,8 @@ const HomeContainer = () => {
                                                 ) {
                                                     errors.email = 'Địa chỉ email không đúng';
                                                 }
+
+
                                                 return errors;
                                             }}
                                             onSubmit={async (values, { setSubmitting }) => {
@@ -350,7 +352,7 @@ const HomeContainer = () => {
                                                                     onChange={onChangeInputNumber}
                                                                 >
                                                                 </InputNumber>
-                                                                <span className='absolute right-10'>đ</span>
+                                                                <span className='absolute right-10'>000.000.đ</span>
                                                             </div>
                                                             <button type='submit' className="onhover-btn btn-orange place-self-center mt-5 mx-auto w-2/5">TƯ VẤN NGAY</button>
                                                         </div>

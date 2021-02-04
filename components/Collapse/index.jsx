@@ -25,8 +25,8 @@ const index = () => {
                             Gói quà THẬT MAY MẮN - Propzy mùa Lễ hội: Số lượng không giới hạn
                     </li>
                         <li>
-                            Cùng hàng nghìn câu chúc Tết mang đến Xuân Tài Lộc - Hạnh Phúc - Bình An.
-                    </li>
+                            Cùng hàng nghìn câu chúc Tết mang đến Xuân <span className='font-bold text-red-400'> Tài Lộc - Hạnh Phúc - Bình An.</span>
+                        </li>
                     </ul>
                 </div>
             )
@@ -35,7 +35,7 @@ const index = () => {
             title: 'ĐIỀU KIỆN VÀ QUY ĐỊNH THAM GIA', child: (
                 <div className='collapse__list text-justify leading-10'>
                     <div className=''> - Khách hàng phải là công dân Việt Nam từ 18 tuổi trở lên.</div>
-                    <div className=''> - Mỗi khách hàng có 03 LƯỢT hái lì xì khi đăng ký tham gia hái lì xì.</div>
+                    <div className=''> - Mỗi khách hàng có <span className='font-bold text-red-400'>03</span> LƯỢT hái lì xì khi đăng ký tham gia hái lì xì.</div>
                     <div className=''> - Để có thêm lượt hái lì xì, bạn có thể thực hiện các NHIỆM VỤ sau:</div>
                     <div className='ml-10'>
                         <div>+ Chia sẻ bài viết thành công: +1 lượt chơi </div>
@@ -44,7 +44,7 @@ const index = () => {
                         <div>+ Subscribe Youtube channel: +1 lượt chơi </div>
                         <div>+ Mời bạn bè tham gia thành công: tối đa +10 lượt chơi</div>
                         <Link href='/user?tab=tab-2'>
-                            <a>"Làm nhiệm vụ ngay"</a>
+                            <a><span className='font-bold text-red-400'> "Làm nhiệm vụ ngay" </span></a>
                         </Link>
                     </div>
                     <div className=""> - Hệ thống tự động thêm lượt khi bạn thực hiện thành công những cách trên.</div>
