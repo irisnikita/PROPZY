@@ -33,9 +33,10 @@ const HomeContainer = () => {
 
     // State
     const [isOpenLuckyMoney, setOpenLuckyMoney] = useState(false);
+    const [error, setShowError] = useState(false);
     const [formContact, setFormContact] = useState({
         price: '',
-        demand: 'Thuê'
+        demand: ''
     });
 
     useEffect(() => {
@@ -78,8 +79,6 @@ const HomeContainer = () => {
         <Menu onClick={onClickDemand}>defaultSelectedKeys={'Nhu cầu của bạn'}
             <Menu.Item key='Thuê'>Thuê</Menu.Item>
             <Menu.Item key='Mua'>Mua</Menu.Item>
-            <Menu.Item key='Bán'>Bán</Menu.Item>
-            <Menu.Item key='Cho thuê'>Cho thuê</Menu.Item>
         </Menu>
     )
 
@@ -119,6 +118,12 @@ const HomeContainer = () => {
     }
 
     const onChangeInputNumber = (value) => {
+        if (value === '') {
+            setShowError(true);
+        } else {
+            setShowError(false)
+        }
+
         setFormContact({
             ...formContact,
             price: value
@@ -276,7 +281,7 @@ const HomeContainer = () => {
                                             </div>
                                         </div>
                                         <Formik
-                                            initialValues={{ name: '', email: '', phone: '', price: '' }}
+                                            initialValues={{ name: '', email: '', phone: '', price: '', demand: '' }}
                                             validate={values => {
                                                 const errors = {};
                                                 if (!values.name) {
@@ -301,26 +306,31 @@ const HomeContainer = () => {
                                                 return errors;
                                             }}
                                             onSubmit={async (values, { setSubmitting }) => {
-                                                const order = await userServices.createOrders({ ...values, price: formContact.price, demand: formContact.demand });
+                                                if (formContact.price !== '') {
+                                                    const order = await userServices.createOrders({ ...values, price: formContact.price, demand: formContact.demand });
 
-                                                if (order && order.data) {
-                                                    const sendThanksMail = await userServices.sendThanks({
-                                                        user: order.data
-                                                    })
-                                                    Modal.success({
-                                                        title: 'Cảm ơn bạn đã gửi thông tin',
-                                                        content: 'Cảm ơn bạn đã tin tưởng dịch vụ của chúng tôi. Chúng tôi sẽ liên lạc nhanh nhất có thể ',
-                                                        okText: 'Đồng ý',
-                                                        closable: true
-                                                    })
+                                                    if (order && order.data) {
+                                                        const sendThanksMail = await userServices.sendThanks({
+                                                            user: order.data
+                                                        })
+                                                        Modal.success({
+                                                            title: 'Cảm ơn bạn đã gửi thông tin',
+                                                            content: 'Cảm ơn bạn đã tin tưởng dịch vụ của chúng tôi. Chúng tôi sẽ liên lạc nhanh nhất có thể ',
+                                                            okText: 'Đồng ý',
+                                                            closable: true
+                                                        })
+                                                    } else {
+                                                        Modal.error({
+                                                            title: 'Email đã tồn tại',
+                                                            content: 'Email bạn gửi tư vấn đã tồn tại, vui lòng gửi lại email khác',
+                                                            okText: 'Đồng ý',
+                                                            closable: true
+                                                        })
+                                                    }
                                                 } else {
-                                                    Modal.error({
-                                                        title: 'Email đã tồn tại',
-                                                        content: 'Email bạn gửi tư vấn đã tồn tại, vui lòng gửi lại email khác',
-                                                        okText: 'Đồng ý',
-                                                        closable: true
-                                                    })
+                                                    setShowError(true)
                                                 }
+
                                             }}
                                         >
                                             {({
@@ -343,11 +353,13 @@ const HomeContainer = () => {
                                                             {errors.phone && touched.phone && <div className='my-1 text-red-300'>{errors.phone}</div>}
                                                             <Dropdown trigger={['click']} overlay={listDemand}>
                                                                 <div className='relative flex items-center'>
-                                                                    <input value={formContact.demand} readOnly className='cursor-pointer default__input w-full' placeholder='Giá muốn thuê(*)'></input>
+                                                                    <input name='demand' value={formContact.demand || 'Nhu cầu của bạn'} readOnly className='cursor-pointer default__input w-full' placeholder='Giá muốn thuê(*)'></input>
                                                                     <img src="/svg/icons/caret-down.svg" className='absolute right-5' alt="" />
                                                                 </div>
                                                             </Dropdown>
+                                                            {formContact.demand === '' && touched.demand && <div className='my-1 text-red-300'>Vui lòng chọn nhu cầu của bạn</div>}
                                                             <div className='relative flex text-white items-center'>
+                                                                <input type="text" name='price' className='opacity-0 absolute w-full h-full' />
                                                                 <InputNumber
                                                                     min={0}
                                                                     placeholder='Mức giá mong muốn'
@@ -359,6 +371,9 @@ const HomeContainer = () => {
                                                                 >
                                                                 </InputNumber>
                                                                 <span className='absolute right-10'>đ</span>
+                                                            </div>
+                                                            <div>
+                                                                {error ? <div className='my-1 text-red-300'>Vui lòng nhập số tiền </div> : null}
                                                             </div>
                                                             <button type='submit' className="onhover-btn btn-orange place-self-center mt-5 mx-auto w-2/5">TƯ VẤN NGAY</button>
                                                         </div>

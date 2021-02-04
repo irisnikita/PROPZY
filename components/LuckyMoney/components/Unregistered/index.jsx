@@ -42,6 +42,7 @@ const Unregistered = (props) => {
     const [isOpenRegister, setOpenRegister] = useState(false);
     const [isRegisterSuccess, setRegisterSuccess] = useState(false);
     const [isRegisterRent, setRegisterRent] = useState(false);
+    const [error, setError] = useState(false);
     const [prizeSelected, setPrizeSelected] = useState({});
     const [user, setUser] = useState({});
     const [form, setForm] = useState({
@@ -49,7 +50,7 @@ const Unregistered = (props) => {
         name: '',
         phone: 0,
         price: '',
-        demand: 'Thuê'
+        demand: ''
     })
     const [listPrize, setListPrize] = useState([]);
 
@@ -93,8 +94,6 @@ const Unregistered = (props) => {
         <Menu onClick={onClickDemand}>
             <Menu.Item key='Thuê'>Thuê</Menu.Item>
             <Menu.Item key='Mua'>Mua</Menu.Item>
-            <Menu.Item key='Bán'>Bán</Menu.Item>
-            <Menu.Item key='Cho thuê'>Cho thuê</Menu.Item>
         </Menu>
     )
 
@@ -198,6 +197,12 @@ const Unregistered = (props) => {
 
 
     const onChangeInputNumber = (value) => {
+        if (value === '') {
+            setError(true)
+        } else {
+            setError(false)
+        }
+
         setForm({
             ...form,
             price: value
@@ -382,16 +387,20 @@ const Unregistered = (props) => {
                                             return errors;
                                         }}
                                         onSubmit={async (values, { setSubmitting }) => {
-                                            typeof onClose == 'function' && onClose();
-                                            props.getUser(user)
-
-                                            const order = await userServices.createOrders({ ...values, price: form.price, demand: form.demand });
-
-                                            if (order) {
-                                                const sendThanksMail = await userServices.sendThanks({
-                                                    user: { ...values }
-                                                })
+                                            if (form.price !== '' && form.demand !== '') {
                                                 typeof onClose == 'function' && onClose();
+                                                props.getUser(user)
+
+                                                const order = await userServices.createOrders({ ...values, price: form.price, demand: form.demand });
+
+                                                if (order) {
+                                                    const sendThanksMail = await userServices.sendThanks({
+                                                        user: { ...values }
+                                                    })
+                                                    typeof onClose == 'function' && onClose();
+                                                }
+                                            } else {
+                                                setError(true)
                                             }
                                         }}
                                     >
@@ -419,6 +428,7 @@ const Unregistered = (props) => {
                                                                 <img src="/svg/icons/caret-down.svg" className='text-black absolute right-5' alt="" />
                                                             </div>
                                                         </Dropdown>
+                                                        {form.demand === '' && touched.demand && <div className='my-1 text-red-300'>Vui lòng chọn nhu cầu của bạn</div>}
                                                         <div className='relative flex text-white items-center'>
                                                             <InputNumber
                                                                 min={0}
@@ -431,6 +441,9 @@ const Unregistered = (props) => {
                                                             >
                                                             </InputNumber>
                                                             <span className='absolute right-10 text-black'>đ</span>
+                                                        </div>
+                                                        <div>
+                                                            {error ? <div className='my-1 text-red-300'>Vui lòng nhập số tiền </div> : null}
                                                         </div>
                                                         <div className="flex justify-between py-7 items-center">
                                                             <span onClick={onClickOpenNext} className='cursor-pointer text__color--orange'>Hái lì xì tiếp</span>
