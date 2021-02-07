@@ -24,10 +24,16 @@ import FlipLuckyMoney from 'components/LuckyMoney/components/FlipLuckyMoney';
 import LuckyMoney from 'components/LuckyMoney';
 import { Formik } from 'formik';
 import { EMULTIHOP } from 'constants';
-import ReactGA from 'react-ga';
-const { Option } = Select;
-ReactGA.initialize('GTM-MH7WSC');
+import TagManager from 'react-gtm-module'
 
+const { Option } = Select;
+
+const tagManagerArgs = {
+    gtmId: 'GTM-MH7WSC'
+}
+if (process.browser) {
+    TagManager.initialize(tagManagerArgs);
+}
 const HomeContainer = () => {
     const router = useRouter()
 
