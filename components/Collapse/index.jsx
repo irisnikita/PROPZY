@@ -16,13 +16,13 @@ const index = () => {
                     Từ ngày 25/01/2021 đến 28/02/2021, chỉ cần hái lì xì và để lại thông tin là bạn có cơ hội nhận cơn mưa quà tặng với tổng giải thưởng lên đến 1.000.000.000 VNĐ.
                     <ul>
                         <li>
-                            Gói quà tặng PROPZY CARE THẬT ĐONG ĐẦY trị giá hơn 2.000.000 VNĐ: số lượng giới hạn
+                            Gói quà PROPZY CARE - THẬT ĐONG ĐẦY trị giá hơn 2.000.000 VNĐ: Số lượng giới hạn
                     </li>
                         <li>
-                            Gói quà THẬT NHƯ Ý  - Coupon giảm giá từ 100.000 - 1.000.000 VNĐ: số lượng không giới hạn
+                            Gói quà THẬT NHƯ Ý  - Coupon giảm giá từ 100.000 - 1.000.000 VNĐ: Số lượng không giới hạn
                     </li>
                         <li>
-                            Gói quà THẬT MAY MẮN - Propzy mùa Lễ hội: Số lượng không giới hạn
+                            Gói quà THẬT MAY MẮN - House + Love = Home: Số lượng không giới hạn
                     </li>
                         <li>
                             Cùng hàng nghìn câu chúc Tết mang đến Xuân <span className='font-bold text-red-400'> Tài Lộc - Hạnh Phúc - Bình An.</span>
@@ -38,11 +38,11 @@ const index = () => {
                     <div className=''> - Mỗi khách hàng có <span className='font-bold text-red-400'>03</span> LƯỢT hái lì xì khi đăng ký tham gia hái lì xì.</div>
                     <div className=''> - Để có thêm lượt hái lì xì, bạn có thể thực hiện các NHIỆM VỤ sau:</div>
                     <div className='ml-10'>
-                        <div>+ Chia sẻ bài viết thành công: +1 lượt chơi </div>
-                        <div>+ Thích (like) trang Propzy Fanpage: +1 lượt chơi</div>
-                        <div>+ Follow Zalo OA: + 1 lượt chơi </div>
-                        <div>+ Subscribe Youtube channel: +1 lượt chơi </div>
-                        <div>+ Mời bạn bè tham gia thành công: tối đa +10 lượt chơi</div>
+                        <div>+ Chia sẻ bài viết công khai trên trang cá nhân: +1 lượt chơi</div>
+                        <div>+ Thích trang Fanpage chính thức của Propzy: +1 lượt chơi</div>
+                        <div>+ Theo dõi tài khoản Zalo chính thức của Propzy : +1 lượt chơi</div>
+                        <div>+ Đăng kí kênh Youtube của Propzy: +1 lượt chơi</div>
+                        <div>+ Mời bạn bè tham gia thành công: +1 lượt chơi (tối đa +10 lượt chơi)</div>
                         <Link href='/user?tab=tab-2'>
                             <a><span className='font-bold text-red-400'> "Làm nhiệm vụ ngay" </span></a>
                         </Link>
