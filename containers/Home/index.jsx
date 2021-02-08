@@ -8,6 +8,7 @@ import axios from 'axios'
 import { Select, Dropdown, Menu, Modal, InputNumber } from 'antd';
 import Head from 'next/head'
 import { useRouter } from 'next/router'
+import classnames from 'classnames';
 
 // Services
 import * as userServices from 'services/user'
@@ -125,6 +126,11 @@ const HomeContainer = () => {
         } else {
             setShowError(false)
         }
+        if (value > 10000000000 || value === 0) {
+            setShowError(true);
+        } else {
+            setShowError(false)
+        }
 
         setFormContact({
             ...formContact,
@@ -142,6 +148,7 @@ const HomeContainer = () => {
                 <meta property='og:image' content={`/images/Thumbnail.png`} />
                 <meta property='og:title' content={'Hái Lì Xì Với Propzy - Khai Xuân Đón Lộc'} />
                 <meta property='og:description' content='Tham gia ngay Hái Lì Xì “Có nhà là có Tết – Propzy Care hết” để rinh nhiều phần quà hấp dẫn lên đến 1 tỷ đồng. Đăng ký xem nhà (Thuê) trước ngày 28/02/2021 để nhận gói ưu đãi Propzy CARE trị giá 2.000.000 VNĐ. Khám phá ngay' />
+
             </Head>
             <Header />
             <section className='home-page__main'>
@@ -303,6 +310,10 @@ const HomeContainer = () => {
                                                 ) {
                                                     errors.email = 'Địa chỉ email không đúng';
                                                 }
+                                                // if (values.price > 10000000) {
+                                                //     console.log('lỗi giá')
+                                                //     errors.price = 'looix';
+                                                // }
 
 
                                                 return errors;
@@ -363,7 +374,8 @@ const HomeContainer = () => {
                                                             <div className='relative flex text-white items-center'>
                                                                 <input type="text" name='price' className='opacity-0 absolute w-full h-full' />
                                                                 <InputNumber
-                                                                    min={0}
+                                                                    min={1}
+                                                                    max={10000000000}
                                                                     placeholder='Mức giá mong muốn'
                                                                     style={{ padding: '0 10px' }}
                                                                     className='cursor-pointer default__input w-full overflow-hidden flex items-center'
@@ -375,9 +387,16 @@ const HomeContainer = () => {
                                                                 <span className='absolute right-10'>đ</span>
                                                             </div>
                                                             <div>
-                                                                {error ? <div className='my-1 text-red-300'>Vui lòng nhập số tiền </div> : null}
+                                                                {error ? <div className='my-1 text-red-300'>Vui lòng nhập số tiền hợp lệ </div> : null}
                                                             </div>
-                                                            <button type='submit' className="onhover-btn btn-orange place-self-center mt-5 mx-auto w-2/5">TƯ VẤN NGAY</button>
+
+                                                            <button type='submit' className={classnames({
+                                                                'onhover-btn btn-orange place-self-center mt-5 mx-auto w-2/5': true,
+                                                                'opacity-50': error,
+                                                                'pointer-events-none': error
+                                                            })}>TƯ VẤN NGAY</button>
+
+                                                            {/* <button type='submit' className="onhover-btn btn-orange place-self-center mt-5 mx-auto w-2/5">TƯ VẤN NGAY</button> */}
                                                         </div>
                                                     </form>
                                                 )}
