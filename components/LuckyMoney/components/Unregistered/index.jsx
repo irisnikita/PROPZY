@@ -81,6 +81,7 @@ const Unregistered = (props) => {
         })
     }
 
+
     const listPrice = (
         <Menu onClick={onClickPrice} defaultSelectedKeys={'6-9 triệu'}>
             <Menu.Item key='6-9 triệu' value="6-9 triệu">6-9 triệu</Menu.Item>
@@ -388,6 +389,12 @@ const Unregistered = (props) => {
                                         }}
                                         onSubmit={async (values, { setSubmitting }) => {
                                             if (form.price !== '' && form.demand !== '') {
+                                                Modal.success({
+                                                    title: 'Cảm ơn bạn đã gửi thông tin',
+                                                    content: 'Cảm ơn bạn đã tin tưởng dịch vụ của chúng tôi. Chúng tôi sẽ liên lạc nhanh nhất có thể ',
+                                                    okText: 'Đồng ý',
+                                                    closable: true
+                                                })
                                                 typeof onClose == 'function' && onClose();
                                                 props.getUser(user)
 
@@ -397,6 +404,7 @@ const Unregistered = (props) => {
                                                     const sendThanksMail = await userServices.sendThanks({
                                                         user: { ...values }
                                                     })
+
                                                     typeof onClose == 'function' && onClose();
                                                 }
                                             } else {
