@@ -32,7 +32,7 @@ const tagManagerArgs = {
     gtmId: 'GTM-MH7WSC'
 }
 if (process.browser) {
-    TagManager.initialize(tagManagerArgs);
+    //TagManager.initialize(tagManagerArgs);
 }
 const HomeContainer = () => {
     const router = useRouter()
@@ -52,11 +52,7 @@ const HomeContainer = () => {
         }
 
     }, [router])
-    useEffect(() => {
-        ReactGA.pageview(window.location.pathname + window.location.search);
 
-
-    }, [])
 
     const onClickPrice = (e) => {
         setFormContact({
