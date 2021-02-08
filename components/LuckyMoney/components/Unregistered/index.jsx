@@ -199,10 +199,17 @@ const Unregistered = (props) => {
 
     const onChangeInputNumber = (value) => {
         if (value === '') {
-            setError(true)
+            setError(true);
         } else {
             setError(false)
         }
+
+        if (value > 10000000000 || value === 0) {
+            setError(true);
+        } else {
+            setError(false)
+        }
+
 
         setForm({
             ...form,
@@ -455,7 +462,16 @@ const Unregistered = (props) => {
                                                         </div>
                                                         <div className="flex justify-between py-7 items-center">
                                                             <span onClick={onClickOpenNext} className='cursor-pointer text__color--orange'>Hái lì xì tiếp</span>
-                                                            <button type='submit' className="btn-orange min-h-0 py-3 min-w-0 px-5 rounded-md">TƯ VẤN NGAY</button>
+                                                            <button
+                                                                type='submit'
+                                                                className={classnames({
+                                                                    'onhover-btn btn-orange place-self-center mt-5 mx-auto w-2/5': true,
+                                                                    'opacity-50': error,
+                                                                    'pointer-events-none': error
+                                                                })}
+                                                            >
+                                                                TƯ VẤN NGAY
+                                                                    </button>
                                                         </div>
                                                     </div>
                                                 </form>
